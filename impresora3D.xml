@@ -2,7 +2,7 @@
 <!DOCTYPE rem:requirementsProject SYSTEM "C:\Program Files\REM 1.2.2\xml\REM_1_2_2.dtd">
 <rem:requirementsProject
 xmlns:rem="http://rem.lsi.us.es">
-<rem:name>Impresora3D</rem:name>
+<rem:name>impresora3D</rem:name>
 <rem:c_requirementsSpecification oid = "CRS-0001">
 <rem:name>Documento de Requisitos del Sistema</rem:name>
 <rem:version>
@@ -11,7 +11,7 @@ xmlns:rem="http://rem.lsi.us.es">
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -29,7 +29,7 @@ Visión</rem:name>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -46,7 +46,7 @@ Introducción</rem:name>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -64,7 +64,7 @@ Participantes en el proyecto</rem:name>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -81,49 +81,30 @@ A3D Ingeniería</rem:name>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
-</rem:date>
-</rem:version>
-<rem:comments>
-Empresa que requiere de la aplicación.</rem:comments>
-<rem:address><rem:tbd/></rem:address>
-<rem:telephone><rem:tbd/></rem:telephone>
-<rem:fax><rem:tbd/></rem:fax>
-</rem:organization>
-<rem:stakeholder
- oid = "STK-0001">
-<rem:name>
-Andrea Escribano</rem:name>
-<rem:version>
-<rem:major>1</rem:major>
-<rem:minor>0</rem:minor>
-<rem:date>
-<rem:year>2016</rem:year>
-<rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
 Ninguno</rem:comments>
-<rem:stakeholderRole>Analista, diseñadora, programadora, probadora</rem:stakeholderRole>
-<rem:isDeveloper/>
-<rem:worksFor organization = "ORG-0002"/>
-</rem:stakeholder>
+<rem:address><rem:tbd/></rem:address>
+<rem:telephone><rem:tbd/></rem:telephone>
+<rem:fax><rem:tbd/></rem:fax>
+</rem:organization>
 <rem:organization
  oid = "ORG-0002">
 <rem:name>
-EII</rem:name>
+Andrea Escribano (EII)</rem:name>
 <rem:version>
 <rem:major>1</rem:major>
 <rem:minor>0</rem:minor>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
-Empresa desarrolladora de la aplicación.</rem:comments>
+Ninguno</rem:comments>
 <rem:address><rem:tbd/></rem:address>
 <rem:telephone><rem:tbd/></rem:telephone>
 <rem:fax><rem:tbd/></rem:fax>
@@ -139,7 +120,7 @@ Objetivos del sistema</rem:name>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -149,14 +130,44 @@ Ninguno</rem:comments>
 <rem:objective
  oid = "OBJ-0001">
 <rem:name>
-</rem:name>
+Imprimir imagen en 3D</rem:name>
 <rem:version>
 <rem:major>1</rem:major>
 <rem:minor>0</rem:minor>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
+</rem:date>
+</rem:version>
+<rem:comments>
+Ninguno</rem:comments>
+<rem:importance>
+<rem:tbd/>
+</rem:importance>
+<rem:urgency>
+<rem:tbd/>
+</rem:urgency>
+<rem:status>
+<rem:tbd/>
+</rem:status>
+<rem:stability>
+<rem:tbd/>
+</rem:stability>
+<rem:description>
+<rem:tbd/></rem:description>
+</rem:objective>
+<rem:objective
+ oid = "OBJ-0002">
+<rem:name>
+Recoja archivos 3D</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2016</rem:year>
+<rem:month>2</rem:month>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -188,7 +199,7 @@ Catálogo de requisitos del sistema</rem:name>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -205,7 +216,7 @@ Requisitos funcionales</rem:name>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -222,7 +233,7 @@ Ninguno</rem:comments>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -253,7 +264,7 @@ Definición de actores</rem:name>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -270,7 +281,7 @@ Ninguno</rem:comments>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -288,7 +299,7 @@ Casos de uso del sistema</rem:name>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -305,7 +316,7 @@ Ninguno</rem:comments>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -343,7 +354,7 @@ Restricciones [Reglas de negocio]</rem:name>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -360,7 +371,7 @@ Ninguno</rem:comments>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -391,7 +402,7 @@ Requisitos de información</rem:name>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -408,7 +419,7 @@ Ninguno</rem:comments>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -449,7 +460,7 @@ Requisitos no funcionales</rem:name>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -466,7 +477,7 @@ Ninguno</rem:comments>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -497,7 +508,7 @@ Ninguno</rem:comments>
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -512,7 +523,7 @@ Ninguno
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
@@ -527,7 +538,7 @@ Ninguno
 <rem:date>
 <rem:year>2016</rem:year>
 <rem:month>2</rem:month>
-<rem:day>15</rem:day>
+<rem:day>16</rem:day>
 </rem:date>
 </rem:version>
 <rem:comments>
