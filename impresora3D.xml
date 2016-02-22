@@ -172,37 +172,7 @@ Ninguno</rem:comments>
 <rem:tbd/>
 </rem:stability>
 <rem:description>
-<rem:tbd/></rem:description>
-</rem:objective>
-<rem:objective
- oid = "OBJ-0002">
-<rem:name>
-Recoja archivos 3D</rem:name>
-<rem:version>
-<rem:major>1</rem:major>
-<rem:minor>0</rem:minor>
-<rem:date>
-<rem:year>2016</rem:year>
-<rem:month>2</rem:month>
-<rem:day>16</rem:day>
-</rem:date>
-</rem:version>
-<rem:comments>
-Ninguno</rem:comments>
-<rem:importance>
-<rem:tbd/>
-</rem:importance>
-<rem:urgency>
-<rem:tbd/>
-</rem:urgency>
-<rem:status>
-<rem:tbd/>
-</rem:status>
-<rem:stability>
-<rem:tbd/>
-</rem:stability>
-<rem:description>
-<rem:tbd/></rem:description>
+imprimir una imagen en 3D en el material que se necesite.</rem:description>
 </rem:objective>
 </rem:section>
 </rem:section>
@@ -429,7 +399,7 @@ mostar el número de capas que se necesitarán para imprimir la imagen dependiendo
 <rem:functionalRequirement
  oid = "FRQ-0007">
 <rem:name>
-Capa situado</rem:name>
+Situación en capas</rem:name>
 <rem:version>
 <rem:major>1</rem:major>
 <rem:minor>0</rem:minor>
@@ -457,6 +427,37 @@ Ninguno</rem:comments>
 <rem:description>
 mostrar en qué capa se encuentra en un momento determinado.</rem:description>
 </rem:functionalRequirement>
+<rem:functionalRequirement
+ oid = "FRQ-0008">
+<rem:name>
+Importación de imágenes</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2016</rem:year>
+<rem:month>2</rem:month>
+<rem:day>22</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders ="STK-0001 "/>
+<rem:comments>
+Ninguno</rem:comments>
+<rem:importance>
+<rem:tbd/>
+</rem:importance>
+<rem:urgency>
+<rem:tbd/>
+</rem:urgency>
+<rem:status>
+<rem:tbd/>
+</rem:status>
+<rem:stability>
+<rem:tbd/>
+</rem:stability>
+<rem:description>
+permitir importar imágenes en 3D.</rem:description>
+</rem:functionalRequirement>
 </rem:section>
 <rem:section
  oid = "SEC-0007">
@@ -478,7 +479,7 @@ Ninguno</rem:comments>
 <rem:actor
  oid = "ACT-0001">
 <rem:name>
-</rem:name>
+Trabajador</rem:name>
 <rem:version>
 <rem:major>1</rem:major>
 <rem:minor>0</rem:minor>
@@ -488,9 +489,10 @@ Ninguno</rem:comments>
 <rem:day>16</rem:day>
 </rem:date>
 </rem:version>
+<rem:authors stakeholders ="STK-0001 "/>
 <rem:comments>
 Ninguno</rem:comments>
-<rem:actorRole><rem:tbd/></rem:actorRole>
+<rem:actorRole>a cualquier trabajador de la empresa cliente.</rem:actorRole>
 </rem:actor>
 </rem:section>
 <rem:section
@@ -513,7 +515,7 @@ Ninguno</rem:comments>
 <rem:useCase
  oid = "UC-0001">
 <rem:name>
-</rem:name>
+Importar imágenes</rem:name>
 <rem:version>
 <rem:major>1</rem:major>
 <rem:minor>0</rem:minor>
@@ -523,6 +525,7 @@ Ninguno</rem:comments>
 <rem:day>16</rem:day>
 </rem:date>
 </rem:version>
+<rem:authors stakeholders ="STK-0001 "/>
 <rem:comments>
 Ninguno</rem:comments>
 <rem:importance>
@@ -538,9 +541,201 @@ Ninguno</rem:comments>
 <rem:tbd/>
 </rem:stability>
 <rem:triggeringEvent>
-<rem:tbd/></rem:triggeringEvent>
+el actor desee importar una imagen en 3D para imprimir.</rem:triggeringEvent>
 <rem:precondition>
 <rem:tbd/></rem:precondition>
+<rem:postcondition>
+<rem:tbd/></rem:postcondition>
+<rem:frequency>
+<rem:tbd/>
+</rem:frequency>
+<rem:step oid = "STP-0010">
+<rem:number>1</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>
+selecciona importar una imagen 3D</rem:description>
+</rem:actorAction>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0011">
+<rem:number>2</rem:number>
+<rem:systemAction>
+<rem:description>
+abre una ventana con las carpetas que haya para que el actor elija una.</rem:description>
+</rem:systemAction>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0012">
+<rem:number>3</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>
+busca y selecciona la carpeta en la que se encuentra la imagen que se desea importar. </rem:description>
+</rem:actorAction>
+<rem:stepException oid = "STX-0002">
+<rem:condition>
+el actor cancela la importación de una nueva imagen</rem:condition>
+<rem:systemAction>
+<rem:description>
+cerrará la ventana de selección de imagen</rem:description>
+</rem:systemAction>
+<rem:termination value = "TEV-0003"/>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:stepException>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0013">
+<rem:number>4</rem:number>
+<rem:systemAction>
+<rem:description>
+muestra la imagen seleccionada y pide confirmación al actor.</rem:description>
+</rem:systemAction>
+<rem:stepException oid = "STX-0003">
+<rem:condition>
+si la imagen no tiene un formato acorde a los especificados</rem:condition>
+<rem:systemAction>
+<rem:description>
+mostrará al actor un aviso del error en el formato de la imagen</rem:description>
+</rem:systemAction>
+<rem:termination value = "TEV-0002"/>
+<rem:comments>
+paso 3</rem:comments>
+</rem:stepException>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0014">
+<rem:number>5</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>
+confirma la importación de la imagen y el caso de uso termina.</rem:description>
+</rem:actorAction>
+<rem:stepException oid = "STX-0004">
+<rem:condition>
+rectifica en la imagen importada</rem:condition>
+<rem:systemAction>
+<rem:description>
+no importará la imagen previamente selecionada</rem:description>
+</rem:systemAction>
+<rem:termination value = "TEV-0002"/>
+<rem:comments>
+paso 3</rem:comments>
+</rem:stepException>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+</rem:useCase>
+<rem:useCase
+ oid = "UC-0002">
+<rem:name>
+Colocar imagen</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2016</rem:year>
+<rem:month>2</rem:month>
+<rem:day>22</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders ="STK-0001 "/>
+<rem:comments>
+Ninguno</rem:comments>
+<rem:importance>
+<rem:tbd/>
+</rem:importance>
+<rem:urgency>
+<rem:tbd/>
+</rem:urgency>
+<rem:status>
+<rem:tbd/>
+</rem:status>
+<rem:stability>
+<rem:tbd/>
+</rem:stability>
+<rem:triggeringEvent>
+el actor desee colocar la imagen con un ángulo y un escalado específico.</rem:triggeringEvent>
+<rem:precondition>
+<rem:tbd/></rem:precondition>
+<rem:postcondition>
+<rem:tbd/></rem:postcondition>
+<rem:frequency>
+<rem:tbd/>
+</rem:frequency>
+</rem:useCase>
+<rem:useCase
+ oid = "UC-0003">
+<rem:name>
+Seleccionar tamaño de capas</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2016</rem:year>
+<rem:month>2</rem:month>
+<rem:day>22</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders ="STK-0001 "/>
+<rem:comments>
+Ninguno</rem:comments>
+<rem:importance>
+<rem:tbd/>
+</rem:importance>
+<rem:urgency>
+<rem:tbd/>
+</rem:urgency>
+<rem:status>
+<rem:tbd/>
+</rem:status>
+<rem:stability>
+<rem:tbd/>
+</rem:stability>
+<rem:triggeringEvent>
+el actor selecciona el grosor de las capas con las que se imprimirá.</rem:triggeringEvent>
+<rem:precondition>
+<rem:tbd/></rem:precondition>
+<rem:postcondition>
+<rem:tbd/></rem:postcondition>
+<rem:frequency>
+<rem:tbd/>
+</rem:frequency>
+</rem:useCase>
+<rem:useCase
+ oid = "UC-0004">
+<rem:name>
+Imprimir imagen 3D</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2016</rem:year>
+<rem:month>2</rem:month>
+<rem:day>22</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders ="STK-0001 "/>
+<rem:comments>
+Ninguno</rem:comments>
+<rem:importance>
+<rem:tbd/>
+</rem:importance>
+<rem:urgency>
+<rem:tbd/>
+</rem:urgency>
+<rem:status>
+<rem:tbd/>
+</rem:status>
+<rem:stability>
+<rem:tbd/>
+</rem:stability>
+<rem:triggeringEvent>
+el actor imprima la imagen.</rem:triggeringEvent>
+<rem:precondition>
+La imagen ya estará colocada y escalada según el actor desee.</rem:precondition>
 <rem:postcondition>
 <rem:tbd/></rem:postcondition>
 <rem:frequency>
@@ -626,6 +821,37 @@ Ninguno</rem:comments>
 </rem:stability>
 <rem:description>
 si la impresora se para se deberá mostar en qué capa se encontraba. Capa última que ha realizado correctamente y que empiece el usuario en la siguiente capa.</rem:description>
+</rem:constraintRequirement>
+<rem:constraintRequirement
+ oid = "CRQ-0003">
+<rem:name>
+Comprobaciones</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2016</rem:year>
+<rem:month>2</rem:month>
+<rem:day>22</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders ="STK-0001 "/>
+<rem:comments>
+Ninguno</rem:comments>
+<rem:importance>
+<rem:tbd/>
+</rem:importance>
+<rem:urgency>
+<rem:tbd/>
+</rem:urgency>
+<rem:status>
+<rem:tbd/>
+</rem:status>
+<rem:stability>
+<rem:tbd/>
+</rem:stability>
+<rem:description>
+El sistema a la hora de imprimir deberá permitir al usuario recordar unas comprobaciones que realizar antes de realizar la impresión.</rem:description>
 </rem:constraintRequirement>
 </rem:section>
 <rem:section
