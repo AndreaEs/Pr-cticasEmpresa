@@ -458,6 +458,37 @@ Ninguno</rem:comments>
 <rem:description>
 permitir importar imágenes en 3D.</rem:description>
 </rem:functionalRequirement>
+<rem:functionalRequirement
+ oid = "FRQ-0009">
+<rem:name>
+Obtención de resúmenes</rem:name>
+<rem:version>
+<rem:major>1</rem:major>
+<rem:minor>0</rem:minor>
+<rem:date>
+<rem:year>2016</rem:year>
+<rem:month>2</rem:month>
+<rem:day>22</rem:day>
+</rem:date>
+</rem:version>
+<rem:authors stakeholders ="STK-0001 "/>
+<rem:comments>
+Ninguno</rem:comments>
+<rem:importance>
+<rem:tbd/>
+</rem:importance>
+<rem:urgency>
+<rem:tbd/>
+</rem:urgency>
+<rem:status>
+<rem:tbd/>
+</rem:status>
+<rem:stability>
+<rem:tbd/>
+</rem:stability>
+<rem:description>
+permitir antes de imprimir la imagen, la obtención de un resumen de las características elegidas.</rem:description>
+</rem:functionalRequirement>
 </rem:section>
 <rem:section
  oid = "SEC-0007">
@@ -545,7 +576,7 @@ el actor desee importar una imagen en 3D para imprimir.</rem:triggeringEvent>
 <rem:precondition>
 <rem:tbd/></rem:precondition>
 <rem:postcondition>
-<rem:tbd/></rem:postcondition>
+Se ha importado la imagen deseada.</rem:postcondition>
 <rem:frequency>
 <rem:tbd/>
 </rem:frequency>
@@ -631,7 +662,7 @@ Ninguno</rem:comments>
 <rem:useCase
  oid = "UC-0002">
 <rem:name>
-Colocar imagen</rem:name>
+Transformar imagen</rem:name>
 <rem:version>
 <rem:major>1</rem:major>
 <rem:minor>0</rem:minor>
@@ -659,12 +690,88 @@ Ninguno</rem:comments>
 <rem:triggeringEvent>
 el actor desee colocar la imagen con un ángulo y un escalado específico.</rem:triggeringEvent>
 <rem:precondition>
-<rem:tbd/></rem:precondition>
+La imagen debe estar importada.</rem:precondition>
 <rem:postcondition>
-<rem:tbd/></rem:postcondition>
+La imagen está escalada y rotada.</rem:postcondition>
 <rem:frequency>
 <rem:tbd/>
 </rem:frequency>
+<rem:step oid = "STP-0015">
+<rem:number>1</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>
+selecciona transformar imagen.</rem:description>
+</rem:actorAction>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0016">
+<rem:number>2</rem:number>
+<rem:systemAction>
+<rem:description>
+abre una nueva ventana con la imagen y dos apartados uno para el escalado y otro para la rotación de la misma.</rem:description>
+</rem:systemAction>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0017">
+<rem:number>3</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>
+ajusta la imagen con las especificaciones que requiera.</rem:description>
+</rem:actorAction>
+<rem:stepException oid = "STX-0006">
+<rem:condition>
+cancela la transformación de la imagen</rem:condition>
+<rem:systemAction>
+<rem:description>
+cierra la ventana de selección de los cambios</rem:description>
+</rem:systemAction>
+<rem:termination value = "TEV-0003"/>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:stepException>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0018">
+<rem:number>4</rem:number>
+<rem:systemAction>
+<rem:description>
+pide confirmación sobre los cambios realizados en la imagen.</rem:description>
+</rem:systemAction>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0019">
+<rem:number>5</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>
+confirma los cambios.</rem:description>
+</rem:actorAction>
+<rem:stepException oid = "STX-0007">
+<rem:condition>
+no confirma los cambios establecidos</rem:condition>
+<rem:systemAction>
+<rem:description>
+no guarda los cambios realizados</rem:description>
+</rem:systemAction>
+<rem:termination value = "TEV-0002"/>
+<rem:comments>
+paso 3</rem:comments>
+</rem:stepException>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0020">
+<rem:number>6</rem:number>
+<rem:systemAction>
+<rem:description>
+guarda y establece la imagen con los cambios realizados. El caso de uso finaliza.</rem:description>
+</rem:systemAction>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
 </rem:useCase>
 <rem:useCase
  oid = "UC-0003">
@@ -703,6 +810,93 @@ el actor selecciona el grosor de las capas con las que se imprimirá.</rem:trigge
 <rem:frequency>
 <rem:tbd/>
 </rem:frequency>
+<rem:step oid = "STP-0021">
+<rem:number>1</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>
+selecciona elegir el tamaño de las capas para la impresión.</rem:description>
+</rem:actorAction>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0022">
+<rem:number>2</rem:number>
+<rem:systemAction>
+<rem:description>
+muestra una ventana para editar el tamaño de las capas.</rem:description>
+</rem:systemAction>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0023">
+<rem:number>3</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>
+elige el grosor de las capas.</rem:description>
+</rem:actorAction>
+<rem:stepException oid = "STX-0008">
+<rem:condition>
+cancela la modificación del grosor de las capas</rem:condition>
+<rem:systemAction>
+<rem:description>
+reestablece los datos a antes de ejecutar el cambio</rem:description>
+</rem:systemAction>
+<rem:termination value = "TEV-0003"/>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:stepException>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0024">
+<rem:number>4</rem:number>
+<rem:systemAction>
+<rem:description>
+pide confirmación al actor por los cambios realizados.</rem:description>
+</rem:systemAction>
+<rem:stepException oid = "STX-0009">
+<rem:condition>
+el sistema encuentra algún error en la introducción de los nuevos datos</rem:condition>
+<rem:systemAction>
+<rem:description>
+muestra un aviso de error y no guarda los datos introducidos</rem:description>
+</rem:systemAction>
+<rem:termination value = "TEV-0002"/>
+<rem:comments>
+paso 3</rem:comments>
+</rem:stepException>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0025">
+<rem:number>5</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>
+confirma los cambios.</rem:description>
+</rem:actorAction>
+<rem:stepException oid = "STX-0010">
+<rem:condition>
+cancela la confirmación de los cambios en el grosor de las capas</rem:condition>
+<rem:systemAction>
+<rem:description>
+no almacena los datos introducidos</rem:description>
+</rem:systemAction>
+<rem:termination value = "TEV-0002"/>
+<rem:comments>
+paso 3</rem:comments>
+</rem:stepException>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0026">
+<rem:number>6</rem:number>
+<rem:systemAction>
+<rem:description>
+guarda los cambios realizados y el caso de uso termina.</rem:description>
+</rem:systemAction>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
 </rem:useCase>
 <rem:useCase
  oid = "UC-0004">
@@ -741,6 +935,111 @@ La imagen ya estará colocada y escalada según el actor desee.</rem:precondition>
 <rem:frequency>
 <rem:tbd/>
 </rem:frequency>
+<rem:step oid = "STP-0027">
+<rem:number>1</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>
+selecciona imprimir la imagen 3D.</rem:description>
+</rem:actorAction>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0033">
+<rem:number>2</rem:number>
+<rem:systemAction>
+<rem:description>
+muestra una ventana para que el actor seleccione desde qué capa desea comenzar la impresión.</rem:description>
+</rem:systemAction>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0034">
+<rem:number>3</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>
+selecciona desde qué capa hasta qué capa desea realizar la impresión y escoge siguiente página.</rem:description>
+</rem:actorAction>
+<rem:stepException oid = "STX-0015">
+<rem:condition>
+no aprueba los cambios en la iniciación de la impresión de las capas</rem:condition>
+<rem:systemAction>
+<rem:description>
+cancela los cambios</rem:description>
+</rem:systemAction>
+<rem:termination value = "TEV-0003"/>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:stepException>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0028">
+<rem:number>4</rem:number>
+<rem:systemAction>
+<rem:description>
+muestra un resumen de los parámetros establecidos.</rem:description>
+</rem:systemAction>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0029">
+<rem:number>5</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>
+selecciona imprimir la imagen.</rem:description>
+</rem:actorAction>
+<rem:stepException oid = "STX-0011">
+<rem:condition>
+cancela el proceso de impresión </rem:condition>
+<rem:systemAction>
+<rem:description>
+cierra la ventana correspondiente a impresión</rem:description>
+</rem:systemAction>
+<rem:termination value = "TEV-0003"/>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:stepException>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0030">
+<rem:number>6</rem:number>
+<rem:systemAction>
+<rem:description>
+muestra una serie de comprobaciones.</rem:description>
+</rem:systemAction>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0031">
+<rem:number>7</rem:number>
+<rem:actorAction actor = "ACT-0001">
+<rem:description>
+acepta las comprobaciones a realizar.</rem:description>
+</rem:actorAction>
+<rem:stepException oid = "STX-0012">
+<rem:condition>
+no acepta alguna de las comprobaciones a realizar</rem:condition>
+<rem:systemAction>
+<rem:description>
+mostrará un mensaje de error</rem:description>
+</rem:systemAction>
+<rem:termination value = "TEV-0002"/>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:stepException>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
+<rem:step oid = "STP-0032">
+<rem:number>8</rem:number>
+<rem:systemAction>
+<rem:description>
+realiza la acción de imprimir.</rem:description>
+</rem:systemAction>
+<rem:comments>
+Ninguno</rem:comments>
+</rem:step>
 </rem:useCase>
 </rem:section>
 <rem:section
