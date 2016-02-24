@@ -736,11 +736,37 @@ Estas fases pueden tener varias iteraciones pero en nuestro caso, sólo vamos a 
 \subsubsection{Plan de despliegue}
 {\color{red} RELLENAR }
 \section{Análisis}
+A continuación se realiza el análisis del programa.
 \subsection{Requisitos}
+\ref{ANEXOII}
 \subsection{Casos de uso}
+  \begin{figure}[h]
+                \centering
+                \subfigure{\includegraphics[scale=0.3, width=0.8\textwidth]{ModeloCasosUso.png}}
+                \captionof{figure}{Modelo de casos de uso.}
+            \end{figure} 
+            \newpage
 \subsection{Modelo de dominio}
+ \begin{figure}[h]
+                \centering
+                \subfigure{\includegraphics[scale=0.2, width=0.4\textwidth]{ModeloClases.png}}
+                \captionof{figure}{Modelo de clases.}
+            \end{figure} 
+            \newpage
 \subsection{Diagrama Entidad-Relación}
+\begin{figure}[h]
+                \centering
+                \subfigure{\includegraphics[scale=0.1, width=0.35\textwidth]{ModeloER.png}}
+                \captionof{figure}{Modelo Entidad-Relación.}
+            \end{figure} 
+            
 \subsection{Diagrama relacional}
+\begin{figure}[h]
+                \centering
+                \subfigure{\includegraphics[scale=0.4, width=\textwidth]{ModeloRelacional.png}}
+                \captionof{figure}{Modelo Relacional.}
+            \end{figure} 
+            
 \section{Diseño}
 \subsection{Aplicaciones similares}
 Podemos encontrar varias aplicaciones similares en la impresión de imágenes en 3D.
@@ -799,8 +825,8 @@ Podemos encontrar varias aplicaciones similares en la impresión de imágenes en
 7 & Descripción de los casos de uso & 4 & 2 \\ \hline
 8 & Identificación de las clases del modelo del dominio & 5 & 2 \\ \hline
 9 & Identificación de las relaciones y multiplicidades & 2 & 2 \\ \hline
-10 & Realización del modelo entidad-relación & 3 &  \\ \hline
-11 & Realización del modelo relacional & 2 &  \\ \hline
+10 & Realización del modelo entidad-relación & 3 & 2 \\ \hline
+11 & Realización del modelo relacional & 2 & 1 \\ \hline
 12 & Revisión del documento & 2 &  \\ \hline
 13 &  Realización de cambios en el documento & 3 &  \\ \hline
 14 & Realización de documento de seguimiento & 32 &  \\ \hline
@@ -901,6 +927,9 @@ Management Plan \url{https://aulas.inf.uva.es/pluginfile.php/26254/mod_resource/
         \caption{Definiciones y acrónimos.}
         \label{ta:defyacr}
     \end{table}
+    
+    \subsection{Análisis: Resquisitos}\label{ANEXOII}
+    \includepdf[pages=-,pagecommand={},width=1.4\textwidth]{documento.pdf}
 \end{appendices}
 
 \end{document}

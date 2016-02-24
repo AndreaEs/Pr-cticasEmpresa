@@ -363,7 +363,7 @@ Ninguno</rem:comments>
 <rem:tbd/>
 </rem:stability>
 <rem:description>
-el escalado de la imagen en 3D que será impresa.</rem:description>
+permitir el escalado de la imagen en 3D que será impresa.</rem:description>
 </rem:functionalRequirement>
 <rem:functionalRequirement
  oid = "FRQ-0006">
@@ -593,7 +593,7 @@ Ninguno</rem:comments>
 <rem:number>2</rem:number>
 <rem:systemAction>
 <rem:description>
-abre una ventana con las carpetas que haya para que el actor elija una.</rem:description>
+abre una ventana con los ficheros de imagen que haya para que el actor elija una.</rem:description>
 </rem:systemAction>
 <rem:comments>
 Ninguno</rem:comments>
@@ -602,7 +602,7 @@ Ninguno</rem:comments>
 <rem:number>3</rem:number>
 <rem:actorAction actor = "ACT-0001">
 <rem:description>
-busca y selecciona la carpeta en la que se encuentra la imagen que se desea importar. </rem:description>
+busca y selecciona el fichero en la que es la imagen que se desea importar. </rem:description>
 </rem:actorAction>
 <rem:stepException oid = "STX-0002">
 <rem:condition>
@@ -929,7 +929,7 @@ Ninguno</rem:comments>
 <rem:triggeringEvent>
 el actor imprima la imagen.</rem:triggeringEvent>
 <rem:precondition>
-La imagen ya estará colocada y escalada según el actor desee.</rem:precondition>
+La imagen ya estará colocada y escalada según como el actor desee.</rem:precondition>
 <rem:postcondition>
 <rem:tbd/></rem:postcondition>
 <rem:frequency>
@@ -1088,7 +1088,7 @@ Ninguno</rem:comments>
 <rem:tbd/>
 </rem:stability>
 <rem:description>
-El sistema deberá permitir el escalado de la imagen de forma relativa y de forma manual, debiendo la manual de que al cambiar X, Y o Z automáticamente las otras dos coordenadas cambien.</rem:description>
+El sistema deberá permitir el escalado de la imagen de forma relativa y de forma manual, debiendo, la manual, actuar de tal forma que al cambiar X, Y o Z, automáticamente las otras dos coordenadas cambien.</rem:description>
 </rem:constraintRequirement>
 <rem:constraintRequirement
  oid = "CRQ-0002">
@@ -1150,7 +1150,7 @@ Ninguno</rem:comments>
 <rem:tbd/>
 </rem:stability>
 <rem:description>
-El sistema a la hora de imprimir deberá permitir al usuario recordar unas comprobaciones que realizar antes de realizar la impresión.</rem:description>
+El sistema a la hora de imprimir deberá permitir al usuario repasar unas comprobaciones que de deben realizar antes de la impresión.</rem:description>
 </rem:constraintRequirement>
 </rem:section>
 <rem:section
@@ -1199,7 +1199,7 @@ Ninguno</rem:comments>
 <rem:tbd/>
 </rem:stability>
 <rem:relevantConcept>
-formate de las entradas del programa</rem:relevantConcept>
+formato de las entradas del programa</rem:relevantConcept>
 <rem:averageLifeTime>
 <rem:tbd/>
 </rem:averageLifeTime>
@@ -1325,7 +1325,7 @@ Ninguno</rem:comments>
 <rem:tbd/>
 </rem:stability>
 <rem:description>
-ser fácil de usar por los usuarios.</rem:description>
+ser fácil de usar por los clientes.</rem:description>
 </rem:nonFunctionalRequirement>
 <rem:nonFunctionalRequirement
  oid = "NFR-0003">
