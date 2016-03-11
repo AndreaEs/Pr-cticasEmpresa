@@ -75,6 +75,7 @@ public class OrigamiEditorUI extends javax.swing.JFrame {
     public OrigamiEditorUI() {
 
         setIconImage(java.awt.Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("res/icon.png")));
+        
         /*
         Check new updates
         try {
