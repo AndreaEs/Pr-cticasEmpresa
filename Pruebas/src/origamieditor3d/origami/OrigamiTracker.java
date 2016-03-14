@@ -14,10 +14,6 @@ package origamieditor3d.origami;
 
 import java.util.ArrayList;
 
-/**
- * @author Attila Bágyoni (ba-sz-at@users.sourceforge.net)
- * @since 2013-10-04
- */
 public class OrigamiTracker {
 
     private final Origami trackedOrigami;

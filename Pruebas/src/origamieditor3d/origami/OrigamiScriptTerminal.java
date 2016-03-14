@@ -22,8 +22,7 @@ import origamieditor3d.resources.Dictionary;
 /**
  * Represents an OrigamiScript engine. To learn more about OrigamiScript, see
  * http://origamieditor3d.sourceforge.net/osdoc_en.html
- * @author Attila Bágyoni (ba-sz-at@users.sourceforge.net)
- * @since 2013-09-29
+
  */
 public class OrigamiScriptTerminal {
 
@@ -57,10 +56,10 @@ public class OrigamiScriptTerminal {
     final private Integer maxVersion = 1;
     private Access access;
     //
-    // betöltött terminál mezők
+    // terminal campos cargados
     private Integer version = 1;
     //
-    // eltárolt terminál mezők
+    // almacenada en los campos terminales
     private ArrayList<String> history;
 
     public ArrayList<String> history() {
@@ -70,7 +69,7 @@ public class OrigamiScriptTerminal {
 
     private String filename;
     //
-    // betöltött szerkesztési mezők
+    // campos de edición cargados
     private double[] ppoint;
     private double[] pnormal;
     private double[] tracker;
@@ -79,7 +78,7 @@ public class OrigamiScriptTerminal {
     private Origami.PaperType papertype;
     private String title;
     //
-    // eltárolt szerkesztési mezők
+    // edición de campos almacenados
     public Origami TerminalOrigami;
     public Camera TerminalCamera;
     private int paper_color;
@@ -1460,11 +1459,11 @@ public class OrigamiScriptTerminal {
         result = result.replace("[", " [");
         result = result.replace("]", "] ");
 
-        // 3. lépés: tabulátorok és sortörések eltávolítása
+        // Paso 3: Retire tabulaciones y saltos de línea
         result = result.replace((char) 9, ' ');
         result = result.replace((char) 10, ' ');
 
-        // 4. lépés: többszörös szóközök összevonása
+        // Paso 4 : La fusión de múltiples espacios
         int tmp_hossz = -1;
         while (tmp_hossz != result.length()) {
 
@@ -1472,7 +1471,7 @@ public class OrigamiScriptTerminal {
             result = result.replace("  ", " ");
         }
 
-        // 5. lépés: szögletes zárójelen belüli szóközök cseréje |-ra.
+        // Paso 5 : Sustitución de los espacios entre paréntesis | ciento .
         boolean param = false;
         for (int i = 0; i < result.length() - 1; i++) {
 
