@@ -32,9 +32,9 @@ public class OrigamiTracker {
     		            boolean tracker = false;
     		            if ((int) polygons.get(polygonIndex).get(polygons.get(polygonIndex).size() - 1) == trackerpont) {
 
-    		                ArrayList<Integer> sokszog0 = polygons.get(polygonIndex);
-    		                sokszog0.remove(sokszog0.size() - 1);
-    		                polygons.set(polygonIndex, sokszog0);
+    		                ArrayList<Integer> poligono = polygons.get(polygonIndex);
+    		                poligono.remove(poligono.size() - 1);
+    		                polygons.set(polygonIndex, poligono);
     		                tracker = true;
     		            }
     		            ArrayList<Integer> s0 = polygons.get(polygonIndex);
@@ -47,21 +47,21 @@ public class OrigamiTracker {
 
     		                    if (point_on_plane(ppoint, pnormal, vertices.get(trackerpont))) {
 
-    		                        ArrayList<Integer> sokszog0 = polygons.get(polygonIndex);
-    		                        sokszog0.add(trackerpont);
-    		                        polygons.set(polygonIndex, sokszog0);
+    		                        ArrayList<Integer> poligono = polygons.get(polygonIndex);
+    		                        poligono.add(trackerpont);
+    		                        polygons.set(polygonIndex, poligono);
     		                    } else {
     		                        if (scalar_product(vertices.get(trackerpont), pnormal) > scalar_product(ppoint, pnormal)) {
 
-    		                            ArrayList<Integer> sokszog0 = polygons.get(polygonIndex);
-    		                            sokszog0.add(trackerpont);
-    		                            polygons.set(polygonIndex, sokszog0);
+    		                            ArrayList<Integer> poligono = polygons.get(polygonIndex);
+    		                            poligono.add(trackerpont);
+    		                            polygons.set(polygonIndex, poligono);
 
     		                        } else {
 
-    		                            ArrayList<Integer> sokszog0 = polygons.get(polygons_size - 1);
-    		                            sokszog0.add(trackerpont);
-    		                            polygons.set(polygons_size - 1, sokszog0);
+    		                            ArrayList<Integer> poligono = polygons.get(polygons_size - 1);
+    		                            poligono.add(trackerpont);
+    		                            polygons.set(polygons_size - 1, poligono);
     		                        }
     		                    }
 
@@ -71,9 +71,9 @@ public class OrigamiTracker {
     		            } else {
     		                if (tracker) {
 
-    		                    ArrayList<Integer> sokszog0 = polygons.get(polygonIndex);
-    		                    sokszog0.add(trackerpont);
-    		                    polygons.set(polygonIndex, sokszog0);
+    		                    ArrayList<Integer> poligono = polygons.get(polygonIndex);
+    		                    poligono.add(trackerpont);
+    		                    polygons.set(polygonIndex, poligono);
     		                }
     		            }
     		            return osztodik;
@@ -92,9 +92,9 @@ public class OrigamiTracker {
     		            boolean tracker = false;
     		            if ((int) polygons.get(polygonIndex).get(polygons.get(polygonIndex).size() - 1) == trackerpont) {
 
-    		                ArrayList<Integer> sokszog0 = polygons.get(polygonIndex);
-    		                sokszog0.remove(sokszog0.size() - 1);
-    		                polygons.set(polygonIndex, sokszog0);
+    		                ArrayList<Integer> poligono = polygons.get(polygonIndex);
+    		                poligono.remove(poligono.size() - 1);
+    		                polygons.set(polygonIndex, poligono);
     		                tracker = true;
     		            }
     		            ArrayList<Integer> s0 = polygons.get(polygonIndex);
@@ -107,21 +107,21 @@ public class OrigamiTracker {
 
     		                    if (point_on_plane(ppoint, pnormal, vertices.get(trackerpont))) {
 
-    		                        ArrayList<Integer> sokszog0 = polygons.get(polygonIndex);
-    		                        sokszog0.add(trackerpont);
-    		                        polygons.set(polygonIndex, sokszog0);
+    		                        ArrayList<Integer> poligono = polygons.get(polygonIndex);
+    		                        poligono.add(trackerpont);
+    		                        polygons.set(polygonIndex, poligono);
     		                    } else {
     		                        if (scalar_product(vertices.get(trackerpont), pnormal) > scalar_product(ppoint, pnormal)) {
 
-    		                            ArrayList<Integer> sokszog0 = polygons.get(polygonIndex);
-    		                            sokszog0.add(trackerpont);
-    		                            polygons.set(polygonIndex, sokszog0);
+    		                            ArrayList<Integer> poligono = polygons.get(polygonIndex);
+    		                            poligono.add(trackerpont);
+    		                            polygons.set(polygonIndex, poligono);
 
     		                        } else {
 
-    		                            ArrayList<Integer> sokszog0 = polygons.get(polygons_size - 1);
-    		                            sokszog0.add(trackerpont);
-    		                            polygons.set(polygons_size - 1, sokszog0);
+    		                            ArrayList<Integer> poligono = polygons.get(polygons_size - 1);
+    		                            poligono.add(trackerpont);
+    		                            polygons.set(polygons_size - 1, poligono);
     		                        }
     		                    }
 
@@ -131,9 +131,9 @@ public class OrigamiTracker {
     		            } else {
     		                if (tracker) {
 
-    		                    ArrayList<Integer> sokszog0 = polygons.get(polygonIndex);
-    		                    sokszog0.add(trackerpont);
-    		                    polygons.set(polygonIndex, sokszog0);
+    		                    ArrayList<Integer> poligono = polygons.get(polygonIndex);
+    		                    poligono.add(trackerpont);
+    		                    polygons.set(polygonIndex, poligono);
     		                }
     		            }
     		            return osztodik;
@@ -147,9 +147,9 @@ public class OrigamiTracker {
         trackedOrigami.history_pointer = origami.history_pointer;
         trackedOrigami.addVertex(new double[]{tracker[0], tracker[1], 0});
         trackedOrigami.add2dVertex(new double[]{tracker[0], tracker[1], 0});
-        ArrayList<Integer> sokszog0 = (ArrayList<Integer>) trackedOrigami.polygons.get(0).clone();
-        sokszog0.add(trackerpont);
-        trackedOrigami.polygons.set(0, sokszog0);
+        ArrayList<Integer> poligono = (ArrayList<Integer>) trackedOrigami.polygons.get(0).clone();
+        poligono.add(trackerpont);
+        trackedOrigami.polygons.set(0, poligono);
     }
     private int trackerpont;
 
