@@ -17,11 +17,6 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/**
- *
- * @author Attila Bágyoni (ba-sz-at@users.sourceforge.net)
- * @since 2013-01-14
- */
 public class OrigamiIO {
 
     final static private double[][] Origins = new double[][]{
@@ -120,40 +115,40 @@ public class OrigamiIO {
                     }
                     
                     double[] puntoPlana = new double[]{origami.history.get(i)[1], origami.history.get(i)[2], origami.history.get(i)[3]};
-                    double[] siknv = new double[]{origami.history.get(i)[4], origami.history.get(i)[5], origami.history.get(i)[6]};
+                    double[] nivelnv = new double[]{origami.history.get(i)[4], origami.history.get(i)[5], origami.history.get(i)[6]};
                     
                     double distacnciaMaxima = -1;
                     int origoUtilizado = 0; //Origo viene de Origami
-                    int terfekUsada = 0;
-                    double[] sikpontnv = new double[]{0, 0, 0};
-                    double arte = puntoPlana[0] * siknv[0] + puntoPlana[1] * siknv[1] + puntoPlana[2] * siknv[2];
+                    int lugarFrenoUsada = 0;
+                    double[] puntoNivelNv = new double[]{0, 0, 0};
+                    double arte = puntoPlana[0] * nivelnv[0] + puntoPlana[1] * nivelnv[1] + puntoPlana[2] * nivelnv[2];
                     
                     for (int ii = 0; ii < Origins.length; ii++) {
                         
-                        double[] iranyvek = siknv;
+                        double[] direccionVector = nivelnv;
                         double X = Origins[ii][0];
                         double Y = Origins[ii][1];
                         double Z = Origins[ii][2];
-                        double U = iranyvek[0];
-                        double V = iranyvek[1];
-                        double W = iranyvek[2];
-                        double A = siknv[0];
-                        double B = siknv[1];
-                        double C = siknv[2];
+                        double U = direccionVector[0];
+                        double V = direccionVector[1];
+                        double W = direccionVector[2];
+                        double A = nivelnv[0];
+                        double B = nivelnv[1];
+                        double C = nivelnv[2];
                         double t = -(A * X + B * Y + C * Z - arte) / (A * U + B * V + C * W);
                         
                         double[] puntoPie = new double[]{X + t * U, Y + t * V, Z + t * W};
                         if (Origami.vector_length(Origami.vector(puntoPie, Origins[ii])) > distacnciaMaxima) {
                             
-                            sikpontnv = Origami.vector(puntoPie, Origins[ii]);
-                            distacnciaMaxima = Origami.vector_length(sikpontnv);
+                            puntoNivelNv = Origami.vector(puntoPie, Origins[ii]);
+                            distacnciaMaxima = Origami.vector_length(puntoNivelNv);
                             origoUtilizado = ii;
                         }
                     }
                     
                     //inner: 1, outer: 0
-                    if (Origami.scalar_product(siknv, sikpontnv) < 0) {
-                        terfekUsada = 1;
+                    if (Origami.scalar_product(nivelnv, puntoNivelNv) < 0) {
+                        lugarFrenoUsada = 1;
                     }
                     
                     int comando = 0;
@@ -213,16 +208,16 @@ public class OrigamiIO {
                             break;
                     }
                     
-                    int Xe = (int) sikpontnv[0];
-                    int Ye = (int) sikpontnv[1];
-                    int Ze = (int) sikpontnv[2];
+                    int Xe = (int) puntoNivelNv[0];
+                    int Ye = (int) puntoNivelNv[1];
+                    int Ze = (int) puntoNivelNv[2];
                     
-                    int Xt = (int) Math.round((Math.abs(sikpontnv[0] - Xe)) * 256 * 256);
-                    int Yt = (int) Math.round((Math.abs(sikpontnv[1] - Ye)) * 256 * 256);
-                    int Zt = (int) Math.round((Math.abs(sikpontnv[2] - Ze)) * 256 * 256);
+                    int Xt = (int) Math.round((Math.abs(puntoNivelNv[0] - Xe)) * 256 * 256);
+                    int Yt = (int) Math.round((Math.abs(puntoNivelNv[1] - Ye)) * 256 * 256);
+                    int Zt = (int) Math.round((Math.abs(puntoNivelNv[2] - Ze)) * 256 * 256);
                     
                     //header
-                    str.write(terfekUsada * 32 + origoUtilizado * 8 + comando);
+                    str.write(lugarFrenoUsada * 32 + origoUtilizado * 8 + comando);
                     str.write(anguloInclinacion);
                     str.write(nucleo >>> 8);
                     str.write(nucleo);
@@ -343,41 +338,41 @@ public class OrigamiIO {
                         }
                     }
                     
-                    double[] sikpont = new double[]{origami.history.get(i)[1], origami.history.get(i)[2], origami.history.get(i)[3]};
-                    double[] siknv = new double[]{origami.history.get(i)[4], origami.history.get(i)[5], origami.history.get(i)[6]};
+                    double[] puntoNivel = new double[]{origami.history.get(i)[1], origami.history.get(i)[2], origami.history.get(i)[3]};
+                    double[] nivelNV = new double[]{origami.history.get(i)[4], origami.history.get(i)[5], origami.history.get(i)[6]};
                     
                     double distanciaMaxima = -1;
                     int origoUtilizado = 0;
-                    int terfelUsada = 0;
-                    double[] sikpontnv = new double[]{0, 0, 0};
-                    double arte = sikpont[0] * siknv[0] + sikpont[1] * siknv[1] + sikpont[2] * siknv[2];
+                    int lugarFrenosUsado = 0;
+                    double[] puntoNivelNV = new double[]{0, 0, 0};
+                    double arte = puntoNivel[0] * nivelNV[0] + puntoNivel[1] * nivelNV[1] + puntoNivel[2] * nivelNV[2];
                     
                     for (int ii = 0; ii < Origins.length; ii++) {
                         
-                        double[] iranyvek = siknv;
+                        double[] direccionVector = nivelNV;
                         double X = Origins[ii][0];
                         double Y = Origins[ii][1];
                         double Z = Origins[ii][2];
-                        double U = iranyvek[0];
-                        double V = iranyvek[1];
-                        double W = iranyvek[2];
-                        double A = siknv[0];
-                        double B = siknv[1];
-                        double C = siknv[2];
+                        double U = direccionVector[0];
+                        double V = direccionVector[1];
+                        double W = direccionVector[2];
+                        double A = nivelNV[0];
+                        double B = nivelNV[1];
+                        double C = nivelNV[2];
                         double t = -(A * X + B * Y + C * Z - arte) / (A * U + B * V + C * W);
                         
                         double[] puntoPie = new double[]{X + t * U, Y + t * V, Z + t * W};
                         if (Origami.vector_length(Origami.vector(puntoPie, Origins[ii])) > distanciaMaxima) {
                             
-                            sikpontnv = Origami.vector(puntoPie, Origins[ii]);
-                            distanciaMaxima = Origami.vector_length(sikpontnv);
+                            puntoNivelNV = Origami.vector(puntoPie, Origins[ii]);
+                            distanciaMaxima = Origami.vector_length(puntoNivelNV);
                             origoUtilizado = ii;
                         }
                     }
                     
                     //inner: 1, outer: 0
-                    if (Origami.scalar_product(siknv, sikpontnv) < 0) {
-                        terfelUsada = 1;
+                    if (Origami.scalar_product(nivelNV, puntoNivelNV) < 0) {
+                        lugarFrenosUsado = 1;
                     }
                     
                     int comando = 0;
@@ -437,16 +432,16 @@ public class OrigamiIO {
                             break;
                     }
                     
-                    int Xe = (int) sikpontnv[0];
-                    int Ye = (int) sikpontnv[1];
-                    int Ze = (int) sikpontnv[2];
+                    int Xe = (int) puntoNivelNV[0];
+                    int Ye = (int) puntoNivelNV[1];
+                    int Ze = (int) puntoNivelNV[2];
                     
-                    int Xt = (int) Math.round((Math.abs(sikpontnv[0] - Xe)) * 256 * 256);
-                    int Yt = (int) Math.round((Math.abs(sikpontnv[1] - Ye)) * 256 * 256);
-                    int Zt = (int) Math.round((Math.abs(sikpontnv[2] - Ze)) * 256 * 256);
+                    int Xt = (int) Math.round((Math.abs(puntoNivelNV[0] - Xe)) * 256 * 256);
+                    int Yt = (int) Math.round((Math.abs(puntoNivelNV[1] - Ye)) * 256 * 256);
+                    int Zt = (int) Math.round((Math.abs(puntoNivelNV[2] - Ze)) * 256 * 256);
                     
                     //header
-                    str.write(terfelUsada * 32 + origoUtilizado * 8 + comando);
+                    str.write(lugarFrenosUsado * 32 + origoUtilizado * 8 + comando);
                     str.write(anguloInclinacion);
                     str.write(nucleo >>> 8);
                     str.write(nucleo);
@@ -588,20 +583,20 @@ public class OrigamiIO {
                         Zfrac += str.read();
                         double Z = Zint + Math.signum(Zint) * (double) Zfrac / 256 / 256;
 
-                        double[] sikpont = new double[3];
-                        double[] siknv = new double[3];
-                        sikpont[0] = (double) X + Origins[(((cabeceraComando >>> 24) % 32) - ((cabeceraComando >>> 24) % 8)) / 8][0];
-                        sikpont[1] = (double) Y + Origins[(((cabeceraComando >>> 24) % 32) - ((cabeceraComando >>> 24) % 8)) / 8][1];
-                        sikpont[2] = (double) Z + Origins[(((cabeceraComando >>> 24) % 32) - ((cabeceraComando >>> 24) % 8)) / 8][2];
-                        siknv[0] = X;
-                        siknv[1] = Y;
-                        siknv[2] = Z;
+                        double[] puntoNivel = new double[3];
+                        double[] nivelNV = new double[3];
+                        puntoNivel[0] = (double) X + Origins[(((cabeceraComando >>> 24) % 32) - ((cabeceraComando >>> 24) % 8)) / 8][0];
+                        puntoNivel[1] = (double) Y + Origins[(((cabeceraComando >>> 24) % 32) - ((cabeceraComando >>> 24) % 8)) / 8][1];
+                        puntoNivel[2] = (double) Z + Origins[(((cabeceraComando >>> 24) % 32) - ((cabeceraComando >>> 24) % 8)) / 8][2];
+                        nivelNV[0] = X;
+                        nivelNV[1] = Y;
+                        nivelNV[2] = Z;
 
                         //Elecciones de partido cuadrados
                         
                         if (((cabeceraComando >>> 24) - ((cabeceraComando >>> 24) % 32)) / 32 == 1) {
 
-                            siknv = new double[]{-siknv[0], -siknv[1], -siknv[2]};
+                            nivelNV = new double[]{-nivelNV[0], -nivelNV[1], -nivelNV[2]};
                         }
 
                         double[] comando;
@@ -660,12 +655,12 @@ public class OrigamiIO {
                             comando[7] = (double) (cabeceraComando % 65536);
                         }
 
-                        comando[1] = sikpont[0];
-                        comando[2] = sikpont[1];
-                        comando[3] = sikpont[2];
-                        comando[4] = siknv[0];
-                        comando[5] = siknv[1];
-                        comando[6] = siknv[2];
+                        comando[1] = puntoNivel[0];
+                        comando[2] = puntoNivel[1];
+                        comando[3] = puntoNivel[2];
+                        comando[4] = nivelNV[0];
+                        comando[5] = nivelNV[1];
+                        comando[6] = nivelNV[2];
 
                         origami.history.add(comando);
 
@@ -792,19 +787,19 @@ public class OrigamiIO {
                         Zfrac += str.read();
                         double Z = Zint + Math.signum(Zint) * (double) Zfrac / 256 / 256;
 
-                        double[] sikpont = new double[3];
-                        double[] siknv = new double[3];
-                        sikpont[0] = (double) X + Origins[(((cabeceraComando >>> 24) % 32) - ((cabeceraComando >>> 24) % 8)) / 8][0];
-                        sikpont[1] = (double) Y + Origins[(((cabeceraComando >>> 24) % 32) - ((cabeceraComando >>> 24) % 8)) / 8][1];
-                        sikpont[2] = (double) Z + Origins[(((cabeceraComando >>> 24) % 32) - ((cabeceraComando >>> 24) % 8)) / 8][2];
-                        siknv[0] = X;
-                        siknv[1] = Y;
-                        siknv[2] = Z;
+                        double[] puntoNivel = new double[3];
+                        double[] nivelNV = new double[3];
+                        puntoNivel[0] = (double) X + Origins[(((cabeceraComando >>> 24) % 32) - ((cabeceraComando >>> 24) % 8)) / 8][0];
+                        puntoNivel[1] = (double) Y + Origins[(((cabeceraComando >>> 24) % 32) - ((cabeceraComando >>> 24) % 8)) / 8][1];
+                        puntoNivel[2] = (double) Z + Origins[(((cabeceraComando >>> 24) % 32) - ((cabeceraComando >>> 24) % 8)) / 8][2];
+                        nivelNV[0] = X;
+                        nivelNV[1] = Y;
+                        nivelNV[2] = Z;
 
                         //Elecciones partido cuadrados
                         if (((cabeceraComando >>> 24) - ((cabeceraComando >>> 24) % 32)) / 32 == 1) {
 
-                            siknv = new double[]{-siknv[0], -siknv[1], -siknv[2]};
+                            nivelNV = new double[]{-nivelNV[0], -nivelNV[1], -nivelNV[2]};
                         }
 
                         double[] comando;
@@ -863,12 +858,12 @@ public class OrigamiIO {
                             comando[7] = (double) (cabeceraComando % 65536);
                         }
 
-                        comando[1] = sikpont[0];
-                        comando[2] = sikpont[1];
-                        comando[3] = sikpont[2];
-                        comando[4] = siknv[0];
-                        comando[5] = siknv[1];
-                        comando[6] = siknv[2];
+                        comando[1] = puntoNivel[0];
+                        comando[2] = puntoNivel[1];
+                        comando[3] = puntoNivel[2];
+                        comando[4] = nivelNV[0];
+                        comando[5] = nivelNV[1];
+                        comando[6] = nivelNV[2];
 
                         origami.history.add(comando);
 

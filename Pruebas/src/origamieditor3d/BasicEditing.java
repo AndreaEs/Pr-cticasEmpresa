@@ -15,9 +15,6 @@ package origamieditor3d;
 import origamieditor3d.origami.Camera;
 import origamieditor3d.origami.Origami;
 
-/**
- * @author Attila Bágyoni (ba-sz-at@users.sourceforge.net)
- */
 public interface BasicEditing {
 
     public enum LinerMode {

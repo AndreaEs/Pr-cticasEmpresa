@@ -12,10 +12,6 @@
 // along with this program.  If not, see <http:// www.gnu.org/licenses/>.
 package origamieditor3d;
 
-/**
- *
- * @author Attila Bágyoni (ba-sz-at@users.sourceforge.net)
- */
 public class OrigamiApplet extends java.applet.Applet {
     
     @Override

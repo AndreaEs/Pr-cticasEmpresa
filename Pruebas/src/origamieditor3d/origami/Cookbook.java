@@ -13,7 +13,7 @@
 package origamieditor3d.origami;
 
 /**
- * A PDF-exportnál használt alapértelmezett angol nyelvű szövegek.
+ * El PDF - exportaciones utilizará el texto Inglés por defecto .
  *
  * @author Attila Bágyoni (ba-sz-at@users.sourceforge.net)
  */

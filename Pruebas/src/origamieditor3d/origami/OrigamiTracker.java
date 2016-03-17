@@ -71,9 +71,9 @@ public class OrigamiTracker {
     		            } else {
     		                if (tracker) {
 
-    		                    ArrayList<Integer> sokszog0 = polygons.get(polygonIndex);
-    		                    sokszog0.add(trackerpont);
-    		                    polygons.set(polygonIndex, sokszog0);
+    		                    ArrayList<Integer> poligono0 = polygons.get(polygonIndex);
+    		                    poligono0.add(trackerpont);
+    		                    polygons.set(polygonIndex, poligono0);
     		                }
     		            }
     		            return ajustado;

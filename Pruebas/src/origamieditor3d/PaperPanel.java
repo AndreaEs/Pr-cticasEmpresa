@@ -19,9 +19,6 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 import origamieditor3d.origami.OrigamiTracker;
 
-/**
- * @author Attila Bágyoni (ba-sz-at@users.sourceforge.net)
- */
 public class PaperPanel extends JPanel implements BasicEditing {
 
     private static final long serialVersionUID = 1L;
@@ -32,7 +29,7 @@ public class PaperPanel extends JPanel implements BasicEditing {
     private boolean ready_to_paint;
     private boolean trackerOn;
     private double[] liner_point, liner_normal;
-    private Integer[][] liner_triangle;
+    private final Integer[][] liner_triangle;
     private int liner_grab_index;
     private LinerMode linerMode;
 
@@ -116,26 +113,26 @@ public class PaperPanel extends JPanel implements BasicEditing {
         double pont1X = ((double) x1 - refcam.xshift) / refcam.zoom();
         double pont1Y = ((double) y1 - refcam.yshift) / refcam.zoom();
 
-        double[] vonalzoNV = new double[]{
+        double[] gobernanteNV = new double[]{
             refcam.axis_x[0] * (y2 - y1) + refcam.axis_y[0] * (x1 - x2),
             refcam.axis_x[1] * (y2 - y1) + refcam.axis_y[1] * (x1 - x2),
             refcam.axis_x[2] * (y2 - y1) + refcam.axis_y[2] * (x1 - x2)
         };
-        double[] vonalzoPT = new double[]{
+        double[] gobernantePT = new double[]{
             refcam.axis_x[0] / refcam.zoom() * pontX + refcam.axis_y[0] / refcam.zoom() * pontY + refcam.camera_pos[0],
             refcam.axis_x[1] / refcam.zoom() * pontX + refcam.axis_y[1] / refcam.zoom() * pontY + refcam.camera_pos[1],
             refcam.axis_x[2] / refcam.zoom() * pontX + refcam.axis_y[2] / refcam.zoom() * pontY + refcam.camera_pos[2]
         };
-        double[] vonalzoPT1 = new double[]{
+        double[] gobernantePT1 = new double[]{
             refcam.axis_x[0] / refcam.zoom() * pont1X + refcam.axis_y[0] / refcam.zoom() * pont1Y + refcam.camera_pos[0],
             refcam.axis_x[1] / refcam.zoom() * pont1X + refcam.axis_y[1] / refcam.zoom() * pont1Y + refcam.camera_pos[1],
             refcam.axis_x[2] / refcam.zoom() * pont1X + refcam.axis_y[2] / refcam.zoom() * pont1Y + refcam.camera_pos[2]
         };
         if (linerMode == LinerMode.Neusis) {
-            vonalzoNV = Origami.vector(vonalzoPT, vonalzoPT1);
+            gobernanteNV = Origami.vector(gobernantePT, gobernantePT1);
         }
-        liner_point = vonalzoPT;
-        liner_normal = vonalzoNV;
+        liner_point = gobernantePT;
+        liner_normal = gobernanteNV;
     }
 
     @Override

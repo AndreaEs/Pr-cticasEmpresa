@@ -20,8 +20,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 /**
- * Metódusokat nyújt az {@linkplain Origami} objektumok PDF és OpenCTM
- * formátumba exportálásához.
+ * Proporciona métodos para {@linkplain Origami} objetos OpenCTM formato PDF y exportación .
  *
  * @author Attila Bágyoni (ba-sz-at@users.sourceforge.net)
  * @since 2013-01-14
@@ -36,212 +35,212 @@ public class Export {
 
         try {
 
-            Camera kamera = new Camera(0, 0, 1);
-            kamera.adjust(origami);
+            Camera camera = new Camera(0, 0, 1);
+            camera.adjust(origami);
 
-            int haromszogek_hossz = 0;
+            int longitudTriangulo = 0;
             for (int i = 0; i < origami.polygons_size(); i++) {
 
                 if (origami.isNonDegenerate(i)) {
-                    haromszogek_hossz += origami.polygons().get(i).size() - 2;
+                    longitudTriangulo += origami.polygons().get(i).size() - 2;
                 }
             }
 
-            ArrayList<Byte> bajtlista = new ArrayList<>();
-            int uj_int;
+            ArrayList<Byte> listaProblemas = new ArrayList<>();
+            int nuevoEntero;
 
             //OCTM
-            uj_int = 0x4d54434f;
-            bajtlista.add((byte) (uj_int));
-            bajtlista.add((byte) (uj_int >>> 8));
-            bajtlista.add((byte) (uj_int >>> 16));
-            bajtlista.add((byte) (uj_int >>> 24));
+            nuevoEntero = 0x4d54434f;
+            listaProblemas.add((byte) (nuevoEntero));
+            listaProblemas.add((byte) (nuevoEntero >>> 8));
+            listaProblemas.add((byte) (nuevoEntero >>> 16));
+            listaProblemas.add((byte) (nuevoEntero >>> 24));
 
-            //5. verzió
-            uj_int = 0x00000005;
-            bajtlista.add((byte) (uj_int));
-            bajtlista.add((byte) (uj_int >>> 8));
-            bajtlista.add((byte) (uj_int >>> 16));
-            bajtlista.add((byte) (uj_int >>> 24));
+            //versión 5
+            nuevoEntero = 0x00000005;
+            listaProblemas.add((byte) (nuevoEntero));
+            listaProblemas.add((byte) (nuevoEntero >>> 8));
+            listaProblemas.add((byte) (nuevoEntero >>> 16));
+            listaProblemas.add((byte) (nuevoEntero >>> 24));
 
-            //RAW tömörítés
-            uj_int = 0x00574152;
-            bajtlista.add((byte) (uj_int));
-            bajtlista.add((byte) (uj_int >>> 8));
-            bajtlista.add((byte) (uj_int >>> 16));
-            bajtlista.add((byte) (uj_int >>> 24));
+            //compresión RAW
+            nuevoEntero = 0x00574152;
+            listaProblemas.add((byte) (nuevoEntero));
+            listaProblemas.add((byte) (nuevoEntero >>> 8));
+            listaProblemas.add((byte) (nuevoEntero >>> 16));
+            listaProblemas.add((byte) (nuevoEntero >>> 24));
 
-            //Pontok száma
-            uj_int = origami.vertices_size();
-            bajtlista.add((byte) (uj_int));
-            bajtlista.add((byte) (uj_int >>> 8));
-            bajtlista.add((byte) (uj_int >>> 16));
-            bajtlista.add((byte) (uj_int >>> 24));
+            //número de puntos
+            nuevoEntero = origami.vertices_size();
+            listaProblemas.add((byte) (nuevoEntero));
+            listaProblemas.add((byte) (nuevoEntero >>> 8));
+            listaProblemas.add((byte) (nuevoEntero >>> 16));
+            listaProblemas.add((byte) (nuevoEntero >>> 24));
 
-            //Háromszögek száma
-            uj_int = haromszogek_hossz;
-            bajtlista.add((byte) (uj_int));
-            bajtlista.add((byte) (uj_int >>> 8));
-            bajtlista.add((byte) (uj_int >>> 16));
-            bajtlista.add((byte) (uj_int >>> 24));
+            //Número de Triángulos
+            nuevoEntero = longitudTriangulo;
+            listaProblemas.add((byte) (nuevoEntero));
+            listaProblemas.add((byte) (nuevoEntero >>> 8));
+            listaProblemas.add((byte) (nuevoEntero >>> 16));
+            listaProblemas.add((byte) (nuevoEntero >>> 24));
 
-            //UV térképek száma
-            uj_int = texture == null ? 0 : 1;
-            bajtlista.add((byte) (uj_int));
-            bajtlista.add((byte) (uj_int >>> 8));
-            bajtlista.add((byte) (uj_int >>> 16));
-            bajtlista.add((byte) (uj_int >>> 24));
+            //Número de mapas UV
+            nuevoEntero = texture == null ? 0 : 1;
+            listaProblemas.add((byte) (nuevoEntero));
+            listaProblemas.add((byte) (nuevoEntero >>> 8));
+            listaProblemas.add((byte) (nuevoEntero >>> 16));
+            listaProblemas.add((byte) (nuevoEntero >>> 24));
 
-            //Attibrútumtérképek száma
-            uj_int = 0x00000000;
-            bajtlista.add((byte) (uj_int));
-            bajtlista.add((byte) (uj_int >>> 8));
-            bajtlista.add((byte) (uj_int >>> 16));
-            bajtlista.add((byte) (uj_int >>> 24));
+            //Número de los mapas
+            nuevoEntero = 0x00000000;
+            listaProblemas.add((byte) (nuevoEntero));
+            listaProblemas.add((byte) (nuevoEntero >>> 8));
+            listaProblemas.add((byte) (nuevoEntero >>> 16));
+            listaProblemas.add((byte) (nuevoEntero >>> 24));
 
-            //Csúcsonkénti merôlegesek nincsenek
-            uj_int = 0x00000000;
-            bajtlista.add((byte) (uj_int));
-            bajtlista.add((byte) (uj_int >>> 8));
-            bajtlista.add((byte) (uj_int >>> 16));
-            bajtlista.add((byte) (uj_int >>> 24));
+            //No hay pico en perpendicular
+            nuevoEntero = 0x00000000;
+            listaProblemas.add((byte) (nuevoEntero));
+            listaProblemas.add((byte) (nuevoEntero >>> 8));
+            listaProblemas.add((byte) (nuevoEntero >>> 16));
+            listaProblemas.add((byte) (nuevoEntero >>> 24));
 
-            //Reklám
-            uj_int = 0x00000020;
-            bajtlista.add((byte) (uj_int));
-            bajtlista.add((byte) (uj_int >>> 8));
-            bajtlista.add((byte) (uj_int >>> 16));
-            bajtlista.add((byte) (uj_int >>> 24));
+            //Anuncio
+            nuevoEntero = 0x00000020;
+            listaProblemas.add((byte) (nuevoEntero));
+            listaProblemas.add((byte) (nuevoEntero >>> 8));
+            listaProblemas.add((byte) (nuevoEntero >>> 16));
+            listaProblemas.add((byte) (nuevoEntero >>> 24));
 
-            uj_int = 0x43726561;
-            bajtlista.add((byte) (uj_int >>> 24));
-            bajtlista.add((byte) (uj_int >>> 16));
-            bajtlista.add((byte) (uj_int >>> 8));
-            bajtlista.add((byte) (uj_int));
+            nuevoEntero = 0x43726561;
+            listaProblemas.add((byte) (nuevoEntero >>> 24));
+            listaProblemas.add((byte) (nuevoEntero >>> 16));
+            listaProblemas.add((byte) (nuevoEntero >>> 8));
+            listaProblemas.add((byte) (nuevoEntero));
 
-            uj_int = 0x74656420;
-            bajtlista.add((byte) (uj_int >>> 24));
-            bajtlista.add((byte) (uj_int >>> 16));
-            bajtlista.add((byte) (uj_int >>> 8));
-            bajtlista.add((byte) (uj_int));
+            nuevoEntero = 0x74656420;
+            listaProblemas.add((byte) (nuevoEntero >>> 24));
+            listaProblemas.add((byte) (nuevoEntero >>> 16));
+            listaProblemas.add((byte) (nuevoEntero >>> 8));
+            listaProblemas.add((byte) (nuevoEntero));
 
-            uj_int = 0x77697468;
-            bajtlista.add((byte) (uj_int >>> 24));
-            bajtlista.add((byte) (uj_int >>> 16));
-            bajtlista.add((byte) (uj_int >>> 8));
-            bajtlista.add((byte) (uj_int));
+            nuevoEntero = 0x77697468;
+            listaProblemas.add((byte) (nuevoEntero >>> 24));
+            listaProblemas.add((byte) (nuevoEntero >>> 16));
+            listaProblemas.add((byte) (nuevoEntero >>> 8));
+            listaProblemas.add((byte) (nuevoEntero));
 
-            uj_int = 0x204f7269;
-            bajtlista.add((byte) (uj_int >>> 24));
-            bajtlista.add((byte) (uj_int >>> 16));
-            bajtlista.add((byte) (uj_int >>> 8));
-            bajtlista.add((byte) (uj_int));
+            nuevoEntero = 0x204f7269;
+            listaProblemas.add((byte) (nuevoEntero >>> 24));
+            listaProblemas.add((byte) (nuevoEntero >>> 16));
+            listaProblemas.add((byte) (nuevoEntero >>> 8));
+            listaProblemas.add((byte) (nuevoEntero));
 
-            uj_int = 0x67616d69;
-            bajtlista.add((byte) (uj_int >>> 24));
-            bajtlista.add((byte) (uj_int >>> 16));
-            bajtlista.add((byte) (uj_int >>> 8));
-            bajtlista.add((byte) (uj_int));
+            nuevoEntero = 0x67616d69;
+            listaProblemas.add((byte) (nuevoEntero >>> 24));
+            listaProblemas.add((byte) (nuevoEntero >>> 16));
+            listaProblemas.add((byte) (nuevoEntero >>> 8));
+            listaProblemas.add((byte) (nuevoEntero));
 
-            uj_int = 0x20456469;
-            bajtlista.add((byte) (uj_int >>> 24));
-            bajtlista.add((byte) (uj_int >>> 16));
-            bajtlista.add((byte) (uj_int >>> 8));
-            bajtlista.add((byte) (uj_int));
+            nuevoEntero = 0x20456469;
+            listaProblemas.add((byte) (nuevoEntero >>> 24));
+            listaProblemas.add((byte) (nuevoEntero >>> 16));
+            listaProblemas.add((byte) (nuevoEntero >>> 8));
+            listaProblemas.add((byte) (nuevoEntero));
 
-            uj_int = 0x746f7220;
-            bajtlista.add((byte) (uj_int >>> 24));
-            bajtlista.add((byte) (uj_int >>> 16));
-            bajtlista.add((byte) (uj_int >>> 8));
-            bajtlista.add((byte) (uj_int));
+            nuevoEntero = 0x746f7220;
+            listaProblemas.add((byte) (nuevoEntero >>> 24));
+            listaProblemas.add((byte) (nuevoEntero >>> 16));
+            listaProblemas.add((byte) (nuevoEntero >>> 8));
+            listaProblemas.add((byte) (nuevoEntero));
 
-            uj_int = 0x33442e20;
-            bajtlista.add((byte) (uj_int >>> 24));
-            bajtlista.add((byte) (uj_int >>> 16));
-            bajtlista.add((byte) (uj_int >>> 8));
-            bajtlista.add((byte) (uj_int));
+            nuevoEntero = 0x33442e20;
+            listaProblemas.add((byte) (nuevoEntero >>> 24));
+            listaProblemas.add((byte) (nuevoEntero >>> 16));
+            listaProblemas.add((byte) (nuevoEntero >>> 8));
+            listaProblemas.add((byte) (nuevoEntero));
 
             //INDX
-            uj_int = 0x58444e49;
-            bajtlista.add((byte) (uj_int));
-            bajtlista.add((byte) (uj_int >>> 8));
-            bajtlista.add((byte) (uj_int >>> 16));
-            bajtlista.add((byte) (uj_int >>> 24));
+            nuevoEntero = 0x58444e49;
+            listaProblemas.add((byte) (nuevoEntero));
+            listaProblemas.add((byte) (nuevoEntero >>> 8));
+            listaProblemas.add((byte) (nuevoEntero >>> 16));
+            listaProblemas.add((byte) (nuevoEntero >>> 24));
 
-            //Háromszögek
+            //triángulos
             for (int i = 0; i < origami.polygons_size(); i++) {
 
                 if (origami.isNonDegenerate(i)) {
 
                     for (int ii = 1; ii < origami.polygons().get(i).size() - 1; ii++) {
 
-                        uj_int = origami.polygons().get(i).get(0);
-                        bajtlista.add((byte) (uj_int));
-                        bajtlista.add((byte) (uj_int >>> 8));
-                        bajtlista.add((byte) (uj_int >>> 16));
-                        bajtlista.add((byte) (uj_int >>> 24));
+                        nuevoEntero = origami.polygons().get(i).get(0);
+                        listaProblemas.add((byte) (nuevoEntero));
+                        listaProblemas.add((byte) (nuevoEntero >>> 8));
+                        listaProblemas.add((byte) (nuevoEntero >>> 16));
+                        listaProblemas.add((byte) (nuevoEntero >>> 24));
 
-                        uj_int = origami.polygons().get(i).get(ii);
-                        bajtlista.add((byte) (uj_int));
-                        bajtlista.add((byte) (uj_int >>> 8));
-                        bajtlista.add((byte) (uj_int >>> 16));
-                        bajtlista.add((byte) (uj_int >>> 24));
+                        nuevoEntero = origami.polygons().get(i).get(ii);
+                        listaProblemas.add((byte) (nuevoEntero));
+                        listaProblemas.add((byte) (nuevoEntero >>> 8));
+                        listaProblemas.add((byte) (nuevoEntero >>> 16));
+                        listaProblemas.add((byte) (nuevoEntero >>> 24));
 
-                        uj_int = origami.polygons().get(i).get(ii + 1);
-                        bajtlista.add((byte) (uj_int));
-                        bajtlista.add((byte) (uj_int >>> 8));
-                        bajtlista.add((byte) (uj_int >>> 16));
-                        bajtlista.add((byte) (uj_int >>> 24));
+                        nuevoEntero = origami.polygons().get(i).get(ii + 1);
+                        listaProblemas.add((byte) (nuevoEntero));
+                        listaProblemas.add((byte) (nuevoEntero >>> 8));
+                        listaProblemas.add((byte) (nuevoEntero >>> 16));
+                        listaProblemas.add((byte) (nuevoEntero >>> 24));
                     }
                 }
             }
 
             //VERT
-            uj_int = 0x54524556;
-            bajtlista.add((byte) (uj_int));
-            bajtlista.add((byte) (uj_int >>> 8));
-            bajtlista.add((byte) (uj_int >>> 16));
-            bajtlista.add((byte) (uj_int >>> 24));
+            nuevoEntero = 0x54524556;
+            listaProblemas.add((byte) (nuevoEntero));
+            listaProblemas.add((byte) (nuevoEntero >>> 8));
+            listaProblemas.add((byte) (nuevoEntero >>> 16));
+            listaProblemas.add((byte) (nuevoEntero >>> 24));
 
-            //Csúcsok
+            //picos
             for (int i = 0; i < origami.vertices_size(); i++) {
 
-                uj_int = Float.floatToIntBits((float) origami.vertices().get(i)[0] - (float) kamera.camera_pos[0]);
-                bajtlista.add((byte) (uj_int));
-                bajtlista.add((byte) (uj_int >>> 8));
-                bajtlista.add((byte) (uj_int >>> 16));
-                bajtlista.add((byte) (uj_int >>> 24));
+                nuevoEntero = Float.floatToIntBits((float) origami.vertices().get(i)[0] - (float) camera.camera_pos[0]);
+                listaProblemas.add((byte) (nuevoEntero));
+                listaProblemas.add((byte) (nuevoEntero >>> 8));
+                listaProblemas.add((byte) (nuevoEntero >>> 16));
+                listaProblemas.add((byte) (nuevoEntero >>> 24));
 
-                uj_int = Float.floatToIntBits((float) origami.vertices().get(i)[1] - (float) kamera.camera_pos[1]);
-                bajtlista.add((byte) (uj_int));
-                bajtlista.add((byte) (uj_int >>> 8));
-                bajtlista.add((byte) (uj_int >>> 16));
-                bajtlista.add((byte) (uj_int >>> 24));
+                nuevoEntero = Float.floatToIntBits((float) origami.vertices().get(i)[1] - (float) camera.camera_pos[1]);
+                listaProblemas.add((byte) (nuevoEntero));
+                listaProblemas.add((byte) (nuevoEntero >>> 8));
+                listaProblemas.add((byte) (nuevoEntero >>> 16));
+                listaProblemas.add((byte) (nuevoEntero >>> 24));
 
-                uj_int = Float.floatToIntBits((float) origami.vertices().get(i)[2] - (float) kamera.camera_pos[2]);
-                bajtlista.add((byte) (uj_int));
-                bajtlista.add((byte) (uj_int >>> 8));
-                bajtlista.add((byte) (uj_int >>> 16));
-                bajtlista.add((byte) (uj_int >>> 24));
+                nuevoEntero = Float.floatToIntBits((float) origami.vertices().get(i)[2] - (float) camera.camera_pos[2]);
+                listaProblemas.add((byte) (nuevoEntero));
+                listaProblemas.add((byte) (nuevoEntero >>> 8));
+                listaProblemas.add((byte) (nuevoEntero >>> 16));
+                listaProblemas.add((byte) (nuevoEntero >>> 24));
             }
 
             if (texture != null) {
 
-                uj_int = 0x43584554;
-                bajtlista.add((byte) (uj_int));
-                bajtlista.add((byte) (uj_int >>> 8));
-                bajtlista.add((byte) (uj_int >>> 16));
-                bajtlista.add((byte) (uj_int >>> 24));
+                nuevoEntero = 0x43584554;
+                listaProblemas.add((byte) (nuevoEntero));
+                listaProblemas.add((byte) (nuevoEntero >>> 8));
+                listaProblemas.add((byte) (nuevoEntero >>> 16));
+                listaProblemas.add((byte) (nuevoEntero >>> 24));
 
-                bajtlista.add((byte) 5);
-                bajtlista.add((byte) 0);
-                bajtlista.add((byte) 0);
-                bajtlista.add((byte) 0);
-                bajtlista.add((byte) 'P');
-                bajtlista.add((byte) 'a');
-                bajtlista.add((byte) 'p');
-                bajtlista.add((byte) 'e');
-                bajtlista.add((byte) 'r');
+                listaProblemas.add((byte) 5);
+                listaProblemas.add((byte) 0);
+                listaProblemas.add((byte) 0);
+                listaProblemas.add((byte) 0);
+                listaProblemas.add((byte) 'P');
+                listaProblemas.add((byte) 'a');
+                listaProblemas.add((byte) 'p');
+                listaProblemas.add((byte) 'e');
+                listaProblemas.add((byte) 'r');
 
                 long u = 0;
                 File teximg = new File(filename + "-texture.png");
@@ -254,35 +253,35 @@ public class Export {
 
                 javax.imageio.ImageIO.write(texture, "png", teximg);
 
-                bajtlista.add((byte) teximg.getName().length());
-                bajtlista.add((byte) 0);
-                bajtlista.add((byte) 0);
-                bajtlista.add((byte) 0);
+                listaProblemas.add((byte) teximg.getName().length());
+                listaProblemas.add((byte) 0);
+                listaProblemas.add((byte) 0);
+                listaProblemas.add((byte) 0);
                 for (int i = 0; i < teximg.getName().length(); i++) {
-                    bajtlista.add((byte) teximg.getName().charAt(i));
+                    listaProblemas.add((byte) teximg.getName().charAt(i));
                 }
 
                 //the UV mapping is defined by the vertices in the paper space
                 for (int i = 0; i < origami.vertices_size(); i++) {
 
-                    uj_int = Float.floatToIntBits((float) (origami.vertices2d().get(i)[0] / origami.paperWidth()));
-                    bajtlista.add((byte) (uj_int));
-                    bajtlista.add((byte) (uj_int >>> 8));
-                    bajtlista.add((byte) (uj_int >>> 16));
-                    bajtlista.add((byte) (uj_int >>> 24));
+                    nuevoEntero = Float.floatToIntBits((float) (origami.vertices2d().get(i)[0] / origami.paperWidth()));
+                    listaProblemas.add((byte) (nuevoEntero));
+                    listaProblemas.add((byte) (nuevoEntero >>> 8));
+                    listaProblemas.add((byte) (nuevoEntero >>> 16));
+                    listaProblemas.add((byte) (nuevoEntero >>> 24));
 
-                    uj_int = Float.floatToIntBits((float) (1 - origami.vertices2d().get(i)[1] / origami.paperHeight()));
-                    bajtlista.add((byte) (uj_int));
-                    bajtlista.add((byte) (uj_int >>> 8));
-                    bajtlista.add((byte) (uj_int >>> 16));
-                    bajtlista.add((byte) (uj_int >>> 24));
+                    nuevoEntero = Float.floatToIntBits((float) (1 - origami.vertices2d().get(i)[1] / origami.paperHeight()));
+                    listaProblemas.add((byte) (nuevoEntero));
+                    listaProblemas.add((byte) (nuevoEntero >>> 8));
+                    listaProblemas.add((byte) (nuevoEntero >>> 16));
+                    listaProblemas.add((byte) (nuevoEntero >>> 24));
                 }
             }
 
-            byte[] bajtok = new byte[bajtlista.size()];
-            for (int i = 0; i < bajtlista.size(); i++) {
+            byte[] casoProblemas = new byte[listaProblemas.size()];
+            for (int i = 0; i < listaProblemas.size(); i++) {
 
-                bajtok[i] = bajtlista.get(i);
+                casoProblemas[i] = listaProblemas.get(i);
             }
 
             File ctm = new File(filename);
@@ -291,9 +290,9 @@ public class Export {
             }
 
             try (FileOutputStream str = new FileOutputStream(ctm)) {
-                str.write(bajtok);
+                str.write(casoProblemas);
             }
-            kamera.unadjust(origami);
+            camera.unadjust(origami);
 
             return 1;
 
@@ -312,16 +311,16 @@ public class Export {
             if (pdf.exists()) {
                 pdf.delete();
             }
-            //Itt tároljuk az objektumok offszeteit
+            //Aquí se almacena en los objetos de compensación
             try (FileOutputStream str = new FileOutputStream(pdf)) {
-                //Itt tároljuk az objektumok offszeteit
-                ArrayList<Integer> Conjuntos = new ArrayList<>();
-                Conjuntos.add(0);
+                //Aquí se almacena en los objetos de compensación
+                ArrayList<Integer> conjuntos = new ArrayList<>();
+                conjuntos.add(0);
                 int numCompeticion = 0;
                 
-                //Megszámoljuk, hány mûvelet nem lesz külön feltüntetve
-                int ures_muveletek = 0;
-                ArrayList<Integer> IndicesAventuras = new ArrayList<>();
+                //Contamos el número de operación no se muestra por separado
+                int operacionesVacias = 0;
+                ArrayList<Integer> indicesAventuras = new ArrayList<>();
                 
                 for (int i = 0; i < origami1.history().size(); i++) {
                     
@@ -336,8 +335,8 @@ public class Export {
                                     && origami1.history().get(i + 1)[4] == origami1.history().get(i)[4]
                                     && origami1.history().get(i + 1)[5] == origami1.history().get(i)[5]
                                     && origami1.history().get(i + 1)[6] == origami1.history().get(i)[6]) {
-                                ures_muveletek++;
-                                IndicesAventuras.add(i);
+                                operacionesVacias++;
+                                indicesAventuras.add(i);
                             }
                         }
                     } else if (origami1.history().get(i)[0] == 4.0) {
@@ -352,29 +351,29 @@ public class Export {
                                     && origami1.history().get(i + 1)[5] == origami1.history().get(i)[5]
                                     && origami1.history().get(i + 1)[6] == origami1.history().get(i)[6]
                                     && origami1.history().get(i + 1)[8] == origami1.history().get(i)[8]) {
-                                ures_muveletek++;
-                                IndicesAventuras.add(i);
+                                operacionesVacias++;
+                                indicesAventuras.add(i);
                             }
                         }
                     }
                 }
                 
-                int forgatasok = 2;
-                //Azok a lépések, amikhez szemszögváltás kell
-                ArrayList<Integer> IndicesGirados = new ArrayList<>();
-                IndicesGirados.add(0);
-                //A szemszögváltások függôleges forgásszögei
-                ArrayList<Integer> ForgatasSzogek = new ArrayList<>();
-                ForgatasSzogek.add(0);
+                int piruetas = 2;
+                //Esas medidas, que tienen que cambiar la perspectiva
+                ArrayList<Integer> indicesGirados = new ArrayList<>();
+                indicesGirados.add(0);
+                //El punto de vista cambia los ángulos de rotación vertical
+                ArrayList<Integer> anguloRotacion = new ArrayList<>();
+                anguloRotacion.add(0);
                 
-                //Méretezés és elôigazítás
+                //Calificaciones y mantener la alineación
                 Camera camara = new Camera(0, 0, 0.5);
                 camara.nextOrthogonalView();
                 
-                //Felmérjük az olyan lépések számát, amikhez szemszögváltás kell.
+                //Medir el número de pasos, que deben cambiar la perspectiva.
                 for (int i = 1; i < origami1.history().size(); i++) {
                     
-                    double[] regiVaszonNV = camara.camera_dir;
+                    double[] viejaLonaNV = camara.camera_dir;
                     
                     camara.camera_dir = Origami.vector_product(new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]},
                             new double[]{0, 1, 0});
@@ -387,27 +386,27 @@ public class Export {
                         camara.camera_dir[1] / Origami.vector_length(camara.camera_dir),
                         camara.camera_dir[2] / Origami.vector_length(camara.camera_dir)};
                     
-                    if (Origami.vector_length(Origami.vector_product(regiVaszonNV, camara.camera_dir)) > .00000001 && !IndicesAventuras.contains(i - 1)) {
+                    if (Origami.vector_length(Origami.vector_product(viejaLonaNV, camara.camera_dir)) > .00000001 && !indicesAventuras.contains(i - 1)) {
                         
-                        forgatasok++;
-                        IndicesGirados.add(i);
-                        double cos = Origami.scalar_product(regiVaszonNV, camara.camera_dir) / Origami.vector_length(regiVaszonNV) / Origami.vector_length(camara.camera_dir);
-                        ForgatasSzogek.add((int) (Math.acos(cos >= -1 && cos <= 1 ? cos : 1) / Math.PI * 180));
+                        piruetas++;
+                        indicesGirados.add(i);
+                        double cos = Origami.scalar_product(viejaLonaNV, camara.camera_dir) / Origami.vector_length(viejaLonaNV) / Origami.vector_length(camara.camera_dir);
+                        anguloRotacion.add((int) (Math.acos(cos >= -1 && cos <= 1 ? cos : 1) / Math.PI * 180));
                     }
                 }
-                IndicesGirados.add(origami1.history().size());
+                indicesGirados.add(origami1.history().size());
                 
-                //Egy oldalon 6 cella van (papírmérettôl függetlenül)
-                int numCelda = origami1.history().size() + forgatasok - ures_muveletek + 2;
+                //Una célula tiene seis lados (independientemente del tamaño del papel)
+                int numCelda = origami1.history().size() + piruetas - operacionesVacias + 2;
                 
-                //Fejléc
+                //Membrete
                 String parecerse = "";
                 parecerse += "%PDF-1.3";
                 parecerse += (char) 10;
                 parecerse += (char) 10;
 
-                //Katalógus
-                Conjuntos.add(parecerse.length());
+                //catálogo
+                conjuntos.add(parecerse.length());
                 parecerse += "1 0 obj";
                 parecerse += (char) 10;
                 parecerse += "<< /Type /Catalog";
@@ -420,8 +419,8 @@ public class Export {
                 parecerse += (char) 10;
                 parecerse += (char) 10;
 
-                //Kötet
-                Conjuntos.add(parecerse.length());
+                //volumen
+                conjuntos.add(parecerse.length());
                 parecerse += "2 0 obj";
                 parecerse += (char) 10;
                 parecerse += "<< /Type /Pages";
@@ -429,7 +428,7 @@ public class Export {
                 parecerse += "/Kids [";
                 parecerse += "3 0 R";
                 
-                //Az oldalak száma a cellák számának hatoda felfelé kerekítve
+                //El número de páginas en el número de células redondea una sexta parte
                 for (int i = 1; i < (int) Math.ceil((double) numCelda / 6); i++) {
                     
                     parecerse += " " + Integer.toString(i + 3) + " 0 R";
@@ -446,10 +445,10 @@ public class Export {
                 parecerse += (char) 10;
                 parecerse += (char) 10;
                 
-                //Oldalak
+                //páginas
                 for (int i = 0; i < (int) Math.ceil((double) numCelda / 6); i++) {
                     
-                    Conjuntos.add(parecerse.length());
+                    conjuntos.add(parecerse.length());
                     parecerse += "" + Integer.toString(i + 3) + " 0 obj";
                     parecerse += (char) 10;
                     parecerse += "<< /Type /Page";
@@ -476,8 +475,8 @@ public class Export {
                     parecerse += (char) 10;
                     parecerse += "/Contents[";
                     
-                    //Egy oldalon általánosan 6 kép és 6 szöveg objektum van
-                    //A fájltest elsô felében a képek, a másodikban a szövegek vannak
+                    //Por un lado es generalmente de seis cuadros y objetos de texto es 6
+                    //En la primera mitad de los archivos de prueba de las imágenes, y la segunda son las letras
                     for (int ii = (int) Math.ceil((double) numCelda / 6) + i * 6;
                             ii < (numCelda < (i + 1) * 6
                             ? (int) Math.ceil((double) numCelda / 6) + numCelda
@@ -499,7 +498,7 @@ public class Export {
                 }
                 
                 //El título del nombre del archivo
-                Conjuntos.add(parecerse.length());
+                conjuntos.add(parecerse.length());
                 String stream;
                 stream = "BT";
                 stream += (char) 10;
@@ -525,7 +524,7 @@ public class Export {
                 parecerse += (char) 10;
                 
                 //Dos celda vacía debajo del título es Nuestra publicidad
-                Conjuntos.add(parecerse.length());
+                conjuntos.add(parecerse.length());
                 stream = "BT";
                 stream += (char) 10;
                 stream += "/F1 12 Tf";
@@ -571,7 +570,7 @@ public class Export {
                 //Figuras
                 for (int i = 0; i <= origami1.history().size(); i++) {
                     
-                    while (IndicesAventuras.contains(i - 1)) {
+                    while (indicesAventuras.contains(i - 1)) {
                         
                         origami1.execute(i - 1, 1);
                         i++;
@@ -580,9 +579,9 @@ public class Export {
                     origami1.execute(i - 1, 1);
                     
                     int x = 0, y = 0;
-                    String kep;
+                    String imagen;
                     
-                    if (IndicesGirados.contains(i)) {
+                    if (indicesGirados.contains(i)) {
                         
                         switch ((objindex - (int) Math.ceil((double) numCelda / 6)) % 6) {
                             
@@ -620,12 +619,12 @@ public class Export {
                                 break;
                         }
                         
-                        kep = camara.drawFaces(x, y, origami1) + camara.drawEdges(x, y, origami1);
+                        imagen = camara.drawFaces(x, y, origami1) + camara.drawEdges(x, y, origami1);
                         
-                        Conjuntos.add(numCompeticion);
+                        conjuntos.add(numCompeticion);
                         stream = "q";
                         stream += " ";
-                        stream += kep;
+                        stream += imagen;
                         stream += "Q";
                         stream += (char) 10;
                         parecerse += Integer.toString(objindex) + " 0 obj";
@@ -672,7 +671,7 @@ public class Export {
                             camara.axis_y[1] / Origami.vector_length(camara.axis_y) * camara.zoom(),
                             camara.axis_y[2] / Origami.vector_length(camara.axis_y) * camara.zoom()};
                         
-                        if (Origami.scalar_product(viejaLonaNV, camara.camera_dir) < 0 && !IndicesGirados.contains(i)) {
+                        if (Origami.scalar_product(viejaLonaNV, camara.camera_dir) < 0 && !indicesGirados.contains(i)) {
                             
                             camara.camera_dir = Origami.vector(Origami.nullvektor, camara.camera_dir);
                             camara.axis_x = Origami.vector(Origami.nullvektor, camara.axis_x);
@@ -715,7 +714,7 @@ public class Export {
                         }
                         
                         double[] puntoPlana;
-                        double[] siknv;
+                        double[] nivelnv;
                         
                         camara.adjust(origami1);
                         
@@ -723,55 +722,55 @@ public class Export {
                             
                             case 1:
                                 puntoPlana = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
-                                siknv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
-                                kep = camara.drawFaces(x, y, origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, siknv);
+                                nivelnv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
+                                imagen = camara.drawFaces(x, y, origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, nivelnv);
                                 break;
                                 
                             case 2:
                                 puntoPlana = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
-                                siknv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
-                                kep = camara.drawFaces(x, y, origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, siknv);
+                                nivelnv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
+                                imagen = camara.drawFaces(x, y, origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, nivelnv);
                                 break;
                                 
                             case 3:
                                 puntoPlana = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
-                                siknv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
-                                kep = camara.drawSelection(x, y, puntoPlana, siknv, (int) origami1.history().get(i)[7], origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, siknv);
+                                nivelnv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
+                                imagen = camara.drawSelection(x, y, puntoPlana, nivelnv, (int) origami1.history().get(i)[7], origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, nivelnv);
                                 break;
                                 
                             case 4:
                                 puntoPlana = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
-                                siknv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
-                                kep = camara.drawSelection(x, y, puntoPlana, siknv, (int) origami1.history().get(i)[8], origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, siknv);
+                                nivelnv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
+                                imagen = camara.drawSelection(x, y, puntoPlana, nivelnv, (int) origami1.history().get(i)[8], origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, nivelnv);
                                 break;
                                 
                             case 5:
                                 puntoPlana = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
-                                siknv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
-                                kep = camara.drawFaces(x, y, origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, siknv);
+                                nivelnv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
+                                imagen = camara.drawFaces(x, y, origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, nivelnv);
                                 break;
                                 
                             case 6:
                                 puntoPlana = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
-                                siknv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
-                                kep = camara.drawFaces(x, y, origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, siknv);
+                                nivelnv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
+                                imagen = camara.drawFaces(x, y, origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, nivelnv);
                                 break;
                                 
                             case 7:
                                 puntoPlana = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
-                                siknv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
-                                kep = camara.drawSelection(x, y, puntoPlana, siknv, (int) origami1.history().get(i)[7], origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, siknv);
+                                nivelnv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
+                                imagen = camara.drawSelection(x, y, puntoPlana, nivelnv, (int) origami1.history().get(i)[7], origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, nivelnv);
                                 break;
                                 
                             default:
-                                kep = camara.drawFaces(x, y, origami1) + camara.drawEdges(x, y, origami1);
+                                imagen = camara.drawFaces(x, y, origami1) + camara.drawEdges(x, y, origami1);
                                 break;
                         }
                         
-                        Conjuntos.add(numCompeticion);
+                        conjuntos.add(numCompeticion);
                         stream = "q";
                         stream += " ";
-                        stream += kep;
+                        stream += imagen;
                         stream += "Q";
                         stream += (char) 10;
                         parecerse += Integer.toString(objindex) + " 0 obj";
@@ -793,7 +792,7 @@ public class Export {
                     }
                 }
                 
-                Conjuntos.add(numCompeticion);
+                conjuntos.add(numCompeticion);
                 stream = "BT";
                 stream += (char) 10;
                 stream += "/F1 12 Tf";
@@ -822,7 +821,7 @@ public class Export {
                 numCompeticion += parecerse.length();
                 parecerse = "";
                 
-                Conjuntos.add(numCompeticion);
+                conjuntos.add(numCompeticion);
                 stream = "BT";
                 stream += (char) 10;
                 stream += "/F1 12 Tf";
@@ -856,16 +855,16 @@ public class Export {
                 //Textos
                 for (int i = 0; i <= origami1.history().size(); i++) {
                     
-                    while (IndicesAventuras.contains(i)) {
+                    while (indicesAventuras.contains(i)) {
                         i++;
                     }
                     
                     String instrucciones = "";
                     String koo = "";
                     
-                    double[] siknv;
+                    double[] nivelnv;
                     
-                    if (IndicesGirados.contains(i)) {
+                    if (indicesGirados.contains(i)) {
                         
                         if (i == origami1.history().size()) {
                             
@@ -904,7 +903,7 @@ public class Export {
                         } else {
                             
                             instrucciones = "(" + Integer.toString(numero) + ". "
-                                    + Cookbook.PDF_TURN + Integer.toString(ForgatasSzogek.get(IndicesGirados.indexOf(i)))
+                                    + Cookbook.PDF_TURN + Integer.toString(anguloRotacion.get(indicesGirados.indexOf(i)))
                                     + Cookbook.PDF_TURN_ANGLE;
                             numero++;
                         }
@@ -945,7 +944,7 @@ public class Export {
                                 break;
                         }
                         
-                        Conjuntos.add(numCompeticion);
+                        conjuntos.add(numCompeticion);
                         stream = "BT";
                         stream += (char) 10;
                         stream += "/F1 10 Tf";
@@ -1001,7 +1000,7 @@ public class Export {
                             camara.axis_y[1] / Origami.vector_length(camara.axis_y) * camara.zoom(),
                             camara.axis_y[2] / Origami.vector_length(camara.axis_y) * camara.zoom()};
                         
-                        if (Origami.scalar_product(viejaLonaNV, camara.camera_dir) < 0 && !IndicesGirados.contains(i)) {
+                        if (Origami.scalar_product(viejaLonaNV, camara.camera_dir) < 0 && !indicesGirados.contains(i)) {
                             
                             camara.camera_dir = Origami.vector(Origami.nullvektor, camara.camera_dir);
                             camara.axis_x = Origami.vector(Origami.nullvektor, camara.axis_x);
@@ -1010,11 +1009,11 @@ public class Export {
                         switch ((int) origami1.history().get(i)[0]) {
                             
                             case 1:
-                                siknv = new double[]{origami1.history().get(i)[4],
+                                nivelnv = new double[]{origami1.history().get(i)[4],
                                     origami1.history().get(i)[5],
                                     origami1.history().get(i)[6]};
                                 instrucciones = "(" + Integer.toString(numero) + ". ";
-                                switch (camara.pdfLinerDir(siknv)) {
+                                switch (camara.pdfLinerDir(nivelnv)) {
                                     
                                     case Camera.PDF_NORTH:
                                         instrucciones += Cookbook.PDF_REFLECT_NORTH;
@@ -1035,11 +1034,11 @@ public class Export {
                                 break;
                                 
                             case 2:
-                                siknv = new double[]{origami1.history().get(i)[4],
+                                nivelnv = new double[]{origami1.history().get(i)[4],
                                     origami1.history().get(i)[5],
                                     origami1.history().get(i)[6]};
                                 instrucciones = "(" + Integer.toString(numero) + ". ";
-                                switch (camara.pdfLinerDir(siknv)) {
+                                switch (camara.pdfLinerDir(nivelnv)) {
                                     
                                     case Camera.PDF_NORTH:
                                         instrucciones += Cookbook.PDF_ROTATE_NORTH;
@@ -1058,7 +1057,7 @@ public class Export {
                                 }
                                 int angulo = 0;
                                 int j = i - 1;
-                                while (IndicesAventuras.contains(j)) {
+                                while (indicesAventuras.contains(j)) {
                                     
                                     if (origami1.history().get(j)[0] == 2.0) {
                                         
@@ -1082,7 +1081,7 @@ public class Export {
                                 instrucciones += Cookbook.PDF_ROTATE_TARGET;
                                 int angulo1 = 0;
                                 int j1 = i - 1;
-                                while (IndicesAventuras.contains(j1)) {
+                                while (indicesAventuras.contains(j1)) {
                                     
                                     if (origami1.history().get(j1)[0] == 4.0) {
                                         
@@ -1102,11 +1101,11 @@ public class Export {
                                 break;
                                 
                             case 6:
-                                siknv = new double[]{origami1.history().get(i)[4],
+                                nivelnv = new double[]{origami1.history().get(i)[4],
                                     origami1.history().get(i)[5],
                                     origami1.history().get(i)[6]};
                                 instrucciones = "(" + Integer.toString(numero) + ". ";
-                                switch (camara.pdfLinerDir(siknv)) {
+                                switch (camara.pdfLinerDir(nivelnv)) {
                                     
                                     case Camera.PDF_NORTH:
                                         instrucciones += Cookbook.PDF_CUT_NORTH;
@@ -1175,7 +1174,7 @@ public class Export {
                                 break;
                         }
                         
-                        Conjuntos.add(numCompeticion);
+                        conjuntos.add(numCompeticion);
                         stream = "BT";
                         stream += (char) 10;
                         stream += "/F1 10 Tf";
@@ -1210,17 +1209,17 @@ public class Export {
                 
                 parecerse += "xref";
                 parecerse += (char) 10;
-                parecerse += "0 " + Integer.toString(Conjuntos.size());
+                parecerse += "0 " + Integer.toString(conjuntos.size());
                 parecerse += (char) 10;
                 parecerse += "0000000000 65535 f ";
                 parecerse += (char) 10;
                 
-                for (int i = 1; i < Conjuntos.size(); i++) {
+                for (int i = 1; i < conjuntos.size(); i++) {
                     
-                    for (int ii = 0; ii < 10 - Integer.toString(Conjuntos.get(i)).length(); ii++) {
+                    for (int ii = 0; ii < 10 - Integer.toString(conjuntos.get(i)).length(); ii++) {
                         parecerse += "0";
                     }
-                    parecerse += Integer.toString(Conjuntos.get(i));
+                    parecerse += Integer.toString(conjuntos.get(i));
                     parecerse += " 00000 n ";
                     parecerse += (char) 10;
                 }
@@ -1229,7 +1228,7 @@ public class Export {
                 parecerse += (char) 10;
                 parecerse += "<< /Root 1 0 R";
                 parecerse += (char) 10;
-                parecerse += "/Size " + Integer.toString(Conjuntos.size());
+                parecerse += "/Size " + Integer.toString(conjuntos.size());
                 parecerse += (char) 10;
                 parecerse += ">>";
                 parecerse += (char) 10;

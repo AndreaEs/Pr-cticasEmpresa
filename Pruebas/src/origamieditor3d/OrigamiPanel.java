@@ -19,9 +19,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
-/**
- * @author Attila Bágyoni (ba-sz-at@users.sourceforge.net)
- */
+
 public class OrigamiPanel extends JPanel implements BasicEditing {
 
     private static final long serialVersionUID = 1L;
@@ -64,12 +62,12 @@ public class OrigamiPanel extends JPanel implements BasicEditing {
     private boolean previewOn;
     private DisplayMode displaymode;
     private double[][] beacons;
-    private Integer protractor_angle;
+    private Integer protractor_angle; //protractor = transportador de ángulos
     private LinerMode linerMode;
 
     public enum DisplayMode {
 
-        SIMA, UV, SEMMI, GRADIENT
+        LISO, UV, NADA, GRADIENT
     }
 
     @Override
@@ -145,6 +143,7 @@ public class OrigamiPanel extends JPanel implements BasicEditing {
         linerMode = mode;
     }
     
+    //Inclinar triángulo
     @Override
     public void tiltTriangleTo(Camera refkamera, Integer... xy) {
 
@@ -211,8 +210,8 @@ public class OrigamiPanel extends JPanel implements BasicEditing {
 
     @Override
     public void reset() {
-
-        tracker_x = null;
+        //tracker = rastreador
+        tracker_x = null; 
         tracker_y = null;
         liner_grab_index = 0;
         liner_triangle[0] = null;
@@ -254,6 +253,7 @@ public class OrigamiPanel extends JPanel implements BasicEditing {
         }
     }
 
+    //overlap = superposición
     public boolean validateBeaconOverlap() {
 
         try {
@@ -282,12 +282,12 @@ public class OrigamiPanel extends JPanel implements BasicEditing {
                     PanelCamera.drawEdges(g, Color.black, PanelOrigami);
                     break;
 
-                case SIMA:
+                case LISO:
                     PanelCamera.drawFaces(g, paper_front_color, PanelOrigami);
                     PanelCamera.drawEdges(g, Color.black, PanelOrigami);
                     break;
 
-                case SEMMI:
+                case NADA:
                     PanelCamera.drawEdges(g, Color.black, PanelOrigami);
                     break;
             }
@@ -320,26 +320,26 @@ public class OrigamiPanel extends JPanel implements BasicEditing {
                 double pont1X = ((double) liner_x1 - this.PanelCamera.xshift) / this.PanelCamera.zoom();
                 double pont1Y = ((double) liner_y1 - this.PanelCamera.yshift) / this.PanelCamera.zoom();
 
-                double[] vonalzoNV = new double[]{
+                double[] gobernanteNV = new double[]{
                     this.PanelCamera.axis_x[0] * (liner_y2 - liner_y1) + this.PanelCamera.axis_y[0] * (liner_x1 - liner_x2),
                     this.PanelCamera.axis_x[1] * (liner_y2 - liner_y1) + this.PanelCamera.axis_y[1] * (liner_x1 - liner_x2),
                     this.PanelCamera.axis_x[2] * (liner_y2 - liner_y1) + this.PanelCamera.axis_y[2] * (liner_x1 - liner_x2)
                 };
-                double[] vonalzoPT = new double[]{
+                double[] gobernantePT = new double[]{
                     this.PanelCamera.axis_x[0] / this.PanelCamera.zoom() * pontX + this.PanelCamera.axis_y[0] / this.PanelCamera.zoom() * pontY + this.PanelCamera.camera_pos[0],
                     this.PanelCamera.axis_x[1] / this.PanelCamera.zoom() * pontX + this.PanelCamera.axis_y[1] / this.PanelCamera.zoom() * pontY + this.PanelCamera.camera_pos[1],
                     this.PanelCamera.axis_x[2] / this.PanelCamera.zoom() * pontX + this.PanelCamera.axis_y[2] / this.PanelCamera.zoom() * pontY + this.PanelCamera.camera_pos[2]
                 };
-                double[] vonalzoPT1 = new double[]{
+                double[] gobernantePT1 = new double[]{
                     this.PanelCamera.axis_x[0] / this.PanelCamera.zoom() * pont1X + this.PanelCamera.axis_y[0] / this.PanelCamera.zoom() * pont1Y + this.PanelCamera.camera_pos[0],
                     this.PanelCamera.axis_x[1] / this.PanelCamera.zoom() * pont1X + this.PanelCamera.axis_y[1] / this.PanelCamera.zoom() * pont1Y + this.PanelCamera.camera_pos[1],
                     this.PanelCamera.axis_x[2] / this.PanelCamera.zoom() * pont1X + this.PanelCamera.axis_y[2] / this.PanelCamera.zoom() * pont1Y + this.PanelCamera.camera_pos[2]
                 };
                 if (linerMode == LinerMode.Neusis) {
-                    vonalzoNV = Origami.vector(vonalzoPT, vonalzoPT1);
+                    gobernanteNV = Origami.vector(gobernantePT, gobernantePT1);
                 }
 
-                PanelCamera.drawPreview(g, Color.green, PanelOrigami, vonalzoPT, vonalzoNV);
+                PanelCamera.drawPreview(g, Color.green, PanelOrigami, gobernantePT, gobernanteNV);
             }
 
             g.setColor(Color.red);

@@ -86,20 +86,20 @@ public class OrigamiGen2 extends Origami {
                             }
                             double D = ppoint[0] * pnormal[0] + ppoint[1] * pnormal[1] + ppoint[2] * pnormal[2];
 
-                            double[] iranyvek = vector(vertices.get(polygons.get(polygonIndex).get(i)), vertices.get(polygons.get(polygonIndex).get(j)));
+                            double[] direccionVector = vector(vertices.get(polygons.get(polygonIndex).get(i)), vertices.get(polygons.get(polygonIndex).get(j)));
                             double X = vertices.get(polygons.get(polygonIndex).get(i))[0];
                             double Y = vertices.get(polygons.get(polygonIndex).get(i))[1];
                             double Z = vertices.get(polygons.get(polygonIndex).get(i))[2];
-                            double U = iranyvek[0];
-                            double V = iranyvek[1];
-                            double W = iranyvek[2];
+                            double U = direccionVector[0];
+                            double V = direccionVector[1];
+                            double W = direccionVector[2];
                             double A = pnormal[0];
                             double B = pnormal[1];
                             double C = pnormal[2];
                             double t = -(A * X + B * Y + C * Z - D) / (A * U + B * V + C * W);
 
                             double[] seccion = new double[]{X + t * U, Y + t * V, Z + t * W};
-                            addVertex(seccion);
+                            addVertex(seccion); //Vertex = vértice
 
                             double peso1 = vector_length(vector(seccion, vertices.get(polygons.get(polygonIndex).get(j))));
                             double peso2 = vector_length(vector(seccion, vertices.get(polygons.get(polygonIndex).get(i))));
