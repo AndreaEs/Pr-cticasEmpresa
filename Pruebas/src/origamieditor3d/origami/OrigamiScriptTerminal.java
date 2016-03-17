@@ -98,15 +98,15 @@ public class OrigamiScriptTerminal {
         papertype = Origami.PaperType.Custom;
     }
 
-    private void totalReset() {
-
-        paramReset();
-        version = maxVersion;
-        history.clear();
-
-        TerminalOrigami.undo(TerminalOrigami.history.size());
-        TerminalCamera = new Camera(0, 0, 1);
-    }
+//    private void totalReset() {
+//
+//        paramReset();
+//        version = maxVersion;
+//        history.clear();
+//
+//        TerminalOrigami.undo(TerminalOrigami.history.size());
+//        TerminalCamera = new Camera(0, 0, 1);
+//    }
 
     public void historyReset() {
         history.clear();
@@ -1509,21 +1509,21 @@ public class OrigamiScriptTerminal {
                         
                         if (Params.containsKey(words[i])) {
                             
-                            ArrayList<String> argumentumok = new ArrayList<>();
+                            ArrayList<String> argumentos = new ArrayList<>();
                             for (int ii = i + 1; ii < words.length; ii++) {
                                 if (Commands.containsKey(words[ii])
                                         || Params.containsKey(words[ii])) {
                                     break;
                                 }
                                 if (!words[ii].equals("")) {
-                                    argumentumok.add(words[ii].replace("[", "")
+                                    argumentos.add(words[ii].replace("[", "")
                                             .replace("]", "").replace("|", " "));
                                 }
                             }
                             
-                            String[] tombarg = new String[argumentumok.size()];
-                            for (int iii = 0; iii < argumentumok.size(); iii++) {
-                                tombarg[iii] = argumentumok.get(iii);
+                            String[] tombarg = new String[argumentos.size()];
+                            for (int iii = 0; iii < argumentos.size(); iii++) {
+                                tombarg[iii] = argumentos.get(iii);
                             }
                             
                             Params.get(words[i]).execute(tombarg);
