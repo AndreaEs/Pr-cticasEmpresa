@@ -100,7 +100,7 @@ public class Origami {
         papertype = PaperType.Custom;
         this.corners = ccwWindingOrder(corners);
         if (!isConvex(this.corners)) {
-            throw new Exception("Varatlan konkav sokszog/Unexpected concave polygon");
+            throw new Exception("Unexpected concave polygon");
         }
         reset();
     }
@@ -135,7 +135,7 @@ public class Origami {
         papertype = PaperType.Custom;
         this.corners = ccwWindingOrder(corners);
         if (!isConvex(this.corners)) {
-            throw new Exception("Varatlan konkav sokszog/Unexpected concave polygon");
+            throw new Exception("Unexpected concave polygon");
         }
         reset();
     }

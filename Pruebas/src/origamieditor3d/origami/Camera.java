@@ -17,12 +17,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
-/**
- * 
- * @author Attila Bágyoni (ba-sz-at@users.sourceforge.net)
- * @since 2013-01-14
- * @see Origami
- */
 public class Camera {
 
     final static public int paper_back_color = 0xF7D6A6;
@@ -110,15 +104,15 @@ public class Camera {
         double C = camera_dir[2];
         double t = -(A * X + B * Y + C * Z - konst) / (A * U + B * V + C * W);
 
-        double[] talppont = {X + t * U, Y + t * V, Z + t * W};
-        double[] vissza0 = {talppont[0] * axis_x[0] + talppont[1] * axis_x[1] + talppont[2] * axis_x[2],
-            talppont[0] * axis_y[0] + talppont[1] * axis_y[1] + talppont[2] * axis_y[2]};
-        return vissza0;
+        double[] puntoPie = {X + t * U, Y + t * V, Z + t * W};
+        double[] espalda0 = {puntoPie[0] * axis_x[0] + puntoPie[1] * axis_x[1] + puntoPie[2] * axis_x[2],
+            puntoPie[0] * axis_y[0] + puntoPie[1] * axis_y[1] + puntoPie[2] * axis_y[2]};
+        return espalda0;
     }
 
     public double[] projection(double[] point) {
-        double[] vissza0 = {projection0(point)[0] - projection0(camera_pos)[0], projection0(point)[1] - projection0(camera_pos)[1]};
-        return vissza0;
+        double[] espalda0 = {projection0(point)[0] - projection0(camera_pos)[0], projection0(point)[1] - projection0(camera_pos)[1]};
+        return espalda0;
     }
 
     public void rotate(float x, float y) {
@@ -238,10 +232,10 @@ public class Camera {
 
     public java.util.List<int[]> alignmentPoints2d(Origami origami) {
 
-        java.util.List<int[]> vissza = new ArrayList<>();
+        java.util.List<int[]> espalda = new ArrayList<>();
         for (int i = 0; i < origami.vertices_size(); i++) {
 
-            vissza.add(new int[]{(int) projection(origami.vertices2d().get(i))[0],
+            espalda.add(new int[]{(int) projection(origami.vertices2d().get(i))[0],
                 (int) projection(origami.vertices2d().get(i))[1]});
         }
 
@@ -255,18 +249,18 @@ public class Camera {
                     double[] pont2 = origami.vertices2d().get(origami.polygons().get(i).get(ii + 1));
                     double[] felezo = Origami.midpoint(pont1, pont2);
 
-                    vissza.add(new int[]{(int) projection(felezo)[0], (int) projection(felezo)[1]});
+                    espalda.add(new int[]{(int) projection(felezo)[0], (int) projection(felezo)[1]});
                 }
 
-                double[] Upont1 = origami.vertices2d().get(origami.polygons().get(i).get(origami.polygons().get(i).size() - 1));
-                double[] Upont2 = origami.vertices2d().get(origami.polygons().get(i).get(0));
-                double[] Ufelezo = Origami.midpoint(Upont1, Upont2);
+                double[] puntoU1 = origami.vertices2d().get(origami.polygons().get(i).get(origami.polygons().get(i).size() - 1));
+                double[] puntoU2 = origami.vertices2d().get(origami.polygons().get(i).get(0));
+                double[] puntoMedio = Origami.midpoint(puntoU1, puntoU2);
 
-                vissza.add(new int[]{(int) projection(Ufelezo)[0], (int) projection(Ufelezo)[1]});
+                espalda.add(new int[]{(int) projection(puntoMedio)[0], (int) projection(puntoMedio)[1]});
             }
         }
 
-        return vissza;
+        return espalda;
     }
 
     public void drawEdges(Graphics canvas, Color color, Origami origami) {
@@ -291,31 +285,31 @@ public class Camera {
 
     public String drawEdges(int x, int y, Origami origami) {
 
-        String ki = "1 w ";
+        String fuera = "1 w ";
 
         for (int i = 0; i < origami.polygons_size(); i++) {
 
             if (isDrawable(i, origami)) {
 
-                ki += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[0]) + x);
-                ki += " ";
-                ki += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[1]) + y);
-                ki += " m ";
+                fuera += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[0]) + x);
+                fuera += " ";
+                fuera += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[1]) + y);
+                fuera += " m ";
 
                 for (int ii = 1; ii < origami.polygons().get(i).size(); ii++) {
-                    ki += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(ii)))[0]) + x);
-                    ki += " ";
-                    ki += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(ii)))[1]) + y);
-                    ki += " l ";
+                    fuera += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(ii)))[0]) + x);
+                    fuera += " ";
+                    fuera += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(ii)))[1]) + y);
+                    fuera += " l ";
                 }
-                ki += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[0]) + x);
-                ki += " ";
-                ki += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[1]) + y);
-                ki += " l S ";
+                fuera += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[0]) + x);
+                fuera += " ";
+                fuera += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[1]) + y);
+                fuera += " l S ";
             }
         }
 
-        return ki;
+        return fuera;
     }
 
     public void drawPreview(Graphics canvas, Color color, Origami origami, double[] ppoint, double[] pnormal) {
@@ -325,8 +319,8 @@ public class Camera {
         double[] xt = axis_x;
         double[] yt = axis_y;
 
-        double konst = ppoint[0] * pnormal[0] + ppoint[1] * pnormal[1] + ppoint[2] * pnormal[2];
-        double[] talppont;
+        double constante = ppoint[0] * pnormal[0] + ppoint[1] * pnormal[1] + ppoint[2] * pnormal[2];
+        double[] puntoPie;
         double X, Y, Z, t;
         double[] iranyvek = pnormal;
         double U = iranyvek[0];
@@ -339,42 +333,42 @@ public class Camera {
         X = camera_pos[0];
         Y = camera_pos[1];
         Z = camera_pos[2];
-        t = -(A * X + B * Y + C * Z - konst) / (A * U + B * V + C * W);
-        talppont = new double[]{X + t * U, Y + t * V, Z + t * W};
+        t = -(A * X + B * Y + C * Z - constante) / (A * U + B * V + C * W);
+        puntoPie = new double[]{X + t * U, Y + t * V, Z + t * W};
         camera_pos = new double[]{
-            talppont[0] + Origami.vector(talppont, camera_pos)[0],
-            talppont[1] + Origami.vector(talppont, camera_pos)[1],
-            talppont[2] + Origami.vector(talppont, camera_pos)[2]};
+            puntoPie[0] + Origami.vector(puntoPie, camera_pos)[0],
+            puntoPie[1] + Origami.vector(puntoPie, camera_pos)[1],
+            puntoPie[2] + Origami.vector(puntoPie, camera_pos)[2]};
 
         X = camera_dir[0];
         Y = camera_dir[1];
         Z = camera_dir[2];
         t = -(A * X + B * Y + C * Z) / (A * U + B * V + C * W);
-        talppont = new double[]{X + t * U, Y + t * V, Z + t * W};
+        puntoPie = new double[]{X + t * U, Y + t * V, Z + t * W};
         camera_dir = new double[]{
-            talppont[0] + Origami.vector(talppont, camera_dir)[0],
-            talppont[1] + Origami.vector(talppont, camera_dir)[1],
-            talppont[2] + Origami.vector(talppont, camera_dir)[2]};
+            puntoPie[0] + Origami.vector(puntoPie, camera_dir)[0],
+            puntoPie[1] + Origami.vector(puntoPie, camera_dir)[1],
+            puntoPie[2] + Origami.vector(puntoPie, camera_dir)[2]};
 
         X = axis_x[0];
         Y = axis_x[1];
         Z = axis_x[2];
         t = -(A * X + B * Y + C * Z) / (A * U + B * V + C * W);
-        talppont = new double[]{X + t * U, Y + t * V, Z + t * W};
+        puntoPie = new double[]{X + t * U, Y + t * V, Z + t * W};
         axis_x = new double[]{
-            talppont[0] + Origami.vector(talppont, axis_x)[0],
-            talppont[1] + Origami.vector(talppont, axis_x)[1],
-            talppont[2] + Origami.vector(talppont, axis_x)[2]};
+            puntoPie[0] + Origami.vector(puntoPie, axis_x)[0],
+            puntoPie[1] + Origami.vector(puntoPie, axis_x)[1],
+            puntoPie[2] + Origami.vector(puntoPie, axis_x)[2]};
 
         X = axis_y[0];
         Y = axis_y[1];
         Z = axis_y[2];
         t = -(A * X + B * Y + C * Z) / (A * U + B * V + C * W);
-        talppont = new double[]{X + t * U, Y + t * V, Z + t * W};
+        puntoPie = new double[]{X + t * U, Y + t * V, Z + t * W};
         axis_y = new double[]{
-            talppont[0] + Origami.vector(talppont, axis_y)[0],
-            talppont[1] + Origami.vector(talppont, axis_y)[1],
-            talppont[2] + Origami.vector(talppont, axis_y)[2]};
+            puntoPie[0] + Origami.vector(puntoPie, axis_y)[0],
+            puntoPie[1] + Origami.vector(puntoPie, axis_y)[1],
+            puntoPie[2] + Origami.vector(puntoPie, axis_y)[2]};
 
         drawEdges(canvas, color, origami);
         camera_pos = vpt;
@@ -385,42 +379,42 @@ public class Camera {
 
     public String drawSelection(int x, int y, double[] ppoint, double[] pnormal, int polygonIndex, Origami origami) {
 
-        String ki = "0.8 0.8 0.8 rg ";
+        String fuera = "0.8 0.8 0.8 rg ";
 
-        ArrayList<Integer> kijeloles = origami.polygonSelect(ppoint, pnormal, polygonIndex);
-        for (int i : kijeloles) {
+        ArrayList<Integer> selecciones = origami.polygonSelect(ppoint, pnormal, polygonIndex);
+        for (int i : selecciones) {
 
             if (isDrawable(i, origami)) {
 
-                ki += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[0]) + x);
-                ki += " ";
-                ki += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[1]) + y);
-                ki += " m ";
+                fuera += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[0]) + x);
+                fuera += " ";
+                fuera += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[1]) + y);
+                fuera += " m ";
 
                 for (int ii = 1; ii < origami.polygons().get(i).size(); ii++) {
-                    ki += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(ii)))[0]) + x);
-                    ki += " ";
-                    ki += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(ii)))[1]) + y);
-                    ki += " l ";
+                    fuera += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(ii)))[0]) + x);
+                    fuera += " ";
+                    fuera += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(ii)))[1]) + y);
+                    fuera += " l ";
                 }
-                ki += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[0]) + x);
-                ki += " ";
-                ki += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[1]) + y);
-                ki += " l f ";
+                fuera += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[0]) + x);
+                fuera += " ";
+                fuera += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[1]) + y);
+                fuera += " l f ";
             }
         }
 
-        return ki;
+        return fuera;
     }
 
     public boolean isDrawable(int polygonIndex, Origami origami) {
 
         if (origami.polygons().get(polygonIndex).size() > 2) {
 
-            for (int pont1ind : origami.polygons().get(polygonIndex)) {
+            for (int punto1ind : origami.polygons().get(polygonIndex)) {
                 for (int pont2ind : origami.polygons().get(polygonIndex)) {
 
-                    if (Origami.vector_length(Origami.vector_product(Origami.vector(origami.vertices().get(pont1ind), origami.vertices().get(origami.polygons().get(polygonIndex).get(0))),
+                    if (Origami.vector_length(Origami.vector_product(Origami.vector(origami.vertices().get(punto1ind), origami.vertices().get(origami.polygons().get(polygonIndex).get(0))),
                             Origami.vector(origami.vertices().get(pont2ind), origami.vertices().get(origami.polygons().get(polygonIndex).get(0))))) > 0) {
                         return true;
                     }
@@ -437,16 +431,16 @@ public class Camera {
             double maxter = 0;
             for (int i = 0; i < origami.polygons().get(polygonIndex).size(); i++) {
 
-                int pont1ind = origami.polygons().get(polygonIndex).get(i);
-                int pont0ind = origami.polygons().get(polygonIndex).get((i + 1) % origami.polygons().get(polygonIndex).size());
-                int pont2ind = origami.polygons().get(polygonIndex).get((i + 2) % origami.polygons().get(polygonIndex).size());
-                double ter = Origami.vector_length(Origami.vector_product(Origami.vector(origami.vertices().get(pont1ind), origami.vertices().get(pont0ind)),
-                        Origami.vector(origami.vertices().get(pont2ind), origami.vertices().get(pont0ind))));
+                int punto1ind = origami.polygons().get(polygonIndex).get(i);
+                int punto0ind = origami.polygons().get(polygonIndex).get((i + 1) % origami.polygons().get(polygonIndex).size());
+                int punto2ind = origami.polygons().get(polygonIndex).get((i + 2) % origami.polygons().get(polygonIndex).size());
+                double ter = Origami.vector_length(Origami.vector_product(Origami.vector(origami.vertices().get(punto1ind), origami.vertices().get(punto0ind)),
+                        Origami.vector(origami.vertices().get(punto2ind), origami.vertices().get(punto0ind))));
                 if (ter > maxter) {
                     maxter = ter;
-                    ref[1] = pont1ind;
-                    ref[2] = pont2ind;
-                    ref[0] = pont0ind;
+                    ref[1] = punto1ind;
+                    ref[2] = punto2ind;
+                    ref[0] = punto0ind;
                 }
             }
             if (maxter > 1) {
@@ -462,20 +456,20 @@ public class Camera {
 
             if (isDrawable(i, origami)) {
 
-                double[] normalvek = Origami.vector_product(Origami.vector(origami.vertices().get(origami.polygons().get(i).get(0)),
+                double[] normalizado = Origami.vector_product(Origami.vector(origami.vertices().get(origami.polygons().get(i).get(0)),
                         origami.vertices().get(origami.polygons().get(i).get(1))),
                         Origami.vector(origami.vertices().get(origami.polygons().get(i).get(0)),
                                 origami.vertices().get(origami.polygons().get(i).get(2))));
 
-                double nvhossz = Origami.vector_length(normalvek);
-                if (nvhossz != 0) {
-                    normalvek[0] = normalvek[0] / nvhossz;
-                    normalvek[1] = normalvek[1] / nvhossz;
-                    normalvek[2] = normalvek[2] / nvhossz;
+                double longitud = Origami.vector_length(normalizado);
+                if (longitud != 0) {
+                    normalizado[0] = normalizado[0] / longitud;
+                    normalizado[1] = normalizado[1] / longitud;
+                    normalizado[2] = normalizado[2] / longitud;
                 }
 
-                double alfa = 1 - Math.abs(Origami.scalar_product(camera_dir, normalvek));
-                int szin = Origami.scalar_product(camera_dir, normalvek) > 0 ? (rgb & 0xFFFFFF) : paper_back_color;
+                double alfa = 1 - Math.abs(Origami.scalar_product(camera_dir, normalizado));
+                int sintesis = Origami.scalar_product(camera_dir, normalizado) > 0 ? (rgb & 0xFFFFFF) : paper_back_color;
 
                 Polygon ut = new Polygon();
 
@@ -495,18 +489,18 @@ public class Camera {
                     }
                 }
 
-                double konst = far[0] * normalvek[0] + far[1] * normalvek[1] + far[2] * normalvek[2];
+                double constante = far[0] * normalizado[0] + far[1] * normalizado[1] + far[2] * normalizado[2];
 
                 double X = camera_dir[0];
                 double Y = camera_dir[1];
                 double Z = camera_dir[2];
-                double U = normalvek[0];
-                double V = normalvek[1];
-                double W = normalvek[2];
-                double A = normalvek[0];
-                double B = normalvek[1];
-                double C = normalvek[2];
-                double t = -(A * X + B * Y + C * Z - konst) / (A * U + B * V + C * W);
+                double U = normalizado[0];
+                double V = normalizado[1];
+                double W = normalizado[2];
+                double A = normalizado[0];
+                double B = normalizado[1];
+                double C = normalizado[2];
+                double t = -(A * X + B * Y + C * Z - constante) / (A * U + B * V + C * W);
 
                 double[] grad_dir = {X + t * U, Y + t * V, Z + t * W};
                 double lambda = (Origami.scalar_product(close, camera_dir) - Origami.scalar_product(far, camera_dir)) / Origami.scalar_product(grad_dir, camera_dir);
@@ -518,7 +512,7 @@ public class Camera {
 
                 double dclose = Origami.scalar_product(Origami.vector(close, camera_pos), camera_dir) / Math.max(origami.circumscribedSquareSize() * Math.sqrt(2) / 2, 1);
                 double dfar = Origami.scalar_product(Origami.vector(far, camera_pos), camera_dir) / Math.max(origami.circumscribedSquareSize() * Math.sqrt(2) / 2, 1);
-                float[] hsb = Color.RGBtoHSB((szin >>> 16) % 0x100, (szin >>> 8) % 0x100, szin % 0x100, null);
+                float[] hsb = Color.RGBtoHSB((sintesis >>> 16) % 0x100, (sintesis >>> 8) % 0x100, sintesis % 0x100, null);
 
                 int rgb1 = Color.HSBtoRGB(hsb[0], Math.max(Math.min((float) (.5 - dclose * .5), 1f), 0f), 1f) & 0xFFFFFF;
                 int rgb2 = Color.HSBtoRGB(hsb[0], Math.max(Math.min((float) (.5 - dfar * .5), 1f), 0f), hsb[2]) & 0xFFFFFF;
@@ -555,25 +549,25 @@ public class Camera {
 
             if (isDrawable(i, origami)) {
 
-                double[] normalvek = Origami.vector_product(Origami.vector(origami.vertices().get(origami.polygons().get(i).get(0)),
+                double[] normalizado = Origami.vector_product(Origami.vector(origami.vertices().get(origami.polygons().get(i).get(0)),
                         origami.vertices().get(origami.polygons().get(i).get(1))),
                         Origami.vector(origami.vertices().get(origami.polygons().get(i).get(0)),
                                 origami.vertices().get(origami.polygons().get(i).get(2))));
 
-                double nvhossz = Origami.vector_length(normalvek);
-                if (nvhossz != 0) {
-                    normalvek[0] = normalvek[0] / nvhossz;
-                    normalvek[1] = normalvek[1] / nvhossz;
-                    normalvek[2] = normalvek[2] / nvhossz;
+                double longitud = Origami.vector_length(normalizado);
+                if (longitud != 0) {
+                    normalizado[0] = normalizado[0] / longitud;
+                    normalizado[1] = normalizado[1] / longitud;
+                    normalizado[2] = normalizado[2] / longitud;
                 }
 
-                double alfa = 1 - Math.abs(Origami.scalar_product(camera_dir, normalvek));
-                int szin = Origami.scalar_product(camera_dir, normalvek) > 0 ? (rgb & 0xFFFFFF) : paper_back_color;
+                double alfa = 1 - Math.abs(Origami.scalar_product(camera_dir, normalizado));
+                int sintesis = Origami.scalar_product(camera_dir, normalizado) > 0 ? (rgb & 0xFFFFFF) : paper_back_color;
 
                 try {
-                    canvas.setColor(new Color((szin >>> 16) % 0x100, (szin >>> 8) % 0x100, szin % 0x100, (int) (alfa * 128) + 80));
+                    canvas.setColor(new Color((sintesis >>> 16) % 0x100, (sintesis >>> 8) % 0x100, sintesis % 0x100, (int) (alfa * 128) + 80));
                 } catch (Exception exc) {
-                    canvas.setColor(new Color((szin >>> 16) % 0x100, (szin >>> 8) % 0x100, szin % 0x100, 188));
+                    canvas.setColor(new Color((sintesis >>> 16) % 0x100, (sintesis >>> 8) % 0x100, sintesis % 0x100, 188));
                 }
 
                 Polygon ut = new Polygon();
@@ -591,31 +585,31 @@ public class Camera {
 
     public String drawFaces(int x, int y, Origami origami) {
 
-        String ki = "0.8 0.8 0.8 rg ";
+        String fuera = "0.8 0.8 0.8 rg ";
 
         for (int i = 0; i < origami.polygons_size(); i++) {
 
             if (isDrawable(i, origami)) {
 
-                ki += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[0]) + x);
-                ki += " ";
-                ki += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[1]) + y);
-                ki += " m ";
+                fuera += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[0]) + x);
+                fuera += " ";
+                fuera += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[1]) + y);
+                fuera += " m ";
 
                 for (int ii = 1; ii < origami.polygons().get(i).size(); ii++) {
-                    ki += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(ii)))[0]) + x);
-                    ki += " ";
-                    ki += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(ii)))[1]) + y);
-                    ki += " l ";
+                    fuera += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(ii)))[0]) + x);
+                    fuera += " ";
+                    fuera += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(ii)))[1]) + y);
+                    fuera += " l ";
                 }
-                ki += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[0]) + x);
-                ki += " ";
-                ki += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[1]) + y);
-                ki += " l f ";
+                fuera += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[0]) + x);
+                fuera += " ";
+                fuera += Integer.toString((int) (projection(origami.vertices().get(origami.polygons().get(i).get(0)))[1]) + y);
+                fuera += " l f ";
             }
         }
 
-        return ki;
+        return fuera;
     }
 
     public void drawCreasePattern(Graphics canvas, Color color, Origami origami) {
@@ -666,9 +660,9 @@ public class Camera {
 
     public String pfdLiner(int x, int y, double[] ppoint, double[] pnormal) {
 
-        String ki = "0.4 0.4 0.4 RG [5 5] 0 d ";
+        String fuera = "0.4 0.4 0.4 RG [5 5] 0 d ";
         double[] siknv_2D = projection0(pnormal);
-        double[] sikpont_2D = projection(ppoint);
+        double[] seccionPlana_2D = projection(ppoint);
         boolean lineto = false;
         double hatar = 100;
 
@@ -676,29 +670,29 @@ public class Camera {
 
             double[] sikiv_2D = new double[]{-siknv_2D[1] / siknv_2D[0], 1};
 
-            if (sikpont_2D[0] + sikiv_2D[0] * (hatar - sikpont_2D[1]) <= hatar
-                    && sikpont_2D[0] + sikiv_2D[0] * (hatar - sikpont_2D[1]) >= -hatar) {
+            if (seccionPlana_2D[0] + sikiv_2D[0] * (hatar - seccionPlana_2D[1]) <= hatar
+                    && seccionPlana_2D[0] + sikiv_2D[0] * (hatar - seccionPlana_2D[1]) >= -hatar) {
 
-                ki += Integer.toString((int) (sikpont_2D[0] + sikiv_2D[0] * (hatar - sikpont_2D[1])) + x);
-                ki += " ";
-                ki += Integer.toString((int) (sikpont_2D[1] + sikiv_2D[1] * (hatar - sikpont_2D[1])) + y);
-                ki += " m ";
+                fuera += Integer.toString((int) (seccionPlana_2D[0] + sikiv_2D[0] * (hatar - seccionPlana_2D[1])) + x);
+                fuera += " ";
+                fuera += Integer.toString((int) (seccionPlana_2D[1] + sikiv_2D[1] * (hatar - seccionPlana_2D[1])) + y);
+                fuera += " m ";
                 lineto = true;
             }
 
-            if (sikpont_2D[0] + sikiv_2D[0] * (-hatar - sikpont_2D[1]) <= hatar
-                    && sikpont_2D[0] + sikiv_2D[0] * (-hatar - sikpont_2D[1]) >= -hatar) {
+            if (seccionPlana_2D[0] + sikiv_2D[0] * (-hatar - seccionPlana_2D[1]) <= hatar
+                    && seccionPlana_2D[0] + sikiv_2D[0] * (-hatar - seccionPlana_2D[1]) >= -hatar) {
 
-                ki += Integer.toString((int) (sikpont_2D[0] + sikiv_2D[0] * (-hatar - sikpont_2D[1])) + x);
-                ki += " ";
-                ki += Integer.toString((int) (sikpont_2D[1] + sikiv_2D[1] * (-hatar - sikpont_2D[1])) + y);
+                fuera += Integer.toString((int) (seccionPlana_2D[0] + sikiv_2D[0] * (-hatar - seccionPlana_2D[1])) + x);
+                fuera += " ";
+                fuera += Integer.toString((int) (seccionPlana_2D[1] + sikiv_2D[1] * (-hatar - seccionPlana_2D[1])) + y);
                 if (lineto) {
 
-                    ki += " l ";
+                    fuera += " l ";
                     lineto = false;
                 } else {
 
-                    ki += " m ";
+                    fuera += " m ";
                     lineto = true;
                 }
             }
@@ -707,51 +701,51 @@ public class Camera {
 
                 sikiv_2D = new double[]{1, -siknv_2D[0] / siknv_2D[1]};
 
-                if (sikpont_2D[1] + sikiv_2D[1] * (-hatar - sikpont_2D[0]) <= hatar
-                        && sikpont_2D[1] + sikiv_2D[1] * (-hatar - sikpont_2D[0]) >= -hatar) {
+                if (seccionPlana_2D[1] + sikiv_2D[1] * (-hatar - seccionPlana_2D[0]) <= hatar
+                        && seccionPlana_2D[1] + sikiv_2D[1] * (-hatar - seccionPlana_2D[0]) >= -hatar) {
 
-                    ki += Integer.toString((int) (sikpont_2D[0] + sikiv_2D[0] * (-hatar - sikpont_2D[0])) + x);
-                    ki += " ";
-                    ki += Integer.toString((int) (sikpont_2D[1] + sikiv_2D[1] * (-hatar - sikpont_2D[0])) + y);
-                    ki += " l ";
+                    fuera += Integer.toString((int) (seccionPlana_2D[0] + sikiv_2D[0] * (-hatar - seccionPlana_2D[0])) + x);
+                    fuera += " ";
+                    fuera += Integer.toString((int) (seccionPlana_2D[1] + sikiv_2D[1] * (-hatar - seccionPlana_2D[0])) + y);
+                    fuera += " l ";
                 }
 
-                if (sikpont_2D[1] + sikiv_2D[1] * (hatar - sikpont_2D[0]) <= hatar
-                        && sikpont_2D[1] + sikiv_2D[1] * (hatar - sikpont_2D[0]) >= -hatar) {
+                if (seccionPlana_2D[1] + sikiv_2D[1] * (hatar - seccionPlana_2D[0]) <= hatar
+                        && seccionPlana_2D[1] + sikiv_2D[1] * (hatar - seccionPlana_2D[0]) >= -hatar) {
 
-                    ki += Integer.toString((int) (sikpont_2D[0] + sikiv_2D[0] * (hatar - sikpont_2D[0])) + x);
-                    ki += " ";
-                    ki += Integer.toString((int) (sikpont_2D[1] + sikiv_2D[1] * (hatar - sikpont_2D[0])) + y);
-                    ki += " l ";
+                    fuera += Integer.toString((int) (seccionPlana_2D[0] + sikiv_2D[0] * (hatar - seccionPlana_2D[0])) + x);
+                    fuera += " ";
+                    fuera += Integer.toString((int) (seccionPlana_2D[1] + sikiv_2D[1] * (hatar - seccionPlana_2D[0])) + y);
+                    fuera += " l ";
                 }
             }
         } else {
 
             double[] sikiv_2D = new double[]{1, -siknv_2D[0] / siknv_2D[1]};
 
-            if (sikpont_2D[1] + sikiv_2D[1] * (-hatar - sikpont_2D[0]) <= hatar
-                    && sikpont_2D[1] + sikiv_2D[1] * (-hatar - sikpont_2D[0]) >= -hatar) {
+            if (seccionPlana_2D[1] + sikiv_2D[1] * (-hatar - seccionPlana_2D[0]) <= hatar
+                    && seccionPlana_2D[1] + sikiv_2D[1] * (-hatar - seccionPlana_2D[0]) >= -hatar) {
 
-                ki += Integer.toString((int) (sikpont_2D[0] + sikiv_2D[0] * (-hatar - sikpont_2D[0])) + x);
-                ki += " ";
-                ki += Integer.toString((int) (sikpont_2D[1] + sikiv_2D[1] * (-hatar - sikpont_2D[0])) + y);
-                ki += " m ";
+                fuera += Integer.toString((int) (seccionPlana_2D[0] + sikiv_2D[0] * (-hatar - seccionPlana_2D[0])) + x);
+                fuera += " ";
+                fuera += Integer.toString((int) (seccionPlana_2D[1] + sikiv_2D[1] * (-hatar - seccionPlana_2D[0])) + y);
+                fuera += " m ";
                 lineto = true;
             }
 
-            if (sikpont_2D[1] + sikiv_2D[1] * (hatar - sikpont_2D[0]) <= hatar
-                    && sikpont_2D[1] + sikiv_2D[1] * (hatar - sikpont_2D[0]) >= -hatar) {
+            if (seccionPlana_2D[1] + sikiv_2D[1] * (hatar - seccionPlana_2D[0]) <= hatar
+                    && seccionPlana_2D[1] + sikiv_2D[1] * (hatar - seccionPlana_2D[0]) >= -hatar) {
 
-                ki += Integer.toString((int) (sikpont_2D[0] + sikiv_2D[0] * (hatar - sikpont_2D[0])) + x);
-                ki += " ";
-                ki += Integer.toString((int) (sikpont_2D[1] + sikiv_2D[1] * (hatar - sikpont_2D[0])) + y);
+                fuera += Integer.toString((int) (seccionPlana_2D[0] + sikiv_2D[0] * (hatar - seccionPlana_2D[0])) + x);
+                fuera += " ";
+                fuera += Integer.toString((int) (seccionPlana_2D[1] + sikiv_2D[1] * (hatar - seccionPlana_2D[0])) + y);
                 if (lineto) {
 
-                    ki += " l ";
+                    fuera += " l ";
                     lineto = false;
                 } else {
 
-                    ki += " m ";
+                    fuera += " m ";
                     lineto = true;
                 }
             }
@@ -760,28 +754,28 @@ public class Camera {
 
                 sikiv_2D = new double[]{-siknv_2D[1] / siknv_2D[0], 1};
 
-                if (sikpont_2D[0] + sikiv_2D[0] * (hatar - sikpont_2D[1]) <= hatar
-                        && sikpont_2D[0] + sikiv_2D[0] * (hatar - sikpont_2D[1]) >= -hatar) {
+                if (seccionPlana_2D[0] + sikiv_2D[0] * (hatar - seccionPlana_2D[1]) <= hatar
+                        && seccionPlana_2D[0] + sikiv_2D[0] * (hatar - seccionPlana_2D[1]) >= -hatar) {
 
-                    ki += Integer.toString((int) (sikpont_2D[0] + sikiv_2D[0] * (hatar - sikpont_2D[1])) + x);
-                    ki += " ";
-                    ki += Integer.toString((int) (sikpont_2D[1] + sikiv_2D[1] * (hatar - sikpont_2D[1])) + y);
-                    ki += " l ";
+                    fuera += Integer.toString((int) (seccionPlana_2D[0] + sikiv_2D[0] * (hatar - seccionPlana_2D[1])) + x);
+                    fuera += " ";
+                    fuera += Integer.toString((int) (seccionPlana_2D[1] + sikiv_2D[1] * (hatar - seccionPlana_2D[1])) + y);
+                    fuera += " l ";
                 }
 
-                if (sikpont_2D[0] + sikiv_2D[0] * (-hatar - sikpont_2D[1]) <= hatar
-                        && sikpont_2D[0] + sikiv_2D[0] * (-hatar - sikpont_2D[1]) >= -hatar) {
+                if (seccionPlana_2D[0] + sikiv_2D[0] * (-hatar - seccionPlana_2D[1]) <= hatar
+                        && seccionPlana_2D[0] + sikiv_2D[0] * (-hatar - seccionPlana_2D[1]) >= -hatar) {
 
-                    ki += Integer.toString((int) (sikpont_2D[0] + sikiv_2D[0] * (-hatar - sikpont_2D[1])) + x);
-                    ki += " ";
-                    ki += Integer.toString((int) (sikpont_2D[1] + sikiv_2D[1] * (-hatar - sikpont_2D[1])) + y);
-                    ki += " l ";
+                    fuera += Integer.toString((int) (seccionPlana_2D[0] + sikiv_2D[0] * (-hatar - seccionPlana_2D[1])) + x);
+                    fuera += " ";
+                    fuera += Integer.toString((int) (seccionPlana_2D[1] + sikiv_2D[1] * (-hatar - seccionPlana_2D[1])) + y);
+                    fuera += " l ";
                 }
             }
         }
 
-        ki += "S [ ] 0 d 0.0 0.0 0.0 RG ";
-        return ki;
+        fuera += "S [ ] 0 d 0.0 0.0 0.0 RG ";
+        return fuera;
     }
 
     final static public int PDF_NORTH = 'F';
@@ -816,33 +810,33 @@ public class Camera {
 
     public java.util.ArrayList<int[]> centers(Origami origami) {
 
-        java.util.ArrayList<int[]> vissza = new java.util.ArrayList<>(java.util.Arrays.asList(new int[][]{}));
+        java.util.ArrayList<int[]> espalda = new java.util.ArrayList<>(java.util.Arrays.asList(new int[][]{}));
         for (int i = 0; i < origami.polygons_size(); i++) {
-            vissza.add(new int[]{(short) (projection(origami.polygonCenter(i))[0]) + xshift, (short) (projection(origami.polygonCenter(i))[1]) + yshift});
+            espalda.add(new int[]{(short) (projection(origami.polygonCenter(i))[0]) + xshift, (short) (projection(origami.polygonCenter(i))[1]) + yshift});
         }
-        return vissza;
+        return espalda;
     }
 
     public int polygonSelect(int cursor_x, int cursor_y, Origami origami) {
 
-        java.util.ArrayList<int[]> kozepek = centers(origami);
+        java.util.ArrayList<int[]> centro = centers(origami);
 
         int min = Integer.MAX_VALUE;
-        int minhely = -1;
+        int areaMinima = -1;
         for (int i = 0; i < origami.polygons_size(); i++) {
 
             if (origami.isNonDegenerate(i)) {
 
-                int[] kpont = kozepek.get(i);
-                int tavolsagnegyzet = (kpont[0] - cursor_x) * (kpont[0] - cursor_x) + (kpont[1] - cursor_y) * (kpont[1] - cursor_y);
+                int[] puntoK = centro.get(i);
+                int distanciaAlCuadrado = (puntoK[0] - cursor_x) * (puntoK[0] - cursor_x) + (puntoK[1] - cursor_y) * (puntoK[1] - cursor_y);
 
-                if (tavolsagnegyzet < min) {
-                    min = tavolsagnegyzet;
-                    minhely = i;
+                if (distanciaAlCuadrado < min) {
+                    min = distanciaAlCuadrado;
+                    areaMinima = i;
                 }
             }
         }
-        return minhely;
+        return areaMinima;
     }
 
     public void adjust(Origami origami) {
@@ -1003,18 +997,18 @@ public class Camera {
 
     public void updateBuffer(Origami origami) {
 
-        java.awt.image.BufferedImage terkep = new java.awt.image.BufferedImage(texture.getWidth(), texture.getHeight(), java.awt.image.BufferedImage.TYPE_INT_RGB);
-        java.awt.Graphics2D canvas = terkep.createGraphics();
+        java.awt.image.BufferedImage mostrar = new java.awt.image.BufferedImage(texture.getWidth(), texture.getHeight(), java.awt.image.BufferedImage.TYPE_INT_RGB);
+        java.awt.Graphics2D canvas = mostrar.createGraphics();
         canvas.setBackground(Color.WHITE);
         canvas.clearRect(0, 0, texture.getWidth(), texture.getHeight());
         int[][] vaz = new int[origami.polygons_size()][];
 
         for (int i = 0; i < origami.polygons_size(); i++) {
 
-            int[] hsz = new int[3];
-            if (isDrawable(i, origami, hsz)) {
+            int[] mensajes = new int[3];
+            if (isDrawable(i, origami, mensajes)) {
 
-                vaz[i] = hsz;
+                vaz[i] = mensajes;
 
                 Polygon ut = new Polygon();
                 for (int ii = 0; ii < origami.polygons().get(i).size(); ii++) {
@@ -1027,30 +1021,30 @@ public class Camera {
             }
         }
 
-        int[] nyers = ((java.awt.image.DataBufferInt) terkep.getRaster().getDataBuffer()).getData();
+        int[] crudo = ((java.awt.image.DataBufferInt) mostrar.getRaster().getDataBuffer()).getData();
 
         int len = texture.getHeight() * texture.getWidth();
-        int sor = texture.getWidth();
+        int fila = texture.getWidth();
         space_buffer = new double[len][];
 
         for (int i = 0; i < len; i++) {
 
-            int szin = nyers[i] & 0xFFFFFF;
-            if (szin != 0xFFFFFF) {
+            int sintesis = crudo[i] & 0xFFFFFF;
+            if (sintesis != 0xFFFFFF) {
 
                 try {
-                    double x_1 = origami.vertices2d().get(vaz[szin][1])[0] - origami.vertices2d().get(vaz[szin][0])[0];
-                    double x_2 = origami.vertices2d().get(vaz[szin][1])[1] - origami.vertices2d().get(vaz[szin][0])[1];
-                    double y_1 = origami.vertices2d().get(vaz[szin][2])[0] - origami.vertices2d().get(vaz[szin][0])[0];
-                    double y_2 = origami.vertices2d().get(vaz[szin][2])[1] - origami.vertices2d().get(vaz[szin][0])[1];
-                    double a_1 = (double) (i % sor) - origami.vertices2d().get(vaz[szin][0])[0];
-                    double a_2 = (double) i / sor - origami.vertices2d().get(vaz[szin][0])[1];
+                    double x_1 = origami.vertices2d().get(vaz[sintesis][1])[0] - origami.vertices2d().get(vaz[sintesis][0])[0];
+                    double x_2 = origami.vertices2d().get(vaz[sintesis][1])[1] - origami.vertices2d().get(vaz[sintesis][0])[1];
+                    double y_1 = origami.vertices2d().get(vaz[sintesis][2])[0] - origami.vertices2d().get(vaz[sintesis][0])[0];
+                    double y_2 = origami.vertices2d().get(vaz[sintesis][2])[1] - origami.vertices2d().get(vaz[sintesis][0])[1];
+                    double a_1 = (double) (i % fila) - origami.vertices2d().get(vaz[sintesis][0])[0];
+                    double a_2 = (double) i / fila - origami.vertices2d().get(vaz[sintesis][0])[1];
 
                     double lambda1 = (a_1 * y_2 - a_2 * y_1) / (x_1 * y_2 - x_2 * y_1);
                     double lambda2 = (a_1 * x_2 - a_2 * x_1) / (y_1 * x_2 - y_2 * x_1);
-                    double[] v3d1 = Origami.vector(origami.vertices.get(vaz[szin][1]), origami.vertices.get(vaz[szin][0]));
-                    double[] v3d2 = Origami.vector(origami.vertices.get(vaz[szin][0]), origami.vertices.get(vaz[szin][2]));
-                    space_buffer[i] = Origami.vector(Origami.vector(Origami.scalar_multip(v3d1, lambda1), Origami.scalar_multip(v3d2, lambda2)), Origami.scalar_multip(origami.vertices.get(vaz[szin][0]), -1));
+                    double[] v3d1 = Origami.vector(origami.vertices.get(vaz[sintesis][1]), origami.vertices.get(vaz[sintesis][0]));
+                    double[] v3d2 = Origami.vector(origami.vertices.get(vaz[sintesis][0]), origami.vertices.get(vaz[sintesis][2]));
+                    space_buffer[i] = Origami.vector(Origami.vector(Origami.scalar_multip(v3d1, lambda1), Origami.scalar_multip(v3d2, lambda2)), Origami.scalar_multip(origami.vertices.get(vaz[sintesis][0]), -1));
                 } catch (Exception ex) {
                 }
             }
@@ -1061,35 +1055,35 @@ public class Camera {
 
     public void drawTexture(Graphics canvas, int w, int h) {
 
-        byte[] nyers = ((java.awt.image.DataBufferByte) texture.getRaster().getDataBuffer()).getData();
+        byte[] crudo = ((java.awt.image.DataBufferByte) texture.getRaster().getDataBuffer()).getData();
         Double[][] depth_buffer = new Double[w][h];
-        java.awt.image.BufferedImage ki = new java.awt.image.BufferedImage(w, h, java.awt.image.BufferedImage.TYPE_INT_RGB);
-        java.awt.Graphics2D bleach = ki.createGraphics();
+        java.awt.image.BufferedImage fuera = new java.awt.image.BufferedImage(w, h, java.awt.image.BufferedImage.TYPE_INT_RGB);
+        java.awt.Graphics2D bleach = fuera.createGraphics();
         bleach.setBackground(Color.WHITE);
         bleach.clearRect(0, 0, w, h);
 
-        for (int i = 0; i < nyers.length; i += 3) {
+        for (int i = 0; i < crudo.length; i += 3) {
 
-            int szin = (nyers[i] & 0xFF) + ((nyers[i + 1] & 0xFF) << 8) + ((nyers[i + 2] & 0xFF) << 16);
-            kiserlet:
+            int sintesis = (crudo[i] & 0xFF) + ((crudo[i + 1] & 0xFF) << 8) + ((crudo[i + 2] & 0xFF) << 16);
+            experimento:
             try {
-                double[] pont = space_buffer[i / 3];
-                if (pont == null) {
-                    break kiserlet;
+                double[] punto = space_buffer[i / 3];
+                if (punto == null) {
+                    break experimento;
                 }
-                double[] vet = projection(pont);
-                short vetX = (short) (vet[0] + xshift);
-                short vetY = (short) (vet[1] + yshift);
+                double[] cerda = projection(punto);
+                short vetX = (short) (cerda[0] + xshift);
+                short vetY = (short) (cerda[1] + yshift);
                 if (vetX >= 0 && vetX < depth_buffer.length && vetY >= 0 && vetY < depth_buffer[0].length) {
-                    if (depth_buffer[vetX][vetY] == null || Origami.scalar_product(pont, camera_dir) > depth_buffer[vetX][vetY]) {
+                    if (depth_buffer[vetX][vetY] == null || Origami.scalar_product(punto, camera_dir) > depth_buffer[vetX][vetY]) {
 
-                        depth_buffer[vetX][vetY] = Origami.scalar_product(pont, camera_dir);
-                        ki.setRGB(vetX, vetY, szin);
+                        depth_buffer[vetX][vetY] = Origami.scalar_product(punto, camera_dir);
+                        fuera.setRGB(vetX, vetY, sintesis);
                     }
                 }
             } catch (Exception ex) {
             }
         }
-        canvas.drawImage(ki, 0, 0, null);
+        canvas.drawImage(fuera, 0, 0, null);
     }
 }

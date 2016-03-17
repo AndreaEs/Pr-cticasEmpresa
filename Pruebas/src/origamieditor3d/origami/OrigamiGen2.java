@@ -51,36 +51,36 @@ public class OrigamiGen2 extends Origami {
 
         if (isCut(ppoint, pnormal, polygonIndex)) {
 
-            ArrayList<Integer> ujsokszog1 = new ArrayList<>();
-            ArrayList<Integer> ujsokszog2 = new ArrayList<>();
+            ArrayList<Integer> nuevoPoligono1 = new ArrayList<>();
+            ArrayList<Integer> nuevoPoligono2 = new ArrayList<>();
 
             for (int i = 0; i < polygons.get(polygonIndex).size(); i++) {
 
                 int j = (i +1) % polygons.get(polygonIndex).size();
                 if (point_on_plane(ppoint, pnormal, vertices.get(polygons.get(polygonIndex).get(i)))) {
 
-                    ujsokszog1.add(polygons.get(polygonIndex).get(i));
-                    ujsokszog2.add(polygons.get(polygonIndex).get(i));
+                    nuevoPoligono1.add(polygons.get(polygonIndex).get(i));
+                    nuevoPoligono2.add(polygons.get(polygonIndex).get(i));
                 } else {
 
                     if (scalar_product(vertices.get(polygons.get(polygonIndex).get(i)), pnormal) > scalar_product(ppoint, pnormal)) {
-                        ujsokszog1.add(polygons.get(polygonIndex).get(i));
+                        nuevoPoligono1.add(polygons.get(polygonIndex).get(i));
                     } else {
-                        ujsokszog2.add(polygons.get(polygonIndex).get(i));
+                        nuevoPoligono2.add(polygons.get(polygonIndex).get(i));
                     }
 
                     if (plane_between_points(ppoint, pnormal, vertices.get(polygons.get(polygonIndex).get(i)), vertices.get(polygons.get(polygonIndex).get(j))) && !point_on_plane(ppoint, pnormal, vertices.get(polygons.get(polygonIndex).get(j)))) {
 
                         freshcut:
                         {
-                            for (int[] szakasz : cutpolygon_nodes) {
-                                if (szakasz[0] == polygons.get(polygonIndex).get(i) && szakasz[1] == polygons.get(polygonIndex).get(j)) {
-                                    ujsokszog1.add(szakasz[2]);
-                                    ujsokszog2.add(szakasz[2]);
+                            for (int[] seccion : cutpolygon_nodes) {
+                                if (seccion[0] == polygons.get(polygonIndex).get(i) && seccion[1] == polygons.get(polygonIndex).get(j)) {
+                                    nuevoPoligono1.add(seccion[2]);
+                                    nuevoPoligono2.add(seccion[2]);
                                     break freshcut;
-                                } else if (szakasz[0] == polygons.get(polygonIndex).get(j) && szakasz[1] == polygons.get(polygonIndex).get(i)) {
-                                    ujsokszog1.add(szakasz[2]);
-                                    ujsokszog2.add(szakasz[2]);
+                                } else if (seccion[0] == polygons.get(polygonIndex).get(j) && seccion[1] == polygons.get(polygonIndex).get(i)) {
+                                    nuevoPoligono1.add(seccion[2]);
+                                    nuevoPoligono2.add(seccion[2]);
                                     break freshcut;
                                 }
                             }
@@ -98,19 +98,19 @@ public class OrigamiGen2 extends Origami {
                             double C = pnormal[2];
                             double t = -(A * X + B * Y + C * Z - D) / (A * U + B * V + C * W);
 
-                            double[] metszet = new double[]{X + t * U, Y + t * V, Z + t * W};
-                            addVertex(metszet);
+                            double[] seccion = new double[]{X + t * U, Y + t * V, Z + t * W};
+                            addVertex(seccion);
 
-                            double suly1 = vector_length(vector(metszet, vertices.get(polygons.get(polygonIndex).get(j))));
-                            double suly2 = vector_length(vector(metszet, vertices.get(polygons.get(polygonIndex).get(i))));
+                            double peso1 = vector_length(vector(seccion, vertices.get(polygons.get(polygonIndex).get(j))));
+                            double peso2 = vector_length(vector(seccion, vertices.get(polygons.get(polygonIndex).get(i))));
                             add2dVertex(new double[]{
-                                (vertices2d.get(polygons.get(polygonIndex).get(i))[0] * suly1 + vertices2d.get(polygons.get(polygonIndex).get(j))[0] * suly2) / (suly1 + suly2),
-                                (vertices2d.get(polygons.get(polygonIndex).get(i))[1] * suly1 + vertices2d.get(polygons.get(polygonIndex).get(j))[1] * suly2) / (suly1 + suly2),
+                                (vertices2d.get(polygons.get(polygonIndex).get(i))[0] * peso1 + vertices2d.get(polygons.get(polygonIndex).get(j))[0] * peso2) / (peso1 + peso2),
+                                (vertices2d.get(polygons.get(polygonIndex).get(i))[1] * peso1 + vertices2d.get(polygons.get(polygonIndex).get(j))[1] * peso2) / (peso1 + peso2),
                                 0
                             });
 
-                            ujsokszog1.add(vertices_size - 1);
-                            ujsokszog2.add(vertices_size - 1);
+                            nuevoPoligono1.add(vertices_size - 1);
+                            nuevoPoligono2.add(vertices_size - 1);
                             cutpolygon_nodes.add(new int[]{polygons.get(polygonIndex).get(i), polygons.get(polygonIndex).get(j), vertices_size - 1});
                         }
                     }
@@ -119,8 +119,8 @@ public class OrigamiGen2 extends Origami {
 
             cutpolygon_pairs.add(new int[]{polygonIndex, polygons.size()});
             last_cut_polygons.add(polygons.get(polygonIndex));
-            polygons.set(polygonIndex, ujsokszog1);
-            addPolygon(ujsokszog2);
+            polygons.set(polygonIndex, nuevoPoligono1);
+            addPolygon(nuevoPoligono2);
             return true;
         }
         return false;

@@ -315,13 +315,13 @@ public class Export {
             //Itt tároljuk az objektumok offszeteit
             try (FileOutputStream str = new FileOutputStream(pdf)) {
                 //Itt tároljuk az objektumok offszeteit
-                ArrayList<Integer> Offszetek = new ArrayList<>();
-                Offszetek.add(0);
-                int bajtszam = 0;
+                ArrayList<Integer> Conjuntos = new ArrayList<>();
+                Conjuntos.add(0);
+                int numCompeticion = 0;
                 
                 //Megszámoljuk, hány mûvelet nem lesz külön feltüntetve
                 int ures_muveletek = 0;
-                ArrayList<Integer> UresIndexek = new ArrayList<>();
+                ArrayList<Integer> IndicesAventuras = new ArrayList<>();
                 
                 for (int i = 0; i < origami1.history().size(); i++) {
                     
@@ -337,7 +337,7 @@ public class Export {
                                     && origami1.history().get(i + 1)[5] == origami1.history().get(i)[5]
                                     && origami1.history().get(i + 1)[6] == origami1.history().get(i)[6]) {
                                 ures_muveletek++;
-                                UresIndexek.add(i);
+                                IndicesAventuras.add(i);
                             }
                         }
                     } else if (origami1.history().get(i)[0] == 4.0) {
@@ -353,7 +353,7 @@ public class Export {
                                     && origami1.history().get(i + 1)[6] == origami1.history().get(i)[6]
                                     && origami1.history().get(i + 1)[8] == origami1.history().get(i)[8]) {
                                 ures_muveletek++;
-                                UresIndexek.add(i);
+                                IndicesAventuras.add(i);
                             }
                         }
                     }
@@ -361,145 +361,145 @@ public class Export {
                 
                 int forgatasok = 2;
                 //Azok a lépések, amikhez szemszögváltás kell
-                ArrayList<Integer> ForgatasIndexek = new ArrayList<>();
-                ForgatasIndexek.add(0);
+                ArrayList<Integer> IndicesGirados = new ArrayList<>();
+                IndicesGirados.add(0);
                 //A szemszögváltások függôleges forgásszögei
                 ArrayList<Integer> ForgatasSzogek = new ArrayList<>();
                 ForgatasSzogek.add(0);
                 
                 //Méretezés és elôigazítás
-                Camera kamera = new Camera(0, 0, 0.5);
-                kamera.nextOrthogonalView();
+                Camera camara = new Camera(0, 0, 0.5);
+                camara.nextOrthogonalView();
                 
                 //Felmérjük az olyan lépések számát, amikhez szemszögváltás kell.
                 for (int i = 1; i < origami1.history().size(); i++) {
                     
-                    double[] regiVaszonNV = kamera.camera_dir;
+                    double[] regiVaszonNV = camara.camera_dir;
                     
-                    kamera.camera_dir = Origami.vector_product(new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]},
+                    camara.camera_dir = Origami.vector_product(new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]},
                             new double[]{0, 1, 0});
                     
-                    if (Origami.vector_length(kamera.camera_dir) < .00000001) {
-                        kamera.camera_dir = new double[]{0, 0, 1};
+                    if (Origami.vector_length(camara.camera_dir) < .00000001) {
+                        camara.camera_dir = new double[]{0, 0, 1};
                     }
                     
-                    kamera.camera_dir = new double[]{kamera.camera_dir[0] / Origami.vector_length(kamera.camera_dir),
-                        kamera.camera_dir[1] / Origami.vector_length(kamera.camera_dir),
-                        kamera.camera_dir[2] / Origami.vector_length(kamera.camera_dir)};
+                    camara.camera_dir = new double[]{camara.camera_dir[0] / Origami.vector_length(camara.camera_dir),
+                        camara.camera_dir[1] / Origami.vector_length(camara.camera_dir),
+                        camara.camera_dir[2] / Origami.vector_length(camara.camera_dir)};
                     
-                    if (Origami.vector_length(Origami.vector_product(regiVaszonNV, kamera.camera_dir)) > .00000001 && !UresIndexek.contains(i - 1)) {
+                    if (Origami.vector_length(Origami.vector_product(regiVaszonNV, camara.camera_dir)) > .00000001 && !IndicesAventuras.contains(i - 1)) {
                         
                         forgatasok++;
-                        ForgatasIndexek.add(i);
-                        double cos = Origami.scalar_product(regiVaszonNV, kamera.camera_dir) / Origami.vector_length(regiVaszonNV) / Origami.vector_length(kamera.camera_dir);
+                        IndicesGirados.add(i);
+                        double cos = Origami.scalar_product(regiVaszonNV, camara.camera_dir) / Origami.vector_length(regiVaszonNV) / Origami.vector_length(camara.camera_dir);
                         ForgatasSzogek.add((int) (Math.acos(cos >= -1 && cos <= 1 ? cos : 1) / Math.PI * 180));
                     }
                 }
-                ForgatasIndexek.add(origami1.history().size());
+                IndicesGirados.add(origami1.history().size());
                 
                 //Egy oldalon 6 cella van (papírmérettôl függetlenül)
-                int cellak_szama = origami1.history().size() + forgatasok - ures_muveletek + 2;
+                int numCelda = origami1.history().size() + forgatasok - ures_muveletek + 2;
                 
                 //Fejléc
-                String fajl = "";
-                fajl += "%PDF-1.3";
-                fajl += (char) 10;
-                fajl += (char) 10;
+                String parecerse = "";
+                parecerse += "%PDF-1.3";
+                parecerse += (char) 10;
+                parecerse += (char) 10;
 
                 //Katalógus
-                Offszetek.add(fajl.length());
-                fajl += "1 0 obj";
-                fajl += (char) 10;
-                fajl += "<< /Type /Catalog";
-                fajl += (char) 10;
-                fajl += " /Pages 2 0 R";
-                fajl += (char) 10;
-                fajl += ">>";
-                fajl += (char) 10;
-                fajl += "endobj";
-                fajl += (char) 10;
-                fajl += (char) 10;
+                Conjuntos.add(parecerse.length());
+                parecerse += "1 0 obj";
+                parecerse += (char) 10;
+                parecerse += "<< /Type /Catalog";
+                parecerse += (char) 10;
+                parecerse += " /Pages 2 0 R";
+                parecerse += (char) 10;
+                parecerse += ">>";
+                parecerse += (char) 10;
+                parecerse += "endobj";
+                parecerse += (char) 10;
+                parecerse += (char) 10;
 
                 //Kötet
-                Offszetek.add(fajl.length());
-                fajl += "2 0 obj";
-                fajl += (char) 10;
-                fajl += "<< /Type /Pages";
-                fajl += (char) 10;
-                fajl += "/Kids [";
-                fajl += "3 0 R";
+                Conjuntos.add(parecerse.length());
+                parecerse += "2 0 obj";
+                parecerse += (char) 10;
+                parecerse += "<< /Type /Pages";
+                parecerse += (char) 10;
+                parecerse += "/Kids [";
+                parecerse += "3 0 R";
                 
                 //Az oldalak száma a cellák számának hatoda felfelé kerekítve
-                for (int i = 1; i < (int) Math.ceil((double) cellak_szama / 6); i++) {
+                for (int i = 1; i < (int) Math.ceil((double) numCelda / 6); i++) {
                     
-                    fajl += " " + Integer.toString(i + 3) + " 0 R";
+                    parecerse += " " + Integer.toString(i + 3) + " 0 R";
                 }
-                fajl += "]";
-                fajl += (char) 10;
-                fajl += "/Count " + Integer.toString((int) Math.ceil((double) cellak_szama / 6));
-                fajl += (char) 10;
-                fajl += "/MediaBox [0 0 " + Integer.toString(page_width) + " " + Integer.toString(page_height) + "]";
-                fajl += (char) 10;
-                fajl += ">>";
-                fajl += (char) 10;
-                fajl += "endobj";
-                fajl += (char) 10;
-                fajl += (char) 10;
+                parecerse += "]";
+                parecerse += (char) 10;
+                parecerse += "/Count " + Integer.toString((int) Math.ceil((double) numCelda / 6));
+                parecerse += (char) 10;
+                parecerse += "/MediaBox [0 0 " + Integer.toString(page_width) + " " + Integer.toString(page_height) + "]";
+                parecerse += (char) 10;
+                parecerse += ">>";
+                parecerse += (char) 10;
+                parecerse += "endobj";
+                parecerse += (char) 10;
+                parecerse += (char) 10;
                 
                 //Oldalak
-                for (int i = 0; i < (int) Math.ceil((double) cellak_szama / 6); i++) {
+                for (int i = 0; i < (int) Math.ceil((double) numCelda / 6); i++) {
                     
-                    Offszetek.add(fajl.length());
-                    fajl += "" + Integer.toString(i + 3) + " 0 obj";
-                    fajl += (char) 10;
-                    fajl += "<< /Type /Page";
-                    fajl += (char) 10;
-                    fajl += "/Parent 2 0 R";
-                    fajl += (char) 10;
-                    fajl += "/Resources";
-                    fajl += (char) 10;
-                    fajl += "<< /Font";
-                    fajl += (char) 10;
-                    fajl += "<< /F1";
-                    fajl += (char) 10;
-                    fajl += "<< /Type /Font";
-                    fajl += (char) 10;
-                    fajl += "/Subtype /Type1";
-                    fajl += (char) 10;
-                    fajl += "/BaseFont /Courier";
-                    fajl += (char) 10;
-                    fajl += ">>";
-                    fajl += (char) 10;
-                    fajl += ">>";
-                    fajl += (char) 10;
-                    fajl += ">>";
-                    fajl += (char) 10;
-                    fajl += "/Contents[";
+                    Conjuntos.add(parecerse.length());
+                    parecerse += "" + Integer.toString(i + 3) + " 0 obj";
+                    parecerse += (char) 10;
+                    parecerse += "<< /Type /Page";
+                    parecerse += (char) 10;
+                    parecerse += "/Parent 2 0 R";
+                    parecerse += (char) 10;
+                    parecerse += "/Resources";
+                    parecerse += (char) 10;
+                    parecerse += "<< /Font";
+                    parecerse += (char) 10;
+                    parecerse += "<< /F1";
+                    parecerse += (char) 10;
+                    parecerse += "<< /Type /Font";
+                    parecerse += (char) 10;
+                    parecerse += "/Subtype /Type1";
+                    parecerse += (char) 10;
+                    parecerse += "/BaseFont /Courier";
+                    parecerse += (char) 10;
+                    parecerse += ">>";
+                    parecerse += (char) 10;
+                    parecerse += ">>";
+                    parecerse += (char) 10;
+                    parecerse += ">>";
+                    parecerse += (char) 10;
+                    parecerse += "/Contents[";
                     
                     //Egy oldalon általánosan 6 kép és 6 szöveg objektum van
                     //A fájltest elsô felében a képek, a másodikban a szövegek vannak
-                    for (int ii = (int) Math.ceil((double) cellak_szama / 6) + i * 6;
-                            ii < (cellak_szama < (i + 1) * 6
-                            ? (int) Math.ceil((double) cellak_szama / 6) + cellak_szama
-                            : (int) Math.ceil((double) cellak_szama / 6) + (i + 1) * 6);
+                    for (int ii = (int) Math.ceil((double) numCelda / 6) + i * 6;
+                            ii < (numCelda < (i + 1) * 6
+                            ? (int) Math.ceil((double) numCelda / 6) + numCelda
+                            : (int) Math.ceil((double) numCelda / 6) + (i + 1) * 6);
                             ii++) {
-                        if (ii != (int) Math.ceil((double) cellak_szama / 6) + i * 6) {
-                            fajl += " ";
+                        if (ii != (int) Math.ceil((double) numCelda / 6) + i * 6) {
+                            parecerse += " ";
                         }
-                        fajl += Integer.toString(ii + 3) + " 0 R";
-                        fajl += " " + Integer.toString(ii + cellak_szama + 3) + " 0 R";
+                        parecerse += Integer.toString(ii + 3) + " 0 R";
+                        parecerse += " " + Integer.toString(ii + numCelda + 3) + " 0 R";
                     }
-                    fajl += "]";
-                    fajl += (char) 10;
-                    fajl += ">>";
-                    fajl += (char) 10;
-                    fajl += "endobj";
-                    fajl += (char) 10;
-                    fajl += (char) 10;
+                    parecerse += "]";
+                    parecerse += (char) 10;
+                    parecerse += ">>";
+                    parecerse += (char) 10;
+                    parecerse += "endobj";
+                    parecerse += (char) 10;
+                    parecerse += (char) 10;
                 }
                 
-                //A cím a megadott fájlnév
-                Offszetek.add(fajl.length());
+                //El título del nombre del archivo
+                Conjuntos.add(parecerse.length());
                 String stream;
                 stream = "BT";
                 stream += (char) 10;
@@ -511,21 +511,21 @@ public class Export {
                 stream += (char) 10;
                 stream += "ET";
                 stream += (char) 10;
-                fajl += Integer.toString((int) Math.ceil((double) cellak_szama / 6) + 3) + " 0 obj";
-                fajl += (char) 10;
-                fajl += "<< /Length " + Integer.toString(stream.length()) + " >>";
-                fajl += (char) 10;
-                fajl += "stream";
-                fajl += (char) 10;
-                fajl += stream;
-                fajl += "endstream";
-                fajl += (char) 10;
-                fajl += "endobj";
-                fajl += (char) 10;
-                fajl += (char) 10;
+                parecerse += Integer.toString((int) Math.ceil((double) numCelda / 6) + 3) + " 0 obj";
+                parecerse += (char) 10;
+                parecerse += "<< /Length " + Integer.toString(stream.length()) + " >>";
+                parecerse += (char) 10;
+                parecerse += "stream";
+                parecerse += (char) 10;
+                parecerse += stream;
+                parecerse += "endstream";
+                parecerse += (char) 10;
+                parecerse += "endobj";
+                parecerse += (char) 10;
+                parecerse += (char) 10;
                 
-                //A cím alatti két üres cellában van helyünk a reklámozásra
-                Offszetek.add(fajl.length());
+                //Dos celda vacía debajo del título es Nuestra publicidad
+                Conjuntos.add(parecerse.length());
                 stream = "BT";
                 stream += (char) 10;
                 stream += "/F1 12 Tf";
@@ -538,40 +538,40 @@ public class Export {
                 stream += (char) 10;
                 stream += "ET";
                 stream += (char) 10;
-                fajl += Integer.toString((int) Math.ceil((double) cellak_szama / 6) + 4) + " 0 obj";
-                fajl += (char) 10;
-                fajl += "<< /Length " + Integer.toString(stream.length()) + " >>";
-                fajl += (char) 10;
-                fajl += "stream";
-                fajl += (char) 10;
-                fajl += stream;
-                fajl += "endstream";
-                fajl += (char) 10;
-                fajl += "endobj";
-                fajl += (char) 10;
-                fajl += (char) 10;
-                str.write(fajl.getBytes(Charset.forName("UTF-8")));
-                bajtszam += fajl.length();
-                fajl = "";
+                parecerse += Integer.toString((int) Math.ceil((double) numCelda / 6) + 4) + " 0 obj";
+                parecerse += (char) 10;
+                parecerse += "<< /Length " + Integer.toString(stream.length()) + " >>";
+                parecerse += (char) 10;
+                parecerse += "stream";
+                parecerse += (char) 10;
+                parecerse += stream;
+                parecerse += "endstream";
+                parecerse += (char) 10;
+                parecerse += "endobj";
+                parecerse += (char) 10;
+                parecerse += (char) 10;
+                str.write(parecerse.getBytes(Charset.forName("UTF-8")));
+                numCompeticion += parecerse.length();
+                parecerse = "";
                 
-                //Ez már élesben megy
+                //Esto va a ir a vivir
                 origami1.reset();
                 Double maxdim = origami1.circumscribedSquareSize();
                 if (maxdim == .0) {
                     maxdim = 1.;
                 }
                 
-                kamera = new Camera(0, 0, figure_frame / maxdim);
-                kamera.nextOrthogonalView();
-                kamera.unadjust(origami1);
+                camara = new Camera(0, 0, figure_frame / maxdim);
+                camara.nextOrthogonalView();
+                camara.unadjust(origami1);
                 
-                //Az objektum indexe, ahol épp tartunk
-                int objindex = (int) Math.ceil((double) cellak_szama / 6) + 5;
+                //El índice objeto donde estamos
+                int objindex = (int) Math.ceil((double) numCelda / 6) + 5;
                 
-                //Ábrák
+                //Figuras
                 for (int i = 0; i <= origami1.history().size(); i++) {
                     
-                    while (UresIndexek.contains(i - 1)) {
+                    while (IndicesAventuras.contains(i - 1)) {
                         
                         origami1.execute(i - 1, 1);
                         i++;
@@ -582,9 +582,9 @@ public class Export {
                     int x = 0, y = 0;
                     String kep;
                     
-                    if (ForgatasIndexek.contains(i)) {
+                    if (IndicesGirados.contains(i)) {
                         
-                        switch ((objindex - (int) Math.ceil((double) cellak_szama / 6)) % 6) {
+                        switch ((objindex - (int) Math.ceil((double) numCelda / 6)) % 6) {
                             
                             case 0:
                                 x = page_width / 4 * 3;
@@ -620,65 +620,65 @@ public class Export {
                                 break;
                         }
                         
-                        kep = kamera.drawFaces(x, y, origami1) + kamera.drawEdges(x, y, origami1);
+                        kep = camara.drawFaces(x, y, origami1) + camara.drawEdges(x, y, origami1);
                         
-                        Offszetek.add(bajtszam);
+                        Conjuntos.add(numCompeticion);
                         stream = "q";
                         stream += " ";
                         stream += kep;
                         stream += "Q";
                         stream += (char) 10;
-                        fajl += Integer.toString(objindex) + " 0 obj";
-                        fajl += (char) 10;
-                        fajl += "<< /Length " + Integer.toString(stream.length()) + " >>";
-                        fajl += (char) 10;
-                        fajl += "stream";
-                        fajl += (char) 10;
-                        fajl += stream;
-                        fajl += "endstream";
-                        fajl += (char) 10;
-                        fajl += "endobj";
-                        fajl += (char) 10;
-                        fajl += (char) 10;
+                        parecerse += Integer.toString(objindex) + " 0 obj";
+                        parecerse += (char) 10;
+                        parecerse += "<< /Length " + Integer.toString(stream.length()) + " >>";
+                        parecerse += (char) 10;
+                        parecerse += "stream";
+                        parecerse += (char) 10;
+                        parecerse += stream;
+                        parecerse += "endstream";
+                        parecerse += (char) 10;
+                        parecerse += "endobj";
+                        parecerse += (char) 10;
+                        parecerse += (char) 10;
                         objindex++;
-                        str.write(fajl.getBytes(Charset.forName("UTF-8")));
-                        bajtszam += fajl.length();
-                        fajl = "";
+                        str.write(parecerse.getBytes(Charset.forName("UTF-8")));
+                        numCompeticion += parecerse.length();
+                        parecerse = "";
                     }
                     
                     if (i < origami1.history().size()) {
                         
-                        double[] regiVaszonNV = kamera.camera_dir;
+                        double[] viejaLonaNV = camara.camera_dir;
                         
-                        kamera.camera_dir = Origami.vector_product(new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]},
+                        camara.camera_dir = Origami.vector_product(new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]},
                                 new double[]{0, 1, 0});
                         
-                        if (Origami.scalar_product(kamera.camera_dir, kamera.camera_dir) < 0.00000001) {
-                            kamera.camera_dir = new double[]{0, 0, 1};
+                        if (Origami.scalar_product(camara.camera_dir, camara.camera_dir) < 0.00000001) {
+                            camara.camera_dir = new double[]{0, 0, 1};
                         }
                         
-                        kamera.camera_dir = new double[]{kamera.camera_dir[0] / Origami.vector_length(kamera.camera_dir),
-                            kamera.camera_dir[1] / Origami.vector_length(kamera.camera_dir),
-                            kamera.camera_dir[2] / Origami.vector_length(kamera.camera_dir)};
+                        camara.camera_dir = new double[]{camara.camera_dir[0] / Origami.vector_length(camara.camera_dir),
+                            camara.camera_dir[1] / Origami.vector_length(camara.camera_dir),
+                            camara.camera_dir[2] / Origami.vector_length(camara.camera_dir)};
                         
-                        kamera.axis_y = new double[]{0, 1, 0};
-                        kamera.axis_x = Origami.vector_product(kamera.camera_dir, kamera.axis_y);
+                        camara.axis_y = new double[]{0, 1, 0};
+                        camara.axis_x = Origami.vector_product(camara.camera_dir, camara.axis_y);
                         
-                        kamera.axis_x = new double[]{kamera.axis_x[0] / Origami.vector_length(kamera.axis_x) * kamera.zoom(),
-                            kamera.axis_x[1] / Origami.vector_length(kamera.axis_x) * kamera.zoom(),
-                            kamera.axis_x[2] / Origami.vector_length(kamera.axis_x) * kamera.zoom()};
+                        camara.axis_x = new double[]{camara.axis_x[0] / Origami.vector_length(camara.axis_x) * camara.zoom(),
+                            camara.axis_x[1] / Origami.vector_length(camara.axis_x) * camara.zoom(),
+                            camara.axis_x[2] / Origami.vector_length(camara.axis_x) * camara.zoom()};
                         
-                        kamera.axis_y = new double[]{kamera.axis_y[0] / Origami.vector_length(kamera.axis_y) * kamera.zoom(),
-                            kamera.axis_y[1] / Origami.vector_length(kamera.axis_y) * kamera.zoom(),
-                            kamera.axis_y[2] / Origami.vector_length(kamera.axis_y) * kamera.zoom()};
+                        camara.axis_y = new double[]{camara.axis_y[0] / Origami.vector_length(camara.axis_y) * camara.zoom(),
+                            camara.axis_y[1] / Origami.vector_length(camara.axis_y) * camara.zoom(),
+                            camara.axis_y[2] / Origami.vector_length(camara.axis_y) * camara.zoom()};
                         
-                        if (Origami.scalar_product(regiVaszonNV, kamera.camera_dir) < 0 && !ForgatasIndexek.contains(i)) {
+                        if (Origami.scalar_product(viejaLonaNV, camara.camera_dir) < 0 && !IndicesGirados.contains(i)) {
                             
-                            kamera.camera_dir = Origami.vector(Origami.nullvektor, kamera.camera_dir);
-                            kamera.axis_x = Origami.vector(Origami.nullvektor, kamera.axis_x);
+                            camara.camera_dir = Origami.vector(Origami.nullvektor, camara.camera_dir);
+                            camara.axis_x = Origami.vector(Origami.nullvektor, camara.axis_x);
                         }
                         
-                        switch ((objindex - (int) Math.ceil((double) cellak_szama / 6)) % 6) {
+                        switch ((objindex - (int) Math.ceil((double) numCelda / 6)) % 6) {
                             
                             case 0:
                                 x = page_width / 4 * 3;
@@ -714,86 +714,86 @@ public class Export {
                                 break;
                         }
                         
-                        double[] sikpont;
+                        double[] puntoPlana;
                         double[] siknv;
                         
-                        kamera.adjust(origami1);
+                        camara.adjust(origami1);
                         
                         switch ((int) origami1.history().get(i)[0]) {
                             
                             case 1:
-                                sikpont = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
+                                puntoPlana = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
                                 siknv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
-                                kep = kamera.drawFaces(x, y, origami1) + kamera.drawEdges(x, y, origami1) + kamera.pfdLiner(x, y, sikpont, siknv);
+                                kep = camara.drawFaces(x, y, origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, siknv);
                                 break;
                                 
                             case 2:
-                                sikpont = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
+                                puntoPlana = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
                                 siknv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
-                                kep = kamera.drawFaces(x, y, origami1) + kamera.drawEdges(x, y, origami1) + kamera.pfdLiner(x, y, sikpont, siknv);
+                                kep = camara.drawFaces(x, y, origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, siknv);
                                 break;
                                 
                             case 3:
-                                sikpont = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
+                                puntoPlana = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
                                 siknv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
-                                kep = kamera.drawSelection(x, y, sikpont, siknv, (int) origami1.history().get(i)[7], origami1) + kamera.drawEdges(x, y, origami1) + kamera.pfdLiner(x, y, sikpont, siknv);
+                                kep = camara.drawSelection(x, y, puntoPlana, siknv, (int) origami1.history().get(i)[7], origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, siknv);
                                 break;
                                 
                             case 4:
-                                sikpont = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
+                                puntoPlana = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
                                 siknv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
-                                kep = kamera.drawSelection(x, y, sikpont, siknv, (int) origami1.history().get(i)[8], origami1) + kamera.drawEdges(x, y, origami1) + kamera.pfdLiner(x, y, sikpont, siknv);
+                                kep = camara.drawSelection(x, y, puntoPlana, siknv, (int) origami1.history().get(i)[8], origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, siknv);
                                 break;
                                 
                             case 5:
-                                sikpont = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
+                                puntoPlana = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
                                 siknv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
-                                kep = kamera.drawFaces(x, y, origami1) + kamera.drawEdges(x, y, origami1) + kamera.pfdLiner(x, y, sikpont, siknv);
+                                kep = camara.drawFaces(x, y, origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, siknv);
                                 break;
                                 
                             case 6:
-                                sikpont = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
+                                puntoPlana = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
                                 siknv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
-                                kep = kamera.drawFaces(x, y, origami1) + kamera.drawEdges(x, y, origami1) + kamera.pfdLiner(x, y, sikpont, siknv);
+                                kep = camara.drawFaces(x, y, origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, siknv);
                                 break;
                                 
                             case 7:
-                                sikpont = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
+                                puntoPlana = new double[]{origami1.history().get(i)[1], origami1.history().get(i)[2], origami1.history().get(i)[3]};
                                 siknv = new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]};
-                                kep = kamera.drawSelection(x, y, sikpont, siknv, (int) origami1.history().get(i)[7], origami1) + kamera.drawEdges(x, y, origami1) + kamera.pfdLiner(x, y, sikpont, siknv);
+                                kep = camara.drawSelection(x, y, puntoPlana, siknv, (int) origami1.history().get(i)[7], origami1) + camara.drawEdges(x, y, origami1) + camara.pfdLiner(x, y, puntoPlana, siknv);
                                 break;
                                 
                             default:
-                                kep = kamera.drawFaces(x, y, origami1) + kamera.drawEdges(x, y, origami1);
+                                kep = camara.drawFaces(x, y, origami1) + camara.drawEdges(x, y, origami1);
                                 break;
                         }
                         
-                        Offszetek.add(bajtszam);
+                        Conjuntos.add(numCompeticion);
                         stream = "q";
                         stream += " ";
                         stream += kep;
                         stream += "Q";
                         stream += (char) 10;
-                        fajl += Integer.toString(objindex) + " 0 obj";
-                        fajl += (char) 10;
-                        fajl += "<< /Length " + Integer.toString(stream.length()) + " >>";
-                        fajl += (char) 10;
-                        fajl += "stream";
-                        fajl += (char) 10;
-                        fajl += stream;
-                        fajl += "endstream";
-                        fajl += (char) 10;
-                        fajl += "endobj";
-                        fajl += (char) 10;
-                        fajl += (char) 10;
+                        parecerse += Integer.toString(objindex) + " 0 obj";
+                        parecerse += (char) 10;
+                        parecerse += "<< /Length " + Integer.toString(stream.length()) + " >>";
+                        parecerse += (char) 10;
+                        parecerse += "stream";
+                        parecerse += (char) 10;
+                        parecerse += stream;
+                        parecerse += "endstream";
+                        parecerse += (char) 10;
+                        parecerse += "endobj";
+                        parecerse += (char) 10;
+                        parecerse += (char) 10;
                         objindex++;
-                        str.write(fajl.getBytes(Charset.forName("UTF-8")));
-                        bajtszam += fajl.length();
-                        fajl = "";
+                        str.write(parecerse.getBytes(Charset.forName("UTF-8")));
+                        numCompeticion += parecerse.length();
+                        parecerse = "";
                     }
                 }
                 
-                Offszetek.add(bajtszam);
+                Conjuntos.add(numCompeticion);
                 stream = "BT";
                 stream += (char) 10;
                 stream += "/F1 12 Tf";
@@ -805,24 +805,24 @@ public class Export {
                 stream += (char) 10;
                 stream += "ET";
                 stream += (char) 10;
-                fajl += Integer.toString(objindex) + " 0 obj";
-                fajl += (char) 10;
-                fajl += "<< /Length " + Integer.toString(stream.length()) + " >>";
-                fajl += (char) 10;
-                fajl += "stream";
-                fajl += (char) 10;
-                fajl += stream;
-                fajl += "endstream";
-                fajl += (char) 10;
-                fajl += "endobj";
-                fajl += (char) 10;
-                fajl += (char) 10;
+                parecerse += Integer.toString(objindex) + " 0 obj";
+                parecerse += (char) 10;
+                parecerse += "<< /Length " + Integer.toString(stream.length()) + " >>";
+                parecerse += (char) 10;
+                parecerse += "stream";
+                parecerse += (char) 10;
+                parecerse += stream;
+                parecerse += "endstream";
+                parecerse += (char) 10;
+                parecerse += "endobj";
+                parecerse += (char) 10;
+                parecerse += (char) 10;
                 objindex++;
-                str.write(fajl.getBytes(Charset.forName("UTF-8")));
-                bajtszam += fajl.length();
-                fajl = "";
+                str.write(parecerse.getBytes(Charset.forName("UTF-8")));
+                numCompeticion += parecerse.length();
+                parecerse = "";
                 
-                Offszetek.add(bajtszam);
+                Conjuntos.add(numCompeticion);
                 stream = "BT";
                 stream += (char) 10;
                 stream += "/F1 12 Tf";
@@ -830,86 +830,86 @@ public class Export {
                 stream += Integer.toString((int) (page_width - 2 * figure_frame) / 4) + " "
                         + Integer.toString(722 - Cookbook.PDF_DISCLAIMER.length() * 14 + Cookbook.PDF_DISCLAIMER.replace(") '", ") ").length() * 14) + " Td";
                 stream += (char) 10;
-                stream += Cookbook.PDF_STEPS + Integer.toString(cellak_szama - 2) + ") Tj";
+                stream += Cookbook.PDF_STEPS + Integer.toString(numCelda - 2) + ") Tj";
                 stream += (char) 10;
                 stream += "ET";
                 stream += (char) 10;
-                fajl += Integer.toString(objindex) + " 0 obj";
-                fajl += (char) 10;
-                fajl += "<< /Length " + Integer.toString(stream.length()) + " >>";
-                fajl += (char) 10;
-                fajl += "stream";
-                fajl += (char) 10;
-                fajl += stream;
-                fajl += "endstream";
-                fajl += (char) 10;
-                fajl += "endobj";
-                fajl += (char) 10;
-                fajl += (char) 10;
+                parecerse += Integer.toString(objindex) + " 0 obj";
+                parecerse += (char) 10;
+                parecerse += "<< /Length " + Integer.toString(stream.length()) + " >>";
+                parecerse += (char) 10;
+                parecerse += "stream";
+                parecerse += (char) 10;
+                parecerse += stream;
+                parecerse += "endstream";
+                parecerse += (char) 10;
+                parecerse += "endobj";
+                parecerse += (char) 10;
+                parecerse += (char) 10;
                 objindex++;
-                str.write(fajl.getBytes(Charset.forName("UTF-8")));
-                bajtszam += fajl.length();
-                fajl = "";
+                str.write(parecerse.getBytes(Charset.forName("UTF-8")));
+                numCompeticion += parecerse.length();
+                parecerse = "";
                 
-                int sorszam = 1;
+                int numero = 1;
                 
-                //Szövegek
+                //Textos
                 for (int i = 0; i <= origami1.history().size(); i++) {
                     
-                    while (UresIndexek.contains(i)) {
+                    while (IndicesAventuras.contains(i)) {
                         i++;
                     }
                     
-                    String utasitas = "";
+                    String instrucciones = "";
                     String koo = "";
                     
                     double[] siknv;
                     
-                    if (ForgatasIndexek.contains(i)) {
+                    if (IndicesGirados.contains(i)) {
                         
                         if (i == origami1.history().size()) {
                             
-                            utasitas = "(" + Integer.toString(sorszam) + ". " + Cookbook.PDF_OUTRO;
-                            sorszam++;
+                            instrucciones = "(" + Integer.toString(numero) + ". " + Cookbook.PDF_OUTRO;
+                            numero++;
                         } else if (i == 0) {
                             
-                            utasitas = "(" + Integer.toString(sorszam) + ". ";
+                            instrucciones = "(" + Integer.toString(numero) + ". ";
                             switch (origami1.papertype()) {
                                 
                                 case A4:
-                                    utasitas += Cookbook.PDF_INTRO_A4;
+                                    instrucciones += Cookbook.PDF_INTRO_A4;
                                     break;
                                 case Square:
-                                    utasitas += Cookbook.PDF_INTRO_SQUARE;
+                                    instrucciones += Cookbook.PDF_INTRO_SQUARE;
                                     break;
                                 case Hexagon:
-                                    utasitas += Cookbook.PDF_INTRO_HEX;
+                                    instrucciones += Cookbook.PDF_INTRO_HEX;
                                     break;
                                 case Dollar:
-                                    utasitas += Cookbook.PDF_INTRO_DOLLAR;
+                                    instrucciones += Cookbook.PDF_INTRO_DOLLAR;
                                     break;
                                 case Custom:
                                     if (origami1.corners().size() == 3) {
-                                        utasitas += Cookbook.PDF_INTRO_TRIANGLE;
+                                        instrucciones += Cookbook.PDF_INTRO_TRIANGLE;
                                     } else if (origami1.corners().size() == 4) {
-                                        utasitas += Cookbook.PDF_INTRO_QUAD;
+                                        instrucciones += Cookbook.PDF_INTRO_QUAD;
                                     } else {
-                                        utasitas += Cookbook.PDF_INTRO_POLYGON;
+                                        instrucciones += Cookbook.PDF_INTRO_POLYGON;
                                     }
                                     break;
                                 default:
                                     break;
                             }
-                            sorszam++;
+                            numero++;
                         } else {
                             
-                            utasitas = "(" + Integer.toString(sorszam) + ". "
-                                    + Cookbook.PDF_TURN + Integer.toString(ForgatasSzogek.get(ForgatasIndexek.indexOf(i)))
+                            instrucciones = "(" + Integer.toString(numero) + ". "
+                                    + Cookbook.PDF_TURN + Integer.toString(ForgatasSzogek.get(IndicesGirados.indexOf(i)))
                                     + Cookbook.PDF_TURN_ANGLE;
-                            sorszam++;
+                            numero++;
                         }
                         
-                        switch ((sorszam + 1) % 6) {
+                        switch ((numero + 1) % 6) {
                             
                             case 1:
                                 koo = Integer.toString(page_width / 2 * 0 + (page_width / 2 - figure_frame) / 3);
@@ -945,7 +945,7 @@ public class Export {
                                 break;
                         }
                         
-                        Offszetek.add(bajtszam);
+                        Conjuntos.add(numCompeticion);
                         stream = "BT";
                         stream += (char) 10;
                         stream += "/F1 10 Tf";
@@ -954,57 +954,57 @@ public class Export {
                         stream += (char) 10;
                         stream += "12 TL";
                         stream += (char) 10;
-                        stream += utasitas;
+                        stream += instrucciones;
                         stream += (char) 10;
                         stream += "ET";
                         stream += (char) 10;
-                        fajl += Integer.toString(objindex + sorszam - 2) + " 0 obj";
-                        fajl += (char) 10;
-                        fajl += "<< /Length " + Integer.toString(stream.length()) + " >>";
-                        fajl += (char) 10;
-                        fajl += "stream";
-                        fajl += (char) 10;
-                        fajl += stream;
-                        fajl += "endstream";
-                        fajl += (char) 10;
-                        fajl += "endobj";
-                        fajl += (char) 10;
-                        fajl += (char) 10;
-                        str.write(fajl.getBytes(Charset.forName("UTF-8")));
-                        bajtszam += fajl.length();
-                        fajl = "";
+                        parecerse += Integer.toString(objindex + numero - 2) + " 0 obj";
+                        parecerse += (char) 10;
+                        parecerse += "<< /Length " + Integer.toString(stream.length()) + " >>";
+                        parecerse += (char) 10;
+                        parecerse += "stream";
+                        parecerse += (char) 10;
+                        parecerse += stream;
+                        parecerse += "endstream";
+                        parecerse += (char) 10;
+                        parecerse += "endobj";
+                        parecerse += (char) 10;
+                        parecerse += (char) 10;
+                        str.write(parecerse.getBytes(Charset.forName("UTF-8")));
+                        numCompeticion += parecerse.length();
+                        parecerse = "";
                     }
                     
                     if (i < origami1.history().size()) {
                         
-                        double[] regiVaszonNV = kamera.camera_dir;
+                        double[] viejaLonaNV = camara.camera_dir;
                         
-                        kamera.camera_dir = Origami.vector_product(new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]},
+                        camara.camera_dir = Origami.vector_product(new double[]{origami1.history().get(i)[4], origami1.history().get(i)[5], origami1.history().get(i)[6]},
                                 new double[]{0, 1, 0});
                         
-                        if (Origami.scalar_product(kamera.camera_dir, kamera.camera_dir) < 0.00000001) {
-                            kamera.camera_dir = new double[]{0, 0, 1};
+                        if (Origami.scalar_product(camara.camera_dir, camara.camera_dir) < 0.00000001) {
+                            camara.camera_dir = new double[]{0, 0, 1};
                         }
                         
-                        kamera.camera_dir = new double[]{kamera.camera_dir[0] / Origami.vector_length(kamera.camera_dir),
-                            kamera.camera_dir[1] / Origami.vector_length(kamera.camera_dir),
-                            kamera.camera_dir[2] / Origami.vector_length(kamera.camera_dir)};
+                        camara.camera_dir = new double[]{camara.camera_dir[0] / Origami.vector_length(camara.camera_dir),
+                            camara.camera_dir[1] / Origami.vector_length(camara.camera_dir),
+                            camara.camera_dir[2] / Origami.vector_length(camara.camera_dir)};
                         
-                        kamera.axis_y = new double[]{0, 1, 0};
-                        kamera.axis_x = Origami.vector_product(kamera.camera_dir, kamera.axis_y);
+                        camara.axis_y = new double[]{0, 1, 0};
+                        camara.axis_x = Origami.vector_product(camara.camera_dir, camara.axis_y);
                         
-                        kamera.axis_x = new double[]{kamera.axis_x[0] / Origami.vector_length(kamera.axis_x) * kamera.zoom(),
-                            kamera.axis_x[1] / Origami.vector_length(kamera.axis_x) * kamera.zoom(),
-                            kamera.axis_x[2] / Origami.vector_length(kamera.axis_x) * kamera.zoom()};
+                        camara.axis_x = new double[]{camara.axis_x[0] / Origami.vector_length(camara.axis_x) * camara.zoom(),
+                            camara.axis_x[1] / Origami.vector_length(camara.axis_x) * camara.zoom(),
+                            camara.axis_x[2] / Origami.vector_length(camara.axis_x) * camara.zoom()};
                         
-                        kamera.axis_y = new double[]{kamera.axis_y[0] / Origami.vector_length(kamera.axis_y) * kamera.zoom(),
-                            kamera.axis_y[1] / Origami.vector_length(kamera.axis_y) * kamera.zoom(),
-                            kamera.axis_y[2] / Origami.vector_length(kamera.axis_y) * kamera.zoom()};
+                        camara.axis_y = new double[]{camara.axis_y[0] / Origami.vector_length(camara.axis_y) * camara.zoom(),
+                            camara.axis_y[1] / Origami.vector_length(camara.axis_y) * camara.zoom(),
+                            camara.axis_y[2] / Origami.vector_length(camara.axis_y) * camara.zoom()};
                         
-                        if (Origami.scalar_product(regiVaszonNV, kamera.camera_dir) < 0 && !ForgatasIndexek.contains(i)) {
+                        if (Origami.scalar_product(viejaLonaNV, camara.camera_dir) < 0 && !IndicesGirados.contains(i)) {
                             
-                            kamera.camera_dir = Origami.vector(Origami.nullvektor, kamera.camera_dir);
-                            kamera.axis_x = Origami.vector(Origami.nullvektor, kamera.axis_x);
+                            camara.camera_dir = Origami.vector(Origami.nullvektor, camara.camera_dir);
+                            camara.axis_x = Origami.vector(Origami.nullvektor, camara.axis_x);
                         }
                         
                         switch ((int) origami1.history().get(i)[0]) {
@@ -1013,133 +1013,133 @@ public class Export {
                                 siknv = new double[]{origami1.history().get(i)[4],
                                     origami1.history().get(i)[5],
                                     origami1.history().get(i)[6]};
-                                utasitas = "(" + Integer.toString(sorszam) + ". ";
-                                switch (kamera.pdfLinerDir(siknv)) {
+                                instrucciones = "(" + Integer.toString(numero) + ". ";
+                                switch (camara.pdfLinerDir(siknv)) {
                                     
                                     case Camera.PDF_NORTH:
-                                        utasitas += Cookbook.PDF_REFLECT_NORTH;
+                                        instrucciones += Cookbook.PDF_REFLECT_NORTH;
                                         break;
                                     case Camera.PDF_EAST:
-                                        utasitas += Cookbook.PDF_REFLECT_EAST;
+                                        instrucciones += Cookbook.PDF_REFLECT_EAST;
                                         break;
                                     case Camera.PDF_SOUTH:
-                                        utasitas += Cookbook.PDF_REFLECT_SOUTH;
+                                        instrucciones += Cookbook.PDF_REFLECT_SOUTH;
                                         break;
                                     case Camera.PDF_WEST:
-                                        utasitas += Cookbook.PDF_REFLECT_WEST;
+                                        instrucciones += Cookbook.PDF_REFLECT_WEST;
                                         break;
                                     default:
                                         break;
                                 }
-                                sorszam++;
+                                numero++;
                                 break;
                                 
                             case 2:
                                 siknv = new double[]{origami1.history().get(i)[4],
                                     origami1.history().get(i)[5],
                                     origami1.history().get(i)[6]};
-                                utasitas = "(" + Integer.toString(sorszam) + ". ";
-                                switch (kamera.pdfLinerDir(siknv)) {
+                                instrucciones = "(" + Integer.toString(numero) + ". ";
+                                switch (camara.pdfLinerDir(siknv)) {
                                     
                                     case Camera.PDF_NORTH:
-                                        utasitas += Cookbook.PDF_ROTATE_NORTH;
+                                        instrucciones += Cookbook.PDF_ROTATE_NORTH;
                                         break;
                                     case Camera.PDF_EAST:
-                                        utasitas += Cookbook.PDF_ROTATE_EAST;
+                                        instrucciones += Cookbook.PDF_ROTATE_EAST;
                                         break;
                                     case Camera.PDF_SOUTH:
-                                        utasitas += Cookbook.PDF_ROTATE_SOUTH;
+                                        instrucciones += Cookbook.PDF_ROTATE_SOUTH;
                                         break;
                                     case Camera.PDF_WEST:
-                                        utasitas += Cookbook.PDF_ROTATE_WEST;
+                                        instrucciones += Cookbook.PDF_ROTATE_WEST;
                                         break;
                                     default:
                                         break;
                                 }
-                                int szog = 0;
+                                int angulo = 0;
                                 int j = i - 1;
-                                while (UresIndexek.contains(j)) {
+                                while (IndicesAventuras.contains(j)) {
                                     
                                     if (origami1.history().get(j)[0] == 2.0) {
                                         
-                                        szog += (int) origami1.history().get(j)[7];
+                                        angulo += (int) origami1.history().get(j)[7];
                                     }
                                     j--;
                                 }
-                                utasitas += Integer.toString(szog + (int) origami1.history().get(i)[7])
+                                instrucciones += Integer.toString(angulo + (int) origami1.history().get(i)[7])
                                         + Cookbook.PDF_ROTATE_ANGLE;
-                                sorszam++;
+                                numero++;
                                 break;
                                 
                             case 3:
-                                utasitas = "(" + Integer.toString(sorszam) + ". ";
-                                utasitas += Cookbook.PDF_REFLECT_TARGET;
-                                sorszam++;
+                                instrucciones = "(" + Integer.toString(numero) + ". ";
+                                instrucciones += Cookbook.PDF_REFLECT_TARGET;
+                                numero++;
                                 break;
                                 
                             case 4:
-                                utasitas = "(" + Integer.toString(sorszam) + ". ";
-                                utasitas += Cookbook.PDF_ROTATE_TARGET;
-                                int szog1 = 0;
+                                instrucciones = "(" + Integer.toString(numero) + ". ";
+                                instrucciones += Cookbook.PDF_ROTATE_TARGET;
+                                int angulo1 = 0;
                                 int j1 = i - 1;
-                                while (UresIndexek.contains(j1)) {
+                                while (IndicesAventuras.contains(j1)) {
                                     
                                     if (origami1.history().get(j1)[0] == 4.0) {
                                         
-                                        szog1 += (int) origami1.history().get(j1)[7];
+                                        angulo1 += (int) origami1.history().get(j1)[7];
                                     }
                                     j1--;
                                 }
-                                utasitas += Integer.toString(szog1 + (int) origami1.history().get(i)[7])
+                                instrucciones += Integer.toString(angulo1 + (int) origami1.history().get(i)[7])
                                         + Cookbook.PDF_ROTATE_ANGLE;
-                                sorszam++;
+                                numero++;
                                 break;
                                 
                             case 5:
-                                utasitas = "(" + Integer.toString(sorszam) + ". ";
-                                utasitas += Cookbook.PDF_CREASE + Integer.toString(sorszam + 1) + Cookbook.PDF_CREASE_STEP;
-                                sorszam++;
+                                instrucciones = "(" + Integer.toString(numero) + ". ";
+                                instrucciones += Cookbook.PDF_CREASE + Integer.toString(numero + 1) + Cookbook.PDF_CREASE_STEP;
+                                numero++;
                                 break;
                                 
                             case 6:
                                 siknv = new double[]{origami1.history().get(i)[4],
                                     origami1.history().get(i)[5],
                                     origami1.history().get(i)[6]};
-                                utasitas = "(" + Integer.toString(sorszam) + ". ";
-                                switch (kamera.pdfLinerDir(siknv)) {
+                                instrucciones = "(" + Integer.toString(numero) + ". ";
+                                switch (camara.pdfLinerDir(siknv)) {
                                     
                                     case Camera.PDF_NORTH:
-                                        utasitas += Cookbook.PDF_CUT_NORTH;
+                                        instrucciones += Cookbook.PDF_CUT_NORTH;
                                         break;
                                     case Camera.PDF_EAST:
-                                        utasitas += Cookbook.PDF_CUT_EAST;
+                                        instrucciones += Cookbook.PDF_CUT_EAST;
                                         break;
                                     case Camera.PDF_SOUTH:
-                                        utasitas += Cookbook.PDF_CUT_SOUTH;
+                                        instrucciones += Cookbook.PDF_CUT_SOUTH;
                                         break;
                                     case Camera.PDF_WEST:
-                                        utasitas += Cookbook.PDF_CUT_WEST;
+                                        instrucciones += Cookbook.PDF_CUT_WEST;
                                         break;
                                     default:
                                         break;
                                 }
-                                sorszam++;
+                                numero++;
                                 break;
                                 
                             case 7:
-                                utasitas = "(" + Integer.toString(sorszam) + ". ";
-                                utasitas += Cookbook.PDF_CUT_TARGET;
-                                sorszam++;
+                                instrucciones = "(" + Integer.toString(numero) + ". ";
+                                instrucciones += Cookbook.PDF_CUT_TARGET;
+                                numero++;
                                 break;
                                 
                             default:
-                                utasitas = "(" + Integer.toString(sorszam) + ". ";
-                                utasitas += "???) ' ";
-                                sorszam++;
+                                instrucciones = "(" + Integer.toString(numero) + ". ";
+                                instrucciones += "???) ' ";
+                                numero++;
                                 break;
                         }
                         
-                        switch ((sorszam + 1) % 6) {
+                        switch ((numero + 1) % 6) {
                             
                             case 1:
                                 koo = Integer.toString(page_width / 2 * 0 + (page_width / 2 - figure_frame) / 3);
@@ -1175,7 +1175,7 @@ public class Export {
                                 break;
                         }
                         
-                        Offszetek.add(bajtszam);
+                        Conjuntos.add(numCompeticion);
                         stream = "BT";
                         stream += (char) 10;
                         stream += "/F1 10 Tf";
@@ -1184,62 +1184,62 @@ public class Export {
                         stream += (char) 10;
                         stream += "12 TL";
                         stream += (char) 10;
-                        stream += utasitas;
+                        stream += instrucciones;
                         stream += (char) 10;
                         stream += "ET";
                         stream += (char) 10;
-                        fajl += Integer.toString(objindex + sorszam - 2) + " 0 obj";
-                        fajl += (char) 10;
-                        fajl += "<< /Length " + Integer.toString(stream.length()) + " >>";
-                        fajl += (char) 10;
-                        fajl += "stream";
-                        fajl += (char) 10;
-                        fajl += stream;
-                        fajl += "endstream";
-                        fajl += (char) 10;
-                        fajl += "endobj";
-                        fajl += (char) 10;
-                        fajl += (char) 10;
-                        str.write(fajl.getBytes(Charset.forName("UTF-8")));
-                        bajtszam += fajl.length();
-                        fajl = "";
+                        parecerse += Integer.toString(objindex + numero - 2) + " 0 obj";
+                        parecerse += (char) 10;
+                        parecerse += "<< /Length " + Integer.toString(stream.length()) + " >>";
+                        parecerse += (char) 10;
+                        parecerse += "stream";
+                        parecerse += (char) 10;
+                        parecerse += stream;
+                        parecerse += "endstream";
+                        parecerse += (char) 10;
+                        parecerse += "endobj";
+                        parecerse += (char) 10;
+                        parecerse += (char) 10;
+                        str.write(parecerse.getBytes(Charset.forName("UTF-8")));
+                        numCompeticion += parecerse.length();
+                        parecerse = "";
                     }
                 }
                 
-                int xroffszet = bajtszam;
+                int xrDesplazamiento = numCompeticion;
                 
-                fajl += "xref";
-                fajl += (char) 10;
-                fajl += "0 " + Integer.toString(Offszetek.size());
-                fajl += (char) 10;
-                fajl += "0000000000 65535 f ";
-                fajl += (char) 10;
+                parecerse += "xref";
+                parecerse += (char) 10;
+                parecerse += "0 " + Integer.toString(Conjuntos.size());
+                parecerse += (char) 10;
+                parecerse += "0000000000 65535 f ";
+                parecerse += (char) 10;
                 
-                for (int i = 1; i < Offszetek.size(); i++) {
+                for (int i = 1; i < Conjuntos.size(); i++) {
                     
-                    for (int ii = 0; ii < 10 - Integer.toString(Offszetek.get(i)).length(); ii++) {
-                        fajl += "0";
+                    for (int ii = 0; ii < 10 - Integer.toString(Conjuntos.get(i)).length(); ii++) {
+                        parecerse += "0";
                     }
-                    fajl += Integer.toString(Offszetek.get(i));
-                    fajl += " 00000 n ";
-                    fajl += (char) 10;
+                    parecerse += Integer.toString(Conjuntos.get(i));
+                    parecerse += " 00000 n ";
+                    parecerse += (char) 10;
                 }
                 
-                fajl += "trailer";
-                fajl += (char) 10;
-                fajl += "<< /Root 1 0 R";
-                fajl += (char) 10;
-                fajl += "/Size " + Integer.toString(Offszetek.size());
-                fajl += (char) 10;
-                fajl += ">>";
-                fajl += (char) 10;
-                fajl += "startxref";
-                fajl += (char) 10;
-                fajl += Integer.toString(xroffszet);
-                fajl += (char) 10;
-                fajl += "%%EOF";
+                parecerse += "trailer";
+                parecerse += (char) 10;
+                parecerse += "<< /Root 1 0 R";
+                parecerse += (char) 10;
+                parecerse += "/Size " + Integer.toString(Conjuntos.size());
+                parecerse += (char) 10;
+                parecerse += ">>";
+                parecerse += (char) 10;
+                parecerse += "startxref";
+                parecerse += (char) 10;
+                parecerse += Integer.toString(xrDesplazamiento);
+                parecerse += (char) 10;
+                parecerse += "%%EOF";
                 
-                str.write(fajl.getBytes(Charset.forName("UTF-8")));
+                str.write(parecerse.getBytes(Charset.forName("UTF-8")));
             }
             return 1;
 

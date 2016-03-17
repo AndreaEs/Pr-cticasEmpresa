@@ -649,21 +649,21 @@ public class OrigamiScriptTerminal {
 
                 switch (bajf[0]) {
 
-                    case "square":
-                        papertype = Origami.PaperType.Square;
-                        break;
-                    case "a4":
-                        papertype = Origami.PaperType.A4;
-                        break;
-                    case "hexagon":
-                        papertype = Origami.PaperType.Hexagon;
-                        break;
-                    case "usd":
-                        papertype = Origami.PaperType.Dollar;
-                        break;
-                    case "huf":
-                        papertype = Origami.PaperType.Forint;
-                        break;
+//                    case "square":
+//                        papertype = Origami.PaperType.Square;
+//                        break;
+//                    case "a4":
+//                        papertype = Origami.PaperType.A4;
+//                        break;
+//                    case "hexagon":
+//                        papertype = Origami.PaperType.Hexagon;
+//                        break;
+//                    case "usd":
+//                        papertype = Origami.PaperType.Dollar;
+//                        break;
+//                    case "huf":
+//                        papertype = Origami.PaperType.Forint;
+//                        break;
                     default:
                         throw OrigamiException.H009;
                 }

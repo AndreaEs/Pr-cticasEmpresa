@@ -1854,7 +1854,7 @@ public class OrigamiEditorUI extends javax.swing.JFrame {
         c.gridy = 1;
         properties.getContentPane().add(new javax.swing.JLabel(" "), c);
         c.gridy = 2;
-        properties.getContentPane().add(new javax.swing.JLabel(Dictionary.getString(terminal.TerminalOrigami.papertype().toString())), c);
+        //properties.getContentPane().add(new javax.swing.JLabel(Dictionary.getString(terminal.TerminalOrigami.papertype().toString())), c);
         c.gridy = 3;
         properties.getContentPane().add(new javax.swing.JLabel(" "), c);
         c.gridy = 4;
