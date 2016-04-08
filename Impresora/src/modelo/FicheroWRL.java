@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
 import com.sun.j3d.loaders.Scene;
 import com.sun.j3d.loaders.vrml97.VrmlLoader;
-import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
-import com.sun.j3d.utils.behaviors.mouse.MouseTranslate;
-import com.sun.j3d.utils.behaviors.mouse.MouseZoom;
 import com.sun.j3d.utils.picking.PickTool;
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Hashtable;
@@ -29,10 +20,6 @@ import javax.media.j3d.TransformGroup;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 
-/**
- *
- * @author andreaescribano
- */
 public class FicheroWRL {
 
     public FicheroWRL() {

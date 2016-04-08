@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
 import com.sun.j3d.loaders.IncorrectFormatException;
@@ -30,10 +25,6 @@ import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3f;
 
-/**
- *
- * @author andreaescribano
- */
 public class FicheroOBJ {
 
     protected String extension;

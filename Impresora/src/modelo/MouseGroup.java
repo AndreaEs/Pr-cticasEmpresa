@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
 import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
@@ -13,10 +8,6 @@ import javax.media.j3d.Bounds;
 import javax.media.j3d.TransformGroup;
 import javax.vecmath.Point3d;
 
-/**
- *
- * @author andreaescribano
- */
 public class MouseGroup {
 
     public MouseGroup() {

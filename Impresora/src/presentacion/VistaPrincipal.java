@@ -1,72 +1,37 @@
 package presentacion;
 
-import com.sun.j3d.audioengines.javasound.JavaSoundMixer;
-import com.sun.j3d.utils.behaviors.mouse.MouseRotate;
-import com.sun.j3d.utils.behaviors.mouse.MouseTranslate;
-import com.sun.j3d.utils.behaviors.mouse.MouseZoom;
 import com.sun.j3d.utils.universe.SimpleUniverse;
-import edu.ncsa.model.MeshLoader;
 import edu.ncsa.model.graphics.jogl.ModelViewer;
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GraphicsConfigTemplate;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.util.Hashtable;
-import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.media.j3d.AmbientLight;
-import javax.media.j3d.AudioDevice;
-import javax.media.j3d.Background;
-import javax.media.j3d.BoundingSphere;
-import javax.media.j3d.Bounds;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
-import javax.media.j3d.DirectionalLight;
-import javax.media.j3d.GraphicsConfigTemplate3D;
-import javax.media.j3d.Group;
-import javax.media.j3d.Locale;
-import javax.media.j3d.PhysicalBody;
-import javax.media.j3d.PhysicalEnvironment;
-import javax.media.j3d.Transform3D;
-import javax.media.j3d.TransformGroup;
-import javax.media.j3d.View;
-import javax.media.j3d.ViewPlatform;
-import javax.media.j3d.VirtualUniverse;
 import javax.swing.JComponent;
 import javax.swing.JDesktopPane;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.vecmath.Color3f;
-import javax.vecmath.Point3d;
-import javax.vecmath.Vector3d;
 
 /**
- *
- * @author andreaescribano
+ * Vista inicial de GUI
  */
 public class VistaPrincipal extends javax.swing.JFrame {
 
     private final ControladorVistaPrincipal control;
     private final JDesktopPane desktop;
+    private final int MY_WIDTH = 5000;
+    private final int MY_HEIGHT = 1000;
 
     /**
-     * Creates new form Main
+     * Crea una nueva vista
      */
     public VistaPrincipal() {
         initComponents();
@@ -210,6 +175,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(5000, 1000));
 
         panel.setPreferredSize(new java.awt.Dimension(5000, 1000));
 
@@ -344,7 +310,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_rotateActionPerformed
 
     private void layersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_layersMouseClicked
-        layerDialog.setSize(5000, 1000);
+        layerDialog.setSize(MY_WIDTH, MY_HEIGHT);
         layerDialog.setVisible(true);
         //Make sure we have nice window decorations.
         //JFrame.setDefaultLookAndFeelDecorated(true);
@@ -430,7 +396,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JSlider thicknessSlider;
     // End of variables declaration//GEN-END:variables
 
-    //Let double values in slider
+    //Pone valores Double en el Slider
     private void setSlider() {
         Format f = new DecimalFormat("0.0");
         Hashtable<Integer, JComponent> labels = new Hashtable<Integer, JComponent>();
@@ -442,19 +408,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         thicknessSlider.setLabelTable(labels);
     }
 
-    //Get extension from FileFilter description
-    private String getExtension(String s) {
-        String ext, ext1;
-        ext1 = "";
-        int i = s.lastIndexOf('.');
-        if (i > 0 && i < s.length() - 1) {
-            ext1 = s.substring(i + 1).toLowerCase();
-        }
-        ext = ext1.substring(0, ext1.length() - 1);
-        return ext;
-    }
-
-    //Create a new window inside the Main
+    //Crea un Frame dentro del Panel
     private JInternalFrame createFrame() {
         JInternalFrame frame = new JInternalFrame();
         frame.setResizable(true);
@@ -473,34 +427,12 @@ public class VistaPrincipal extends javax.swing.JFrame {
         return frame;
     }
 
+    //Abre archivos a través del FileChooser
     private void openFileChooser(JFileChooser fc) {
         int returnVal = fc.showOpenDialog(null);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File fileSelec = fc.getSelectedFile();
-            final String filename = fileSelec.getAbsolutePath();
-            if (getExtension(fileSelec).equals("obj") || getExtension(fileSelec).equals("wrl")|| getExtension(fileSelec).equals("stl")) {
-                Canvas3D c1 = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
-                setLayout(new FlowLayout());
-                c1.setSize(this.getWidth(), this.getHeight());
-                add(c1);
-                
-
-                BranchGroup scene = control.abrirArchivosO1(filename);
-
-                SimpleUniverse u = new SimpleUniverse(c1);
-                // This will move the ViewPlatform back a bit so the
-                // objects in the scene can be viewed.
-                //u.getViewingPlatform().setNominalViewingTransform();
-                u.addBranchGraph(scene);
-            } else {
-                JPanel viewer_panel = new JPanel();
-                viewer_panel.setLayout(null);
-                viewer_panel.setLocation(0, 0);
-                viewer_panel.setSize(5000, 1000);
-                viewer_panel.add(control.abrirArchivosO2(filename));
-
-                add(viewer_panel);
-            }
+            control.abrirArchivo(fileSelec);
         } else if (returnVal == JFileChooser.ERROR_OPTION || returnVal == JFileChooser.CANCEL_OPTION) {
             JOptionPane.showMessageDialog(null, "It has not opened any file", "Alert", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -508,6 +440,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         }
     }
 
+    //Guarda los archivos por medio de un FileChooser
     private void saveFileChooser(JFileChooser fc) {
         int returnVal = fc.showSaveDialog(null);
         //BufferedImage image = null;
@@ -531,7 +464,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         }
     }
 
-    //Manage the options of the fileChooser: Open and Save
+    //Controla las opciones del FileChooser: abrir y cerrar
     private void manageFileChooser(int val) {
         JFileChooser fc = new JFileChooser();
 
@@ -540,13 +473,12 @@ public class VistaPrincipal extends javax.swing.JFrame {
         String[] filesExtensions = new FileExtensions().getExtensions();
         String[] filesDescriptions = new FileExtensions().getDescriptions();
 
-        fc.addChoosableFileFilter(new FileTypeFilter(filesExtensions[randomValue], filesDescriptions[randomValue])); //Filter file types 
+        fc.addChoosableFileFilter(new FileTypeFilter(filesExtensions[randomValue], filesDescriptions[randomValue])); //Tipos de filtro para ficheros 
 
-        fc.setAcceptAllFileFilterUsed(false);//disable the Accept All filter
+        fc.setAcceptAllFileFilterUsed(false);//Deshabilitar opción: Todos los archivos
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        fc.setMultiSelectionEnabled(false);//disable multiple files selected
+        fc.setMultiSelectionEnabled(false);//Deshabilita múltiples selecciones
 
-        //Set FileFilters
         for (int i = 0; i < filesExtensions.length; i++) {
             if (i != randomValue) {
                 FileFilter ff = new FileNameExtensionFilter(filesDescriptions[i] + String.format(" (*.%s)", filesExtensions[i]), filesExtensions[i]);
@@ -561,16 +493,32 @@ public class VistaPrincipal extends javax.swing.JFrame {
         }
     }
 
-    private String getExtension(File f) {
-        String ext = null;
-        String s = f.getName();
-        int i = s.lastIndexOf('.');
+    public void showFile1(BranchGroup s) {
+        Canvas3D c1 = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
+        setLayout(new FlowLayout());
+        c1.setSize(this.getWidth(), this.getHeight());
+        add(c1);
 
-        if (i > 0 && i < s.length() - 1) {
-            ext = s.substring(i + 1).toLowerCase();
-        }
-        return ext;
+        BranchGroup scene = s;
+
+        SimpleUniverse u = new SimpleUniverse(c1);
+        // This will move the ViewPlatform back a bit so the
+        // objects in the scene can be viewed.
+        //u.getViewingPlatform().setNominalViewingTransform();
+        u.addBranchGraph(scene);
+        JInternalFrame iF = createFrame();
+        iF.add(u.getCanvas());
     }
 
-    
+    public void showFile2(ModelViewer m) {
+        JInternalFrame iF = createFrame();
+//        JPanel viewer_panel = new JPanel();
+//        viewer_panel.setLayout(getLayout());
+//        viewer_panel.setLocation(0, 0);
+//        viewer_panel.setSize(MY_WIDTH, MY_HEIGHT);
+//        viewer_panel.add(m);
+
+        iF.add(m);
+        
+    }
 }

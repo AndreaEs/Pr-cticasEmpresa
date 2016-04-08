@@ -1,21 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentacion;
 
 import java.io.File;
 import javax.swing.filechooser.FileFilter;
 
 /**
- *
- * @author andreaescribano
+ * Tipos de filtros para los ficheros que queremos buscar
  */
-class FileTypeFilter extends FileFilter {
+public class FileTypeFilter extends FileFilter {
+    
+    //Atributos
     private String extension;
     private String description;
 
+    /**
+     * Constructor de un Filtro de Fichero
+     * @param extension extensión correspondiente a un fichero
+     * @param description descripcion que tendrá ese fichero a partir de la extensión
+     */
     public FileTypeFilter(String extension, String description) {
         this.extension = extension;
         this.description = description;

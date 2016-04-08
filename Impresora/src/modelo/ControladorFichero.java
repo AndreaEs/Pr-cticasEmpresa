@@ -1,24 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelo;
 
-import edu.ncsa.model.Mesh;
 import edu.ncsa.model.graphics.jogl.ModelViewer;
-import edu.ncsa.model.loaders.MeshLoader_PLY;
-import edu.ncsa.model.loaders.MeshLoader_STL;
 import edu.ncsa.model.loaders.MeshLoader_STP;
-import edu.ncsa.model.loaders.MeshLoader_WRL;
 import java.util.Vector;
 import javax.media.j3d.BranchGroup;
 import presentacion.ControladorVistaPrincipal;
 
-/**
- *
- * @author andreaescribano
- */
 public class ControladorFichero {
 
     private ControladorVistaPrincipal controladorVista;
@@ -50,8 +37,8 @@ public class ControladorFichero {
     }
 
     public ModelViewer abrirArchivosO2(final String pathFile) {
-        String ext = getExtension(pathFile);
-        ModelViewer model = new ModelViewer();
+//        String ext = getExtension(pathFile);
+//        ModelViewer model = new ModelViewer();
 //        if (ext.equals("igs")) {
 //
 //        } else {
@@ -60,7 +47,7 @@ public class ControladorFichero {
                 try {
                     modelviewer.add((ModelViewer) Viewer.getDeclaredConstructor(String.class, int.class, int.class, boolean.class, boolean.class).newInstance("ModelViewer.ini", 600, 600, true, true));
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    System.err.print("Error: "+e);
                 }
                 new Thread(new Runnable() {
                     public void run() {
