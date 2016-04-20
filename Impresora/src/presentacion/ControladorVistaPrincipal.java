@@ -3,7 +3,9 @@ package presentacion;
 import edu.ncsa.model.graphics.jogl.ModelViewer;
 import java.io.File;
 import javax.media.j3d.BranchGroup;
+import javax.swing.JDesktopPane;
 import modelo.ControladorFichero;
+import modelo.ControladorVision;
 
 /**
  * Controlador de la vista Principal
@@ -13,6 +15,9 @@ public class ControladorVistaPrincipal {
     //Atributos
     private VistaPrincipal vista;
     private ControladorFichero controlFichero;
+    private ControladorVision controlMouse;
+    private ControladorVistaRotar controlRotar;
+    private ControladorVistaEscalar controlEscalar;
 
     /**
      * Constructor del controlador
@@ -22,6 +27,9 @@ public class ControladorVistaPrincipal {
     public ControladorVistaPrincipal(VistaPrincipal vista) {
         this.vista = vista;
         controlFichero = new ControladorFichero(this);
+        controlMouse = new ControladorVision(this);
+        controlRotar = new ControladorVistaRotar(this);
+        controlEscalar = new ControladorVistaEscalar(this);
     }
 
     public BranchGroup abrirArchivosO1(String pathFile) {
@@ -32,15 +40,11 @@ public class ControladorVistaPrincipal {
         return controlFichero.abrirArchivosO2(pathFile);
     }
 
-    public void abrirArchivo(File fileSelec) {
-        if (getExtension(fileSelec).equals("obj") || getExtension(fileSelec).equals("wrl") || getExtension(fileSelec).equals("stl")) {
-            vista.showFile1(controlFichero.abrirArchivosO1(fileSelec.getAbsolutePath()));
-        } else {
-            vista.showFile2(controlFichero.abrirArchivosO2(fileSelec.getAbsolutePath()));
-        }
+    public void abrirArchivos(File fileSelec) {
+        controlFichero.abrirArchivos(fileSelec.getAbsolutePath());
     }
     
-    //Obtiene la extensión de un fichero (File)
+     //Obtiene la extensión de un fichero (File)
     private String getExtension(File f) {
         String ext = null;
         String s = f.getName();
@@ -50,5 +54,37 @@ public class ControladorVistaPrincipal {
             ext = s.substring(i + 1).toLowerCase();
         }
         return ext;
+    }
+
+    public void rotarManual(String nombre, JDesktopPane desktop) {
+        controlRotar.rotarManual(nombre, desktop);
+    }
+
+    public void showFile1(BranchGroup abrirArchivosO1, String name) {
+        vista.showFile1(abrirArchivosO1, name);
+    }
+
+    public void showFile2(ModelViewer abrirArchivosO2, String name) {
+        vista.showFile2(abrirArchivosO2, name);
+    }
+
+    public void rotarAutomatico(String title, JDesktopPane desktop) {
+        controlRotar.rotarAutomatico(title, desktop);
+    }
+
+    public void cancelarRotacion() {
+        vista.cancelarRotacion();
+    }
+
+    public void cancelarEscalado() {
+        vista.cancelarEscalado();
+    }
+
+    public void escalarManual(String title, JDesktopPane desktop) {
+        controlEscalar.escalarManual(title, desktop);
+    }
+
+    public void escalarAutomatico(String title, JDesktopPane desktop) {
+        controlEscalar.escalarAutomatico(title, desktop);
     }
 }

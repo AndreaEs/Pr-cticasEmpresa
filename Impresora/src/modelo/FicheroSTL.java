@@ -21,13 +21,6 @@ import com.sun.j3d.loaders.Scene;
 import com.sun.j3d.loaders.SceneBase;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.media.j3d.AmbientLight;
-import javax.media.j3d.BoundingSphere;
-import javax.media.j3d.Bounds;
-import javax.media.j3d.DirectionalLight;
-import javax.media.j3d.TransformGroup;
-import javax.vecmath.Color3f;
-import javax.vecmath.Point3d;
 
 public class FicheroSTL {
 
@@ -44,32 +37,27 @@ public class FicheroSTL {
     }
 
     public BranchGroup load(String fileName) {
-        BranchGroup objRoot = new BranchGroup();
+//        BranchGroup objRoot = new BranchGroup();
 
-        Bounds lightBounds = new BoundingSphere(new Point3d(0.0, 0.0, 0.0),
-                100.0);
-
-        AmbientLight ambLight = new AmbientLight(true, new Color3f(1.0f, 1.0f,
-                1.0f));
-        ambLight.setInfluencingBounds(lightBounds);
-        objRoot.addChild(ambLight);
-
-        DirectionalLight headLight = new DirectionalLight();
-        headLight.setInfluencingBounds(lightBounds);
-        objRoot.addChild(headLight);
+//        Bounds lightBounds = new BoundingSphere(new Point3d(0.0, 0.0, 0.0),
+//                100.0);
+//
+//        AmbientLight ambLight = new AmbientLight(true, new Color3f(1.0f, 1.0f,
+//                1.0f));
+//        ambLight.setInfluencingBounds(lightBounds);
+//        objRoot.addChild(ambLight);
+//
+//        DirectionalLight headLight = new DirectionalLight();
+//        headLight.setInfluencingBounds(lightBounds);
+//        objRoot.addChild(headLight);
 
         Scene scene = null;
 
         try {
             try {
-                MouseGroup mG = new MouseGroup();
-                TransformGroup mouseGroup = mG.createMouseBehaviorsGroup();
+                Vision mG = new Vision();
                 scene = load(new File(fileName).toURI().toURL());
-                BranchGroup sceneRoot = scene.getSceneGroup();
-                if (sceneRoot != null) 
-                    mouseGroup.addChild(sceneRoot);
-                objRoot.addChild(mouseGroup);
-                return objRoot;
+                return mG.createMouseBehaviorsGroup(scene);
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(FicheroSTL.class.getName()).log(Level.SEVERE, null, ex);
                 return null;

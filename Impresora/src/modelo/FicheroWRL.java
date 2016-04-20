@@ -5,20 +5,12 @@ import com.sun.j3d.loaders.vrml97.VrmlLoader;
 import com.sun.j3d.utils.picking.PickTool;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Hashtable;
-import javax.media.j3d.AmbientLight;
-import javax.media.j3d.BoundingSphere;
-import javax.media.j3d.Bounds;
 import javax.media.j3d.BranchGroup;
-import javax.media.j3d.DirectionalLight;
 import javax.media.j3d.Group;
 import javax.media.j3d.Morph;
 import javax.media.j3d.Node;
 import javax.media.j3d.SceneGraphObject;
 import javax.media.j3d.Shape3D;
-import javax.media.j3d.TransformGroup;
-import javax.vecmath.Color3f;
-import javax.vecmath.Point3d;
 
 public class FicheroWRL {
 
@@ -26,24 +18,22 @@ public class FicheroWRL {
     }
 
     public BranchGroup createSceneBranchGroup(String fichero) {
-        BranchGroup objRoot = new BranchGroup();
-
-        Bounds lightBounds = new BoundingSphere(new Point3d(0.0, 0.0, 0.0),
-                100.0);
-
-        AmbientLight ambLight = new AmbientLight(true, new Color3f(1.0f, 1.0f,
-                1.0f));
-        ambLight.setInfluencingBounds(lightBounds);
-        objRoot.addChild(ambLight);
-
-        DirectionalLight headLight = new DirectionalLight();
-        headLight.setInfluencingBounds(lightBounds);
-        objRoot.addChild(headLight);
+//        BranchGroup objRoot = new BranchGroup();
+//
+//        Bounds lightBounds = new BoundingSphere(new Point3d(0.0, 0.0, 0.0),
+//                100.0);
+//
+//        AmbientLight ambLight = new AmbientLight(true, new Color3f(1.0f, 1.0f,
+//                1.0f));
+//        ambLight.setInfluencingBounds(lightBounds);
+//        objRoot.addChild(ambLight);
+//
+//        DirectionalLight headLight = new DirectionalLight();
+//        headLight.setInfluencingBounds(lightBounds);
+//        objRoot.addChild(headLight);
         
-        MouseGroup mG = new MouseGroup();
+        Vision mG = new Vision();
         
-        TransformGroup mouseGroup = mG.createMouseBehaviorsGroup();
-
         String vrmlFile = null;
 
         try {
@@ -52,19 +42,14 @@ public class FicheroWRL {
             e.printStackTrace();
         }
 
-        BranchGroup sceneRoot = loadVrmlFile(vrmlFile);
+//        BranchGroup sceneRoot = loadVrmlFile(vrmlFile);
 
-        if (sceneRoot != null) {
-            mouseGroup.addChild(sceneRoot);
-        }
 
-        objRoot.addChild(mouseGroup);
-
-        return objRoot;
+        return mG.createMouseBehaviorsGroup(loadVrmlFile(vrmlFile));
     }
 
-    private BranchGroup loadVrmlFile(String location) {
-        BranchGroup sceneGroup = null;
+    private Scene loadVrmlFile(String location) {
+//        BranchGroup sceneGroup = null;
         Scene scene = null;
 
         VrmlLoader loader = new VrmlLoader();
@@ -89,33 +74,33 @@ public class FicheroWRL {
             }
         }
 
-        if (scene != null) {
-            // get the scene group
-            sceneGroup = scene.getSceneGroup();
+//        if (scene != null) {
+//            // get the scene group
+//            sceneGroup = scene.getSceneGroup();
+//
+//            sceneGroup.setCapability(BranchGroup.ALLOW_BOUNDS_READ);
+//            sceneGroup.setCapability(BranchGroup.ALLOW_CHILDREN_READ);
+//
+//            Hashtable namedObjects = scene.getNamedObjects();
+//            System.out.println("*** Named Objects in VRML file: \n"
+//                    + namedObjects);
+//
+//      // recursively set the user data here
+//            // so we can find our objects when they are picked
+//            java.util.Enumeration enumValues = namedObjects.elements();
+//            java.util.Enumeration enumKeys = namedObjects.keys();
+//
+//            if (enumValues != null) {
+//                while (enumValues.hasMoreElements() != false) {
+//                    Object value = enumValues.nextElement();
+//                    Object key = enumKeys.nextElement();
+//
+//                    recursiveSetUserData(value, key);
+//                }
+//            }
+//        }
 
-            sceneGroup.setCapability(BranchGroup.ALLOW_BOUNDS_READ);
-            sceneGroup.setCapability(BranchGroup.ALLOW_CHILDREN_READ);
-
-            Hashtable namedObjects = scene.getNamedObjects();
-            System.out.println("*** Named Objects in VRML file: \n"
-                    + namedObjects);
-
-      // recursively set the user data here
-            // so we can find our objects when they are picked
-            java.util.Enumeration enumValues = namedObjects.elements();
-            java.util.Enumeration enumKeys = namedObjects.keys();
-
-            if (enumValues != null) {
-                while (enumValues.hasMoreElements() != false) {
-                    Object value = enumValues.nextElement();
-                    Object key = enumKeys.nextElement();
-
-                    recursiveSetUserData(value, key);
-                }
-            }
-        }
-
-        return sceneGroup;
+        return scene;
     }
 
     private void recursiveSetUserData(Object value, Object key) {

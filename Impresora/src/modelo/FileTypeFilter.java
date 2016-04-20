@@ -1,5 +1,6 @@
-package presentacion;
+package modelo;
 
+import modelo.FileExtensions;
 import java.io.File;
 import javax.swing.filechooser.FileFilter;
 

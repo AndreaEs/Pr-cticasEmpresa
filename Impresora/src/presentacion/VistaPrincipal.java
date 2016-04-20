@@ -1,13 +1,19 @@
 package presentacion;
 
+import modelo.FileTypeFilter;
+import modelo.FileExtensions;
 import com.sun.j3d.utils.universe.SimpleUniverse;
 import edu.ncsa.model.graphics.jogl.ModelViewer;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.beans.PropertyVetoException;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.text.Format;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.swing.JComponent;
@@ -16,7 +22,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -29,6 +34,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private final JDesktopPane desktop;
     private final int MY_WIDTH = 5000;
     private final int MY_HEIGHT = 1000;
+    private HashMap<String, BranchGroup> internalFrameBranchGroup;
 
     /**
      * Crea una nueva vista
@@ -47,6 +53,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
         desktop.setDragMode(JDesktopPane.OUTLINE_DRAG_MODE);
 
         setSlider();
+
+        internalFrameBranchGroup = new HashMap<String, BranchGroup>();
     }
 
     /**
@@ -243,17 +251,17 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         scale.setText("Scale");
-        scale.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                scaleActionPerformed(evt);
+        scale.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                scaleMouseClicked(evt);
             }
         });
         jMenuBar1.add(scale);
 
         rotate.setText("Rotate");
-        rotate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rotateActionPerformed(evt);
+        rotate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rotateMouseClicked(evt);
             }
         });
         jMenuBar1.add(rotate);
@@ -301,14 +309,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_print3DActionPerformed
 
-    private void scaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scaleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_scaleActionPerformed
-
-    private void rotateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rotateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rotateActionPerformed
-
     private void layersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_layersMouseClicked
         layerDialog.setSize(MY_WIDTH, MY_HEIGHT);
         layerDialog.setVisible(true);
@@ -330,6 +330,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         layerDialog.setVisible(false);
     }//GEN-LAST:event_okButtonActionPerformed
+
+    private void rotateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rotateMouseClicked
+        showRotateOptions();
+    }//GEN-LAST:event_rotateMouseClicked
+
+    private void scaleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scaleMouseClicked
+        showScaleOptions();
+    }//GEN-LAST:event_scaleMouseClicked
 
     /**
      * @param args the command line arguments
@@ -432,11 +440,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         int returnVal = fc.showOpenDialog(null);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File fileSelec = fc.getSelectedFile();
-            control.abrirArchivo(fileSelec);
+            control.abrirArchivos(fileSelec);
         } else if (returnVal == JFileChooser.ERROR_OPTION || returnVal == JFileChooser.CANCEL_OPTION) {
-            JOptionPane.showMessageDialog(null, "It has not opened any file", "Alert", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se ha abierto ningún archivo.", "Alerta", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Error opening file", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al abrir el fichero", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -493,7 +501,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         }
     }
 
-    public void showFile1(BranchGroup s) {
+    public void showFile1(BranchGroup s, String filename) {
         Canvas3D c1 = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
         setLayout(new FlowLayout());
         c1.setSize(this.getWidth(), this.getHeight());
@@ -507,18 +515,62 @@ public class VistaPrincipal extends javax.swing.JFrame {
         //u.getViewingPlatform().setNominalViewingTransform();
         u.addBranchGraph(scene);
         JInternalFrame iF = createFrame();
+        iF.setTitle(filename);
         iF.add(u.getCanvas());
+        internalFrameBranchGroup.put(filename, scene);
     }
 
-    public void showFile2(ModelViewer m) {
+    public void showFile2(ModelViewer m, String filename) {
         JInternalFrame iF = createFrame();
 //        JPanel viewer_panel = new JPanel();
 //        viewer_panel.setLayout(getLayout());
 //        viewer_panel.setLocation(0, 0);
 //        viewer_panel.setSize(MY_WIDTH, MY_HEIGHT);
 //        viewer_panel.add(m);
-
+        iF.setTitle(filename);
         iF.add(m);
-        
+    }
+
+    public void cancelarRotacion() {
+        showRotateOptions();
+    }
+
+    private void showRotateOptions() {
+        if (desktop.getSelectedFrame() != null) {
+            Object[] options = {"Rotación manual", "Rotación automática"};
+            int n = JOptionPane.showOptionDialog(this, "¿Cómo prefiere rotar el objeto?", "Rotación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, /*do not use a custom Icon*/ options, /*the titles of buttons*/ options[0]); /*default button title*/
+
+            JInternalFrame seleccionado = desktop.getSelectedFrame();
+
+            if (n == JOptionPane.YES_OPTION) {
+                control.rotarManual(seleccionado.getTitle(), desktop);
+            } else if (n == JOptionPane.NO_OPTION) {
+                control.rotarAutomatico(seleccionado.getTitle(), desktop);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe abrir primero una imagen antes de intentar rotar", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    public void cancelarEscalado() {
+        showScaleOptions();
+    }
+
+    private void showScaleOptions() {
+        if (desktop.getSelectedFrame() != null) {
+            Object[] options = {"Escalado manual", "Escalado automática"};
+            int n = JOptionPane.showOptionDialog(this, "¿Cómo prefiere escalar el objeto?", "Escalado", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, /*do not use a custom Icon*/ options, /*the titles of buttons*/ options[0]); /*default button title*/
+
+            JInternalFrame seleccionado = desktop.getSelectedFrame();
+            
+            if (n == JOptionPane.YES_OPTION) {
+                control.escalarManual(seleccionado.getTitle(), desktop);
+            } else if (n == JOptionPane.NO_OPTION) {
+                control.escalarAutomatico(seleccionado.getTitle(), desktop);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe abrir primero una imagen antes de intentar escalar", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

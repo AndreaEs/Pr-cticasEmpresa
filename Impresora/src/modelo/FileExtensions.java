@@ -1,4 +1,4 @@
-package presentacion;
+package modelo;
 
 /**
  * Extensiones permitidas de los ficheros

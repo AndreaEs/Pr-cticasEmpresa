@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.2.8)  26 FEB 2016 13:21
-=======
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.2.8)  1 MAR 2016 13:01
->>>>>>> 97229a8421e55378f856e8c3f7cce15475f4796b
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.2.8)  14 APR 2016 11:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -864,6 +860,16 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <13> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 87.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <28> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 92.
+LaTeX Font Info:    Try loading font information for U+msa on input line 100.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 100.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
 Package babel Info: Redefining spanish shorthand <<
 (babel)             in language  on input line 104.
 Package babel Info: Redefining spanish shorthand >>
@@ -957,16 +963,6 @@ LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10.95> not available
 (Font)              Font shape `OT1/phv/b/n' tried instead on input line 2.
-LaTeX Font Info:    Try loading font information for U+msa on input line 3.
-
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 3.
-
-(/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
 Package babel Info: Redefining spanish shorthand <<
 (babel)             in language  on input line 44.
 Package babel Info: Redefining spanish shorthand >>
@@ -1044,10 +1040,10 @@ Package babel Info: Redefining spanish shorthand "!
 (babel)             in language  on input line 113.
 Package babel Info: Redefining spanish shorthand "?
 (babel)             in language  on input line 113.
+ [4
 
-[4
-
-] (./documentoPracticas.lof
+]
+(./documentoPracticas.lof
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 )
@@ -2135,18 +2131,6 @@ Package babel Info: Redefining spanish shorthand "!
 Package babel Info: Redefining spanish shorthand "?
 (babel)             in language  on input line 895.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 897.
-Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 897.
-Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 897.
-Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 897.
-Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 897.
-Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 897.
-Package babel Info: Redefining spanish shorthand <<
 (babel)             in language  on input line 898.
 Package babel Info: Redefining spanish shorthand >>
 (babel)             in language  on input line 898.
@@ -2206,613 +2190,625 @@ Package babel Info: Redefining spanish shorthand "!
 (babel)             in language  on input line 902.
 Package babel Info: Redefining spanish shorthand "?
 (babel)             in language  on input line 902.
+Package babel Info: Redefining spanish shorthand <<
+(babel)             in language  on input line 903.
+Package babel Info: Redefining spanish shorthand >>
+(babel)             in language  on input line 903.
+Package babel Info: Redefining spanish shorthand "=
+(babel)             in language  on input line 903.
+Package babel Info: Redefining spanish shorthand "~
+(babel)             in language  on input line 903.
+Package babel Info: Redefining spanish shorthand "!
+(babel)             in language  on input line 903.
+Package babel Info: Redefining spanish shorthand "?
+(babel)             in language  on input line 903.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 5771) has occurred while \output is active []
 
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
  [18]
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 903.
+(babel)             in language  on input line 904.
 
 [19]
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 906.
+(babel)             in language  on input line 907.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 906.
+(babel)             in language  on input line 907.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 906.
+(babel)             in language  on input line 907.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 906.
+(babel)             in language  on input line 907.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 906.
+(babel)             in language  on input line 907.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 906.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 907.
+(babel)             in language  on input line 907.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 908.
 
  (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 907--908
+Underfull \hbox (badness 10000) in paragraph at lines 908--909
 \OT1/pcr/m/n/10.95 php / 26264 / mod _ resource / content / 0 / materiales _ pl
 anif / Ejemplo _ sdp .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 908--910
+Underfull \hbox (badness 10000) in paragraph at lines 909--911
 \OT1/pcr/m/n/10.95 php / 26254 / mod _ resource / content / 1 / Software % 20Pr
 oject % 20Plan %
  []
 
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 912.
+(babel)             in language  on input line 913.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 912.
+(babel)             in language  on input line 913.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 912.
+(babel)             in language  on input line 913.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 912.
+(babel)             in language  on input line 913.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 912.
+(babel)             in language  on input line 913.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 912.
+(babel)             in language  on input line 913.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 912.
+(babel)             in language  on input line 913.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 912.
+(babel)             in language  on input line 913.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 912.
+(babel)             in language  on input line 913.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 912.
+(babel)             in language  on input line 913.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 912.
+(babel)             in language  on input line 913.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 912.
+(babel)             in language  on input line 913.
 [20]
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 915.
+(babel)             in language  on input line 916.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 915.
+(babel)             in language  on input line 916.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 915.
+(babel)             in language  on input line 916.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 915.
+(babel)             in language  on input line 916.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 915.
+(babel)             in language  on input line 916.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 915.
+(babel)             in language  on input line 916.
 LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <20.74> not available
-(Font)              Font shape `OT1/phv/b/n' tried instead on input line 917.
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 918.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 921.
+(babel)             in language  on input line 922.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 921.
+(babel)             in language  on input line 922.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 921.
+(babel)             in language  on input line 922.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 921.
+(babel)             in language  on input line 922.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 921.
+(babel)             in language  on input line 922.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 921.
+(babel)             in language  on input line 922.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 933.
+(babel)             in language  on input line 946.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 933.
+(babel)             in language  on input line 946.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 933.
+(babel)             in language  on input line 946.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 933.
+(babel)             in language  on input line 946.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 933.
+(babel)             in language  on input line 946.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 933.
+(babel)             in language  on input line 946.
  <documento.pdf, id=466, 597.23125pt x 845.1575pt>
 File: documento.pdf Graphic file (type pdf)
  <use documento.pdf>
-Package pdftex.def Info: documento.pdf used on input line 934.
+Package pdftex.def Info: documento.pdf used on input line 947.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf>
-Package pdftex.def Info: documento.pdf used on input line 934.
+Package pdftex.def Info: documento.pdf used on input line 947.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
  <documento.pdf, id=469, page=1, 597.23125pt x 845.1575pt>
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 1>
-Package pdftex.def Info: documento.pdf, page1 used on input line 934.
+Package pdftex.def Info: documento.pdf, page1 used on input line 947.
 (pdftex.def)             Requested size: 617.42212pt x 873.78467pt.
 File: documento.pdf Graphic file (type pdf)
  <use documento.pdf, page 1>
-Package pdftex.def Info: documento.pdf, page1 used on input line 934.
+Package pdftex.def Info: documento.pdf, page1 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 1>
-Package pdftex.def Info: documento.pdf, page1 used on input line 934.
+Package pdftex.def Info: documento.pdf, page1 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 File: documento.pdf Graphic file (type pdf)
  <use documento.pdf, page 1>
-Package pdftex.def Info: documento.pdf, page1 used on input line 934.
+Package pdftex.def Info: documento.pdf, page1 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
  [21]
 <documento.pdf, id=474, page=2, 597.23125pt x 845.1575pt>
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 2>
-Package pdftex.def Info: documento.pdf, page2 used on input line 934.
+Package pdftex.def Info: documento.pdf, page2 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 File: documento.pdf Graphic file (type pdf)
  <use documento.pdf, page 2>
-Package pdftex.def Info: documento.pdf, page2 used on input line 934.
+Package pdftex.def Info: documento.pdf, page2 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 1>
-Package pdftex.def Info: documento.pdf, page1 used on input line 934.
+Package pdftex.def Info: documento.pdf, page1 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
  [22 <./documento.pdf>]
 <documento.pdf, id=491, page=3, 597.23125pt x 845.1575pt>
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 3>
-Package pdftex.def Info: documento.pdf, page3 used on input line 934.
+Package pdftex.def Info: documento.pdf, page3 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 File: documento.pdf Graphic file (type pdf)
  <use documento.pdf, page 3>
-Package pdftex.def Info: documento.pdf, page3 used on input line 934.
+Package pdftex.def Info: documento.pdf, page3 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 2>
-Package pdftex.def Info: documento.pdf, page2 used on input line 934.
+Package pdftex.def Info: documento.pdf, page2 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
  [23 <./documento.pdf>]
 <documento.pdf, id=503, page=4, 597.23125pt x 845.1575pt>
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 4>
-Package pdftex.def Info: documento.pdf, page4 used on input line 934.
+Package pdftex.def Info: documento.pdf, page4 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 File: documento.pdf Graphic file (type pdf)
  <use documento.pdf, page 4>
-Package pdftex.def Info: documento.pdf, page4 used on input line 934.
+Package pdftex.def Info: documento.pdf, page4 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 3>
-Package pdftex.def Info: documento.pdf, page3 used on input line 934.
+Package pdftex.def Info: documento.pdf, page3 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
  [24 <./documento.pdf>]
 <documento.pdf, id=511, page=5, 597.23125pt x 845.1575pt>
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 5>
-Package pdftex.def Info: documento.pdf, page5 used on input line 934.
+Package pdftex.def Info: documento.pdf, page5 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 File: documento.pdf Graphic file (type pdf)
  <use documento.pdf, page 5>
-Package pdftex.def Info: documento.pdf, page5 used on input line 934.
+Package pdftex.def Info: documento.pdf, page5 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 4>
-Package pdftex.def Info: documento.pdf, page4 used on input line 934.
+Package pdftex.def Info: documento.pdf, page4 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
  [25 <./documento.pdf>]
 <documento.pdf, id=519, page=6, 597.23125pt x 845.1575pt>
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 6>
-Package pdftex.def Info: documento.pdf, page6 used on input line 934.
+Package pdftex.def Info: documento.pdf, page6 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 File: documento.pdf Graphic file (type pdf)
  <use documento.pdf, page 6>
-Package pdftex.def Info: documento.pdf, page6 used on input line 934.
+Package pdftex.def Info: documento.pdf, page6 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 5>
-Package pdftex.def Info: documento.pdf, page5 used on input line 934.
+Package pdftex.def Info: documento.pdf, page5 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
  [26 <./documento.pdf>]
 <documento.pdf, id=531, page=7, 597.23125pt x 845.1575pt>
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 7>
-Package pdftex.def Info: documento.pdf, page7 used on input line 934.
+Package pdftex.def Info: documento.pdf, page7 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 File: documento.pdf Graphic file (type pdf)
  <use documento.pdf, page 7>
-Package pdftex.def Info: documento.pdf, page7 used on input line 934.
+Package pdftex.def Info: documento.pdf, page7 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 6>
-Package pdftex.def Info: documento.pdf, page6 used on input line 934.
+Package pdftex.def Info: documento.pdf, page6 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
  [27 <./documento.pdf>]
 <documento.pdf, id=545, page=8, 597.23125pt x 845.1575pt>
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 8>
-Package pdftex.def Info: documento.pdf, page8 used on input line 934.
+Package pdftex.def Info: documento.pdf, page8 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 File: documento.pdf Graphic file (type pdf)
  <use documento.pdf, page 8>
-Package pdftex.def Info: documento.pdf, page8 used on input line 934.
+Package pdftex.def Info: documento.pdf, page8 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 7>
-Package pdftex.def Info: documento.pdf, page7 used on input line 934.
+Package pdftex.def Info: documento.pdf, page7 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
  [28 <./documento.pdf>]
 <documento.pdf, id=560, page=9, 597.23125pt x 845.1575pt>
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 9>
-Package pdftex.def Info: documento.pdf, page9 used on input line 934.
+Package pdftex.def Info: documento.pdf, page9 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 File: documento.pdf Graphic file (type pdf)
  <use documento.pdf, page 9>
-Package pdftex.def Info: documento.pdf, page9 used on input line 934.
+Package pdftex.def Info: documento.pdf, page9 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 8>
-Package pdftex.def Info: documento.pdf, page8 used on input line 934.
+Package pdftex.def Info: documento.pdf, page8 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
  [29 <./documento.pdf>]
 <documento.pdf, id=574, page=10, 597.23125pt x 845.1575pt>
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 10>
-Package pdftex.def Info: documento.pdf, page10 used on input line 934.
+Package pdftex.def Info: documento.pdf, page10 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 File: documento.pdf Graphic file (type pdf)
  <use documento.pdf, page 10>
-Package pdftex.def Info: documento.pdf, page10 used on input line 934.
+Package pdftex.def Info: documento.pdf, page10 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 9>
-Package pdftex.def Info: documento.pdf, page9 used on input line 934.
+Package pdftex.def Info: documento.pdf, page9 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
  [30 <./documento.pdf>]
 File: documento.pdf Graphic file (type pdf)
 
 <use documento.pdf, page 10>
-Package pdftex.def Info: documento.pdf, page10 used on input line 934.
+Package pdftex.def Info: documento.pdf, page10 used on input line 947.
 (pdftex.def)             Requested size: 578.10158pt x 818.08662pt.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 934.
+(babel)             in language  on input line 947.
  [31 <./documento.pdf>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 937.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 937.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 950.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 950.
  (./documentoPracticas.aux
 LaTeX Info: Redefining \. on input line 24.
 LaTeX Info: Redefining \% on input line 24.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 937.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 937.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 950.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 950.
 Package rerunfilecheck Info: File `documentoPracticas.out' has not changed.
 (rerunfilecheck)             Checksum: 9C2FC3EDE67475C3031792793CF59A5D;3247.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 937.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 950.
  ) 
 Here is how much of TeX's memory you used:
- 12591 strings out of 493089
- 183327 string characters out of 6134843
- 301910 words of memory out of 5000000
- 15703 multiletter control sequences out of 15000+600000
- 35437 words of font info for 69 fonts, out of 8000000 for 9000
+ 12608 strings out of 493089
+ 183563 string characters out of 6134843
+ 302914 words of memory out of 5000000
+ 15718 multiletter control sequences out of 15000+600000
+ 38944 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,18n,50p,459b,684s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
@@ -2824,7 +2820,7 @@ texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2015/texmf-d
 ist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2015/texmf-dist/fon
 ts/type1/urw/ncntrsbk/uncb8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type
 1/urw/times/utmb8a.pfb>
-Output written on documentoPracticas.pdf (40 pages, 1641690 bytes).
+Output written on documentoPracticas.pdf (40 pages, 1642412 bytes).
 PDF statistics:
  652 PDF objects out of 1000 (max. 8388607)
  553 compressed objects within 6 object streams

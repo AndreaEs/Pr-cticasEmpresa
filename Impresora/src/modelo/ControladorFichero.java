@@ -2,6 +2,7 @@ package modelo;
 
 import edu.ncsa.model.graphics.jogl.ModelViewer;
 import edu.ncsa.model.loaders.MeshLoader_STP;
+import java.io.File;
 import java.util.Vector;
 import javax.media.j3d.BranchGroup;
 import presentacion.ControladorVistaPrincipal;
@@ -73,5 +74,13 @@ public class ControladorFichero {
             ext = s.substring(i + 1).toLowerCase();
         }
         return ext;
+    }
+
+    public void abrirArchivos(String fileSelec) {
+        if (getExtension(fileSelec).equals("obj") || getExtension(fileSelec).equals("wrl") || getExtension(fileSelec).equals("stl")) {
+            controladorVista.showFile1(abrirArchivosO1(fileSelec), fileSelec);
+        } else {
+            controladorVista.showFile2(abrirArchivosO2(fileSelec), fileSelec);
+        }
     }
 }
