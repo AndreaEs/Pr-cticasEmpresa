@@ -26,6 +26,7 @@ import javax.media.j3d.Shape3D;
 import javax.media.j3d.Transform3D;
 import javax.media.j3d.TransformGroup;
 import javax.media.j3d.TransparencyAttributes;
+import javax.vecmath.AxisAngle4f;
 import javax.vecmath.Color3f;
 import javax.vecmath.Point3d;
 import javax.vecmath.Vector3d;
@@ -66,8 +67,10 @@ public class Vision {
                 }
                 if (contadorRotar == 1) {
                     for (Entry<String, Float> valor : valoresRotar.entrySet()) {
-                        if(valor.getKey().equals("T4")){
-                            
+                        String key = valor.getKey();
+                        if(key.equals("T4")){
+                            AxisAngle4f rotateAxisAngle = new AxisAngle4f(new Vector3f(0.0f, -0.15f, -5f),valoresRotar.get(key));
+                            myTransform3D.setRotation(rotateAxisAngle);
                         }
                     }
                 } else {
@@ -82,6 +85,13 @@ public class Vision {
                             vector.z = valoresRotar.get(key);
                         }
                     }
+                    Transform3D temp = new Transform3D();
+                    Transform3D temp1 = new Transform3D();
+                    myTransform3D.rotX(Math.PI/vector.getX());
+                    temp.rotY(Math.PI/vector.getY());
+                    myTransform3D.mul(temp);
+                    temp1.rotZ(Math.PI/vector.getZ());
+                    myTransform3D.mul(temp1);
                 }
 
                 //Fin Rotar
