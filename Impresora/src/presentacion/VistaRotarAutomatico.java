@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentacion;
 
 import java.beans.PropertyVetoException;
@@ -11,16 +6,17 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author andreaescribano
+ * Vista correspondiente a la rotación automática de un objeto
+ * @author A3D Ingeniería
  */
 public class VistaRotarAutomatico extends javax.swing.JFrame {
 
+    //Atributos
     private static ControladorVistaRotar control;
 
     /**
-     * Creates new form VistaRotarAutomatico
-     * @param control
+     * Crea una nueva vista para la rotación automática
+     * @param control Controlador de la vista de rotar automático, controla lo que contiene la vista
      */
     public VistaRotarAutomatico(ControladorVistaRotar control) {
         initComponents();
@@ -113,10 +109,12 @@ public class VistaRotarAutomatico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Gestiona el botón cancelar de la vista de rotar para cancelar la rotación
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         control.cancelarRotacion();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    //Gestión del botón OK de la vista para aplicar la rotación
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         try {
             control.getDesktop().getSelectedFrame().setClosed(true);
@@ -126,10 +124,12 @@ public class VistaRotarAutomatico extends javax.swing.JFrame {
         control.rotarAutomatico(angulo.getText());
     }//GEN-LAST:event_okButtonActionPerformed
 
+    //Controla cada vez que se introduzca un nuevo carácter en el campo de ángulo
     private void anguloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_anguloKeyTyped
         comprobarValor(angulo.getText());
     }//GEN-LAST:event_anguloKeyTyped
 
+    //Comrpueba el valor introducido a partir de un String
     private void comprobarValor(String valor) {
         boolean falso = false;
         if (valor.length() < 1) {

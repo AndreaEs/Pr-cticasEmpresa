@@ -2,6 +2,7 @@ package modelo;
 
 /**
  * Extensiones permitidas de los ficheros
+ * @author A3D Ingeniería
  */
 public class FileExtensions {
     

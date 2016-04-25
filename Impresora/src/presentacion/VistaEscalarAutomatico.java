@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentacion;
 
 import java.beans.PropertyVetoException;
@@ -10,15 +5,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author andreaescribano
+ * Vista correspondiente al escalado automático de un objeto
+ * @author A3D Ingeniería
  */
 public class VistaEscalarAutomatico extends javax.swing.JFrame {
 
+    //Atributos
     private static ControladorVistaEscalar control;
     
     /**
-     * Creates new form VistaEscalarAutomático
+     * Crea una nueva vista para el escalado automático
+     * @param control Contorlador de la vista para escalar
      */
     public VistaEscalarAutomatico(ControladorVistaEscalar control) {
         initComponents();
@@ -111,14 +108,17 @@ public class VistaEscalarAutomatico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Controla la adición de nuevos caracteres al jTextField
     private void tantoPorCientoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tantoPorCientoKeyTyped
 //        comprobarValor(angulo.getText());
     }//GEN-LAST:event_tantoPorCientoKeyTyped
 
+    //Controla la presión del botón cancelar al aplicar el escalado
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
 //        control.cancelarRotacion();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    //Maneja la presión en el botón de OK para aplicar el escalado
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         try {
             control.getDesktop().getSelectedFrame().setClosed(true);

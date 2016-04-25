@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentacion;
 
 import java.awt.Image;
@@ -13,17 +8,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author andreaescribano
+ * Vista correspondiente a el método de rotación manual de un objeto, dando las coordenadas (X,Y,Z)
+ * @author A3D Ingeniería
  */
 public class VistaRotarManual extends javax.swing.JFrame {
 
+    //Atributos
     private static ControladorVistaRotar control;
 
     /**
-     * Creates new form VistaRotar
-     *
-     * @param control
+     * Crea la vista para rotar manualmente un objeto
+     * @param control Controlador de la vista de rotar manual, que como su nombre indica, controla todo lo que tenga o capture la vista
      */
     public VistaRotarManual(ControladorVistaRotar control) {
         initComponents();
@@ -169,6 +164,7 @@ public class VistaRotarManual extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Gestiona la pulsación del botón OK de la vista para aplicar la rotación
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         try {
             control.getDesktop().getSelectedFrame().setClosed(true);
@@ -178,26 +174,32 @@ public class VistaRotarManual extends javax.swing.JFrame {
         control.rotarManual(xValue.getText(), yValue.getText(), zValue.getText());
     }//GEN-LAST:event_okButtonActionPerformed
 
+    //Gestiona el click del botón cancelar que aparece en la vista que cancela la rotación
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         control.cancelarRotacion();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    //Control del campo de las cordenadas X al introducir un nuevo carácter
     private void xValueKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_xValueKeyTyped
         comprobarValores(xValue.getText());
     }//GEN-LAST:event_xValueKeyTyped
 
+    //Control del campo de las cordenadas Y al introducir un nuevo carácter
     private void yValueKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_yValueKeyTyped
         comprobarValores(yValue.getText());
     }//GEN-LAST:event_yValueKeyTyped
 
+    //Control del campo de las cordenadas Z al introducir un nuevo carácter
     private void zValueKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_zValueKeyTyped
         comprobarValores(zValue.getText());
     }//GEN-LAST:event_zValueKeyTyped
 
+    //Gestión del botón de ayuda que aparece en la vista, cuando es presionado
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
         JOptionPane.showMessageDialog(null, "Valor -> 2 ó 2.02 \n PARTE-ENTERA[.PARTE-DECIMAL] \n Vaya a la ayuda si sigue teniendo dudas.", "Valores decimales", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_helpButtonActionPerformed
 
+    //Comprueba el valor introducido de un String
     private void comprobarValores(String valor) {
         boolean falso = false;
         if (valor.length() < 1) {

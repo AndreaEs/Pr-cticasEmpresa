@@ -6,14 +6,11 @@ import com.sun.j3d.utils.universe.SimpleUniverse;
 import edu.ncsa.model.graphics.jogl.ModelViewer;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.beans.PropertyVetoException;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.media.j3d.BranchGroup;
 import javax.media.j3d.Canvas3D;
 import javax.swing.JComponent;
@@ -27,9 +24,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * Vista inicial de GUI
+ * @author A3D Ingeniería
  */
 public class VistaPrincipal extends javax.swing.JFrame {
 
+    //Atributos
     private final ControladorVistaPrincipal control;
     private final JDesktopPane desktop;
     private final int MY_WIDTH = 5000;
@@ -37,7 +36,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private HashMap<String, BranchGroup> internalFrameBranchGroup;
 
     /**
-     * Crea una nueva vista
+     * Crea una nueva vista inicial
      */
     public VistaPrincipal() {
         initComponents();
@@ -293,22 +292,27 @@ public class VistaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Gestiona la presión en el botón correspondiente a File/Archivo
     private void fileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fileMouseClicked
         manageFileChooser(1);
     }//GEN-LAST:event_fileMouseClicked
 
+    //Gestiona la presión en el botón correspondiente a Save as/Guardar como
     private void saveAsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsActionPerformed
         manageFileChooser(2);
     }//GEN-LAST:event_saveAsActionPerformed
 
+    //Gestiona la presión en el botón correspondiente a Save/Guardar
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_saveActionPerformed
 
+    //Gestiona la presión en el botón correspondiente a Print3D/Imprimir en 3D
     private void print3DActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_print3DActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_print3DActionPerformed
 
+    //Gestiona la presión en el botón correspondiente a Layers/capas en las que se dividirá el objeto
     private void layersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_layersMouseClicked
         layerDialog.setSize(MY_WIDTH, MY_HEIGHT);
         layerDialog.setVisible(true);
@@ -322,19 +326,23 @@ public class VistaPrincipal extends javax.swing.JFrame {
         //frame.setVisible(true);
         //createFrame();
     }//GEN-LAST:event_layersMouseClicked
-
+    
+    //Gestiona la presión en el botón correspondiente a Cancel/Cancelar del dialogo de capas
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         layerDialog.setVisible(false);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    //Gestiona la presión en el botón correspondiente a OK del diálogo de las capas para aplicar las capas al objeto
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         layerDialog.setVisible(false);
     }//GEN-LAST:event_okButtonActionPerformed
 
+    //Gestiona la presión en el botón correspondiente a Rotar un archivo
     private void rotateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rotateMouseClicked
         showRotateOptions();
     }//GEN-LAST:event_rotateMouseClicked
 
+    //Gestiona la presión en el botón correspondiente a Escalar un archivo
     private void scaleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scaleMouseClicked
         showScaleOptions();
     }//GEN-LAST:event_scaleMouseClicked
@@ -416,7 +424,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         thicknessSlider.setLabelTable(labels);
     }
 
-    //Crea un Frame dentro del Panel
+    //Crea un Frame dentro del Frame principal
     private JInternalFrame createFrame() {
         JInternalFrame frame = new JInternalFrame();
         frame.setResizable(true);
@@ -501,6 +509,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Primera forma para mostrar los archivos en la vista
+     * @param s Banchgroup que contiene el objeto
+     * @param filename nombre del archivo que está abierto
+     */
     public void showFile1(BranchGroup s, String filename) {
         Canvas3D c1 = new Canvas3D(SimpleUniverse.getPreferredConfiguration());
         setLayout(new FlowLayout());
@@ -520,6 +533,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         internalFrameBranchGroup.put(filename, scene);
     }
 
+    /**
+     * Segunda forma para mostrar un objeto 
+     * @param m ModelViewer que contiene la imagen a mostrar
+     * @param filename nombre del archivo que se mostrará
+     */
     public void showFile2(ModelViewer m, String filename) {
         JInternalFrame iF = createFrame();
 //        JPanel viewer_panel = new JPanel();
@@ -531,10 +549,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
         iF.add(m);
     }
 
+    /**
+     * Cancelar la rotación de un objeto
+     */
     public void cancelarRotacion() {
         showRotateOptions();
     }
 
+    //Muestra las opciones de rotar un objeto: manual y automática
     private void showRotateOptions() {
         if (desktop.getSelectedFrame() != null) {
             Object[] options = {"Rotación manual", "Rotación automática"};
@@ -553,10 +575,12 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     }
 
+    //Cancela el escalado de la imagen
     public void cancelarEscalado() {
         showScaleOptions();
     }
 
+    //Muestra las opciones para escalar: manual y automática
     private void showScaleOptions() {
         if (desktop.getSelectedFrame() != null) {
             Object[] options = {"Escalado manual", "Escalado automática"};

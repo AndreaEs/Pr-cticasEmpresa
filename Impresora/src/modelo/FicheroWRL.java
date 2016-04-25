@@ -12,11 +12,23 @@ import javax.media.j3d.Node;
 import javax.media.j3d.SceneGraphObject;
 import javax.media.j3d.Shape3D;
 
+/**
+ * Clase correspondiente a los ficheros con extensión WRL
+ * @author A3D Ingeniería
+ */
 public class FicheroWRL {
 
+    /**
+     * Constructor de una instancia para un fichero WRL
+     */
     public FicheroWRL() {
     }
 
+    /**
+     * Crea la escena que contendrá el objeto
+     * @param fichero nombre del fichero que se abrirá
+     * @return devuelve el BanchGroup con el objeto
+     */
     public BranchGroup createSceneBranchGroup(String fichero) {
 //        BranchGroup objRoot = new BranchGroup();
 //
@@ -48,6 +60,7 @@ public class FicheroWRL {
         return mG.createMouseBehaviorsGroup(loadVrmlFile(vrmlFile));
     }
 
+    //Carga el archivo WRL
     private Scene loadVrmlFile(String location) {
 //        BranchGroup sceneGroup = null;
         Scene scene = null;
@@ -58,7 +71,7 @@ public class FicheroWRL {
             URL loadUrl = new URL(location);
             try {
                 // load the scene
-                scene = loader.load(new URL(location));
+                scene = loader.load(loadUrl);
             } catch (Exception e) {
                 System.out.println("Exception loading URL:" + e);
                 e.printStackTrace();
@@ -103,25 +116,26 @@ public class FicheroWRL {
         return scene;
     }
 
-    private void recursiveSetUserData(Object value, Object key) {
-        if (value instanceof SceneGraphObject != false) {
-            // set the user data for the item
-            SceneGraphObject sg = (SceneGraphObject) value;
-            sg.setUserData(key);
-
-            // recursively process group
-            if (sg instanceof Group) {
-                Group g = (Group) sg;
-
-                // recurse on child nodes
-                java.util.Enumeration enumKids = g.getAllChildren();
-
-                while (enumKids.hasMoreElements() != false) {
-                    recursiveSetUserData(enumKids.nextElement(), key);
-                }
-            } else if (sg instanceof Shape3D || sg instanceof Morph) {
-                PickTool.setCapabilities((Node) sg, PickTool.INTERSECT_FULL);
-            }
-        }
-    }
+//    
+//    private void recursiveSetUserData(Object value, Object key) {
+//        if (value instanceof SceneGraphObject != false) {
+//            // set the user data for the item
+//            SceneGraphObject sg = (SceneGraphObject) value;
+//            sg.setUserData(key);
+//
+//            // recursively process group
+//            if (sg instanceof Group) {
+//                Group g = (Group) sg;
+//
+//                // recurse on child nodes
+//                java.util.Enumeration enumKids = g.getAllChildren();
+//
+//                while (enumKids.hasMoreElements() != false) {
+//                    recursiveSetUserData(enumKids.nextElement(), key);
+//                }
+//            } else if (sg instanceof Shape3D || sg instanceof Morph) {
+//                PickTool.setCapabilities((Node) sg, PickTool.INTERSECT_FULL);
+//            }
+//        }
+//    }
 }

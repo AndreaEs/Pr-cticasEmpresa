@@ -22,20 +22,37 @@ import com.sun.j3d.loaders.SceneBase;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Clase correspondiente a los ficheros con extensión STL
+ * @author A3D Ingeniería
+ */
 public class FicheroSTL {
 
+    //Atributos
     private final Component itsParentComponent;
     private boolean itsShowProgress = false;
 
+    /**
+     * Contructor sin parámetros de un fichero STL
+     */
     public FicheroSTL() {
         itsParentComponent = null;
     }
 
+    /**
+     * Constructor con parámetros para un fichero STL
+     * @param parentComponent 
+     */
     public FicheroSTL(final Component parentComponent) {
         itsParentComponent = parentComponent;
         itsShowProgress = true;
     }
 
+    /**
+     * Carga el archivo
+     * @param fileName nombre del archivo a cargar
+     * @return BanchGroup que contiene la escena con el objeto
+     */
     public BranchGroup load(String fileName) {
 //        BranchGroup objRoot = new BranchGroup();
 
@@ -108,9 +125,8 @@ public class FicheroSTL {
     /**
      * Creates a <code>Scene</code> object with the contents of the STL file.
      * Closes the reader after finishing reading.
-     *
      * @param reader <code>STLFileReader</code> object for reading the STL file.
-     * @return
+     * @return scena con el objeto
      */
     public static Scene createScene(final STLFileReader reader) throws IncorrectFormatException, ParsingErrorException {
         try {

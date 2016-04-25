@@ -8,9 +8,7 @@ import com.sun.j3d.utils.behaviors.mouse.MouseTranslate;
 import com.sun.j3d.utils.behaviors.mouse.MouseZoom;
 import java.awt.Color;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -33,17 +31,30 @@ import javax.vecmath.Vector3d;
 import javax.vecmath.Vector3f;
 import presentacion.ControladorVistaPrincipal;
 
+/**
+ * Maneja cómo se van a ver los objetos: apariencias, como se ejecutan y leen
+ * @author A3D Ingeniería
+ */
 public class Vision {
 
+    //Atributos
     private final Map<String, Float> valoresRotar;
     private final Map<String, Float> valoresEscalar;
-
 //    private final Bounds behaviorBounds = new BoundingSphere(new Point3d(0.0, 0.0, 0.0), 100.0);
+    
+    /**
+     * Constructor de una nueva vision
+     */
     public Vision() {
         this.valoresRotar = new LinkedHashMap<String, Float>();
         this.valoresEscalar = new LinkedHashMap<String, Float>();
     }
 
+    /**
+     * Crela nueva escena para introducir el objeto
+     * @param s scena que tiene el objeto
+     * @return banchgroup que contiene el objeto leído
+     */
     public BranchGroup createMouseBehaviorsGroup(Scene s) {
 
         BranchGroup objRoot = new BranchGroup();
@@ -188,6 +199,10 @@ public class Vision {
         return objRoot;
     }
 
+    /**
+     * Forma alternativa para fichero WRL (no los acaba de leer bien los otros)
+     * @return TransformGroup para transformar el fichero en objeto
+     */
     public TransformGroup createMouseBehaviorsGroup() {
         TransformGroup examineGroup = new TransformGroup();
         examineGroup.setCapability(TransformGroup.ALLOW_TRANSFORM_READ);
@@ -225,6 +240,15 @@ public class Vision {
 //        mz.setSchedulingBounds(behaviorBounds);
 //        return mz;
 //    }
+    
+    /**
+     * Rotación manual
+     * @param nombre nombre del fichero que se rotará
+     * @param x coordenada X 
+     * @param y coordenada Y
+     * @param z coordenada Z
+     * @param controlVista controlador de la vista que lo llamó 
+     */
     public void rotarManual(String nombre, float x, float y, float z, ControladorVistaPrincipal controlVista) {
         valoresRotar.put("T1", x);
         valoresRotar.put("T2", y);
@@ -233,6 +257,14 @@ public class Vision {
         control.abrirArchivos(nombre);
     }
 
+    /**
+     * Escalado manual
+     * @param nombreFichero nombre del fichero que se va escalar
+     * @param x coordenada X
+     * @param y coordenada Y
+     * @param z coordenada Z
+     * @param controlVP controlador de la vista que lo llamó 
+     */
     public void escalarManual(String nombreFichero, float x, float y, float z, ControladorVistaPrincipal controlVP) {
         valoresEscalar.put("T1", x);
         valoresEscalar.put("T2", y);
@@ -241,6 +273,12 @@ public class Vision {
         control.abrirArchivos(nombreFichero);
     }
 
+    /**
+     * Rotación automática
+     * @param nombreFichero nombre del fichero que se va a rotar
+     * @param a ángulo a rotar
+     * @param controlVP controlador de la vista que lo llamó 
+     */
     public void rotarAutomatico(String nombreFichero, float a, ControladorVistaPrincipal controlVP) {
         valoresRotar.put("T4", a);
         ControladorFichero control = new ControladorFichero(controlVP);

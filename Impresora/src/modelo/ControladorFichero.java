@@ -2,19 +2,27 @@ package modelo;
 
 import edu.ncsa.model.graphics.jogl.ModelViewer;
 import edu.ncsa.model.loaders.MeshLoader_STP;
-import java.io.File;
 import java.util.Vector;
 import javax.media.j3d.BranchGroup;
 import presentacion.ControladorVistaPrincipal;
 
+/**
+ * Controlador de los ficheros
+ * @author A3D Ingeniería
+ */
 public class ControladorFichero {
 
+    //Atributos
     private ControladorVistaPrincipal controladorVista;
     private FicheroOBJ fOBJ;
     private FicheroWRL fWRL;
     private FicheroSTL fSTL;
     private MeshLoader_STP mlSTP;
 
+    /**
+     * Constructor del Controlador de los ficheros
+     * @param controladorVista Controlador de la vista principal que lo llama
+     */
     public ControladorFichero(ControladorVistaPrincipal controladorVista) {
         this.controladorVista = controladorVista;
         fOBJ = new FicheroOBJ();
@@ -24,6 +32,11 @@ public class ControladorFichero {
 
     }
 
+    /**
+     * Abrir archivos con la opción 1
+     * @param pathFile ruta al fichero que se abrirá
+     * @return BanchGroup con el objeto "dibujado"
+     */
     public BranchGroup abrirArchivosO1(String pathFile) {
         String ext = getExtension(pathFile);
         BranchGroup scene = null;
@@ -37,6 +50,11 @@ public class ControladorFichero {
         return scene;
     }
 
+    /**
+     * Abrir archivos con la opción 1
+     * @param pathFile ruta al fichero que se abrirá
+     * @return ModelViewer con el objeto "dibujado"
+     */
     public ModelViewer abrirArchivosO2(final String pathFile) {
 //        String ext = getExtension(pathFile);
 //        ModelViewer model = new ModelViewer();
@@ -67,6 +85,7 @@ public class ControladorFichero {
 
     }
 
+    //Obtiene la extensión de un String
     private String getExtension(String s) {
         String ext = "";
         int i = s.lastIndexOf('.');
@@ -76,6 +95,10 @@ public class ControladorFichero {
         return ext;
     }
 
+    /**
+     * Abrir archivos
+     * @param fileSelec Fichero que se va a abrir
+     */
     public void abrirArchivos(String fileSelec) {
         if (getExtension(fileSelec).equals("obj") || getExtension(fileSelec).equals("wrl") || getExtension(fileSelec).equals("stl")) {
             controladorVista.showFile1(abrirArchivosO1(fileSelec), fileSelec);

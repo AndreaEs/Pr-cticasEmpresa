@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentacion;
 
 import java.awt.Image;
@@ -13,16 +8,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author andreaescribano
+ * Vista para escalar manualmente un objeto
+ * @author A3D Ingeniería
  */
 public class VistaEscalarManual extends javax.swing.JFrame {
 
+    //Atributos
     private static ControladorVistaEscalar control;
     
     /**
-     * Creates new form VistaEscalarManual
-     * @param controlEscalar
+     * Crea la nueva vista para escalar manualmente
+     * @param controlEscalar Control de la vista de escalar
      */
     public VistaEscalarManual(ControladorVistaEscalar controlEscalar) {
         initComponents();
@@ -168,26 +164,32 @@ public class VistaEscalarManual extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //contorla la presión en el botón de ayuda
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
         JOptionPane.showMessageDialog(null, "Valor -> 2 ó 2.02 \n PARTE-ENTERA[.PARTE-DECIMAL] \n Vaya a la ayuda si sigue teniendo dudas.", "Valores decimales", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_helpButtonActionPerformed
 
+    //Controla cada vez que se escribe en el texto de Z
     private void zValueKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_zValueKeyTyped
         comprobarValores(zValue.getText());
     }//GEN-LAST:event_zValueKeyTyped
 
+    //Controla cada vez que se escribe en el texto de Y
     private void yValueKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_yValueKeyTyped
         comprobarValores(yValue.getText());
     }//GEN-LAST:event_yValueKeyTyped
 
+    //Controla cada vez que se escribe en el texto de X
     private void xValueKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_xValueKeyTyped
         comprobarValores(xValue.getText());
     }//GEN-LAST:event_xValueKeyTyped
 
+    //Maneja la presión en el botón de cancelar el escalado
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         control.cancelarEscalado();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
+    //Maneja la presión en el botón de ok para aplicar el escalado
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         try {
             control.getDesktop().getSelectedFrame().setClosed(true);
@@ -197,6 +199,7 @@ public class VistaEscalarManual extends javax.swing.JFrame {
         control.escalarManual(xValue.getText(), yValue.getText(), zValue.getText());
     }//GEN-LAST:event_okButtonActionPerformed
 
+    //Comprueba los valores introducidos en un String
     private void comprobarValores(String valor) {
         boolean falso = false;
         if (valor.length() < 1) {

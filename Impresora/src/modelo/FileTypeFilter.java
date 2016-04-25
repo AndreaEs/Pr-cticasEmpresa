@@ -1,11 +1,11 @@
 package modelo;
 
-import modelo.FileExtensions;
 import java.io.File;
 import javax.swing.filechooser.FileFilter;
 
 /**
  * Tipos de filtros para los ficheros que queremos buscar
+ * @author A3D Ingeniería
  */
 public class FileTypeFilter extends FileFilter {
     
