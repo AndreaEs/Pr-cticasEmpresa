@@ -1,3 +1,0 @@
-http://www.sc.ehu.es/sbweb/fisica/cursoJava/fundamentos/archivos/objetos.htm
-http://www.chuidiang.com/java/ficheros/ObjetosFichero.php
-https://github.com/AnibalGarcia/Utilidades-Informatica-Grafica
